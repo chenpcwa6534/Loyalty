@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">LoyaltyCard</string>
+
+    <string name="action_settings">設定</string>
+
+    <string name="applicationName">熟客卡</string>
+    <string name="store">集點店家</string>
+    <string name="preferential">限量優惠卷</string>
+    <string name="pocket">我的口袋</string>
+    <string name="more">更多</string>
+
+</resources>
