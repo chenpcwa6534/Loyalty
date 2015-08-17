@@ -2,14 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="friendo.mtel.loyalty" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/app_name" >
+            android:name=".activity.InitializationActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,8 +26,38 @@
         </activity>
 
         <activity
-            android:name=".activity.ExplanationActivity"
-            android:label="ExplanationActivity"
+            android:name=".WelcomeActivity"
+            android:label="CommonActionBarActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.CommonActionBarActivity"
+            android:label="CommonActionBarActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".MainActivity"
+            android:label="LoginActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.ApiTestActivity"
+            android:label="apiActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".LoginActivity"
+            android:label="apiActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.SubPreferentialActivity"
+            android:label="SubPreferentialActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.SubFrontPageActivity"
+            android:label="SubFrontPageActivity"
             android:screenOrientation="portrait"/>
     </application>
 

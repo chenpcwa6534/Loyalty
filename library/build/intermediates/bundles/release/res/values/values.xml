@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- From: file:/Users/MTel/Desktop/Android%20Project/Loyalty/library/res/values/attrs.xml -->
+    <eat-comment/>
+    <attr format="reference|color" name="viewbackground"/>
     <!-- From: file:/Users/MTel/Desktop/Android%20Project/Loyalty/library/res/values/colors.xml -->
     <eat-comment/>
     <color name="background_tab_press">#FFFFFF</color>

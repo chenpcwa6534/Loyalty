@@ -1,10 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pocket"/>
+        android:background="@mipmap/bg_common_gary">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@mipmap/bg_common_gary"
+            android:id="@+id/linearLayout">
+
+            <TextView
+                style="@style/font_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pocket_level"/>
+
+            <TextView
+                android:id="@+id/txt_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/str_level"
+                android:textSize="40sp"
+                android:text="25"/>
+
+            <TextView
+                android:id="@+id/txt_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/str_level"
+                android:text="@string/pocket_leveUnit"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:background="@mipmap/bg_common_gary_mark">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pocket_sogin"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ly_information"
+        android:background="@mipmap/bg_common_gary_small"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            style="@style/more_status_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_common_red_shop"/>
+
+            <TextView
+                style="@style/font_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pocket_store"/>
+
+            <TextView
+                style="@style/pocket_qty"
+                android:id="@+id/txt_storeQTY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="400"/>
+
+        </LinearLayout>
+
+        <ImageView
+            style="@style/line_Vertical_long"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            style="@style/more_status_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_common_red_star"/>
+
+            <TextView
+                style="@style/font_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pocket_store"/>
+
+            <TextView
+                style="@style/pocket_qty"
+                android:id="@+id/txt_pointQTY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="400"/>
+
+        </LinearLayout>
+
+        <ImageView
+            style="@style/line_Vertical_long"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            style="@style/more_status_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_common_red_time"/>
+
+            <TextView
+                style="@style/font_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pocket_store"/>
+
+            <TextView
+                style="@style/pocket_qty"
+                android:id="@+id/txt_frequencyQTY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="400"/>
+
+        </LinearLayout>
+
+        <ImageView
+            style="@style/line_Vertical_long"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            style="@style/more_status_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_common_red_money"/>
+
+            <TextView
+                style="@style/font_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pocket_store"/>
+
+            <TextView
+                style="@style/pocket_qty"
+                android:id="@+id/txt_moneyQTY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="400"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-11dp"
+        android:background="@color/white">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/myPoint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ly_mytabsArea"
+            android:layout_marginTop="-10dp"
+            android:scrollbars="vertical">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/myPreferential"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ly_mytabsArea"
+            android:layout_marginTop="-12dp"
+            android:visibility="invisible"
+            android:scrollbars="vertical">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/myExchange"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ly_mytabsArea"
+            android:layout_marginTop="-10dp"
+            android:visibility="invisible"
+            android:scrollbars="vertical">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:id="@+id/ly_mytabsArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@mipmap/btn_common_red_normal">
+
+            <TextView
+                android:id="@+id/txt_myPoint"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:text="@string/pocket_mypoint"
+                android:background="@mipmap/btn_common_white_pressed"/>
+
+            <ImageView
+                style="@style/line_Vertical_short"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/txt_myPreferential"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:text="@string/pocket_mypreferential"/>
+
+            <ImageView
+                style="@style/line_Vertical_short"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/txt_myExchange"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:text="@string/pocket_exchange"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

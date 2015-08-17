@@ -2,6 +2,7 @@ apply plugin: 'android-library'
 
 dependencies {
     compile 'com.android.support:support-v4:19.0.0'
+    compile 'com.squareup.picasso:picasso:2.3.2'
 }
 
 android {

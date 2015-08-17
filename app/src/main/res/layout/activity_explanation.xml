@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TextView
+
+    <!--<FrameLayout-->
+        <!--android:id="@+id/fragmentLayout"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+    <!--</FrameLayout>-->
+
+    <com.astuetz.page.sliding.PageSlidingPagerView
+        android:id="@+id/Carousel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.astuetz.page.sliding.PageSlidingPagerView>
+
+    <ImageView
+        android:id="@+id/useApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView" />
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:src="@mipmap/btn_tutorial_p5"
+        android:background="@drawable/btn_onclick_introd"
+        android:visibility="gone"/>
+
+</RelativeLayout>

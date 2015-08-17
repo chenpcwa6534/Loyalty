@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/ly_itemView">
+
+    <ImageView
+        android:id="@+id/img_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_TitleView"
+        android:layout_marginTop="-23dp"
+        android:src="@mipmap/test_preferential1"/>
+
+    <ImageView
+        android:id="@+id/img_TitleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/bg_common_h"/>
+
+    <TextView
+        android:id="@+id/txt_storeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginRight="100dp"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:text="(Store Name)"/>
+
+    <TextView
+        android:id="@+id/txt_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="48dp"
+        android:text="300\n公尺"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_photo"
+        android:layout_marginLeft="29dp"
+        android:layout_marginRight="29dp"
+        android:layout_marginBottom="29dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/txt_pointtitle"
+            style="@style/font_storeType_h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/store_item_pointTitle"/>
+
+
+        <ImageView
+            android:id="@+id/img_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/txt_experienceTitle"
+            android:src="@mipmap/common_gary_small_line"/>
+
+        <TextView
+            style="@style/font_stroeitemcontent"
+            android:id="@+id/txt_pointContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/img_line"
+            android:text="消費滿300元即可即一點章,集滿12點贈300元套餐一份"/>
+
+        <TextView
+            style="@style/font_storeType_h"
+            android:id="@+id/txt_experienceTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_pointContent"
+            android:text="@string/store_item_experienceTitle"/>
+
+        <TextView
+            style="@style/font_stroeitemcontent"
+            android:id="@+id/txt_experiencecontent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_pointContent"
+            android:layout_toRightOf="@+id/img_line"
+            android:text="首次來店憑卷日式定食買一送一"/>
+
+
+    </RelativeLayout>
+憑
+</RelativeLayout>

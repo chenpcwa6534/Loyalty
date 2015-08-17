@@ -9,4 +9,99 @@
     <string name="pocket">我的口袋</string>
     <string name="more">更多</string>
 
+    <string name="welcome_reg">手機號碼/註冊登入</string>
+    <string name="welcome_guest">馬上玩玩</string>
+
+    <string name="login_title">粉多熟客卡</string>
+    <string name="login_content1">粉多熟客卡利用手機號碼作為集點帳戶，讓您集點、兌換都輕鬆方便。</string>
+    <string name="login_content2">請輸入手機號碼後，系統將發送一封驗證碼至您手機。</string>
+    <string name="login_skip">先略過此步驟</string>
+    <string name="login_numberHint">請輸入您的手機號碼</string>
+    <string name="login_trip">請輸入正確的手機號碼</string>
+    <string name="login_number">手機號碼：</string>
+    <string name="login_verification">驗證碼(30分內有效)</string>
+    <string name="login_verificationHint">請輸入簡訊驗證碼</string>
+
+    <string name="store_item_pointTitle">集點</string>
+    <string name="store_item_experienceTitle">首次體驗</string>
+    <string name="store_item_searchedit">搜尋店家名稱</string>
+    <string name="substore_beaconcontrol">Beacon到店優惠通知</string>
+    <string name="substore_blog">部落格評價</string>
+    <string name="substore_title">餐廳介紹</string>
+    <string name="substore_distanceUtil">\n公尺</string>
+    <string name="substore_pointtitle">集點注意事項</string>
+    <string name="subpreferential_qty">剩%1$d張</string>
+
+    <string name="more_infromation_login">尚未登入</string>
+    <string name="more_information_sex">性別：</string>
+    <string name="more_information_brithday">生日：</string>
+    <string name="more_information_phonenumber">手機號碼：</string>
+    <string name="more_server_phoneattest">手機認證</string>
+    <string name="more_server_Locationserver">位置服務</string>
+    <string name="more_server_bluetoothserver">藍芽服務</string>
+    <string name="more_server_pushattest">優惠推播</string>
+    
+    <string name="more_serverstatus_alreadyopen">已開啟</string>
+    <string name="more_serverstatus_notopen">未開啟</string>
+    <string name="more_serverstatus_alreadyattest">已認證</string>
+    <string name="more_serverstatus_notattest">未認證</string>
+    
+    <string name="pocket_sogin">熟客\n福利</string>
+    <string name="pocket_level">熟客卡等級</string>
+    <string name="pocket_leveUnit">分熟</string>
+    <string name="pocket_store">光顧店家</string>
+    <string name="pocket_point">累積點數</string>
+    <string name="pocket_frequency">累積次數</string>
+    <string name="pocket_saving">省下金額</string>
+    
+    <string name="pocket_mypoint">我的集點</string>
+    <string name="pocket_mypreferential">我的優惠卷</string>
+    <string name="pocket_exchange">兌換紀錄</string>
+
+    <string name="subfront_preferential">優惠卷</string>
+    <string name="subfront_pointcare">集點卡</string>
+    <string name="subfront_information">店家資訊</string>
+
+    <string name="preferenial_desc">詳細說明</string>
+    <string name="preferenial_usertime">使用期限</string>
+    
+    
+    <string name="btn_nowuse">立即使用</string>
+    <string name="btn_collect">收進口袋</string>
+    
+
+    <string name="strApi_fbShare">FB分享</string>
+    <string name="strApi_1st">首次體驗</string>
+    <string name="strApi_latest">一般優惠</string>
+
+    <string-array name="more_List">
+        <item>關於粉多集點卡</item>
+        <item>服務條款</item>
+        <item>店家合作</item>
+        <item>FAQ</item>
+        <item>問題回報</item>
+        <item>API test</item>
+    </string-array>
+    
+    <string name="server_Unit_meter">\n公尺</string>
+
+    <string-array name="weekday">
+        <item>星期日</item>
+        <item>星期ㄧ</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+    </string-array>
+
+
+    <!--Requset Error code-->
+    <string name="code_301">系統錯誤</string>
+
+    <!-- Tag Key-->
+    <item type="id" name="tag_isPress">true</item>
+    <item type="id" name="tag_isPressed">false</item>
+    <item type="id" name="tag_frontPageStatus"></item>
+
 </resources>

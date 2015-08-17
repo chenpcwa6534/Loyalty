@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ly_itemView_point"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_itemimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/test_mypointpicture"/>
+
+            <TextView
+                android:id="@+id/txt_No"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/bg_common_red_rank"
+                android:textSize="20sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:text="1"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/font_name"
+                android:id="@+id/txt_itemtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Square's 格子美式餐廳"/>
+
+            <TextView
+                style="@style/font_information"
+                android:id="@+id/txt_itemcontent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="已累積九點，可以換炸薯條"/>
+
+            <TextView
+                style="@style/font_information"
+                android:id="@+id/txt_itemtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="2015/05/27 23:37"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/line_common"/>
+
+</LinearLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pages"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.astuetz.page.sliding.PageSlidingPagerView
+        android:id="@+id/csv_Advertising"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.astuetz.page.sliding.PageSlidingPagerView>
+
+   <LinearLayout
+       android:id="@+id/loginview"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:layout_marginBottom="30dp"
+       android:gravity="center"
+       android:visibility="gone">
+
+       <Button
+           android:id="@+id/btn_appstart"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:background="@mipmap/btn_tutorial_p5"/>
+   </LinearLayout>
+
+</RelativeLayout>

@@ -3,47 +3,7 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:minHeight="?attr/actionBarSize"
-    android:background="@color/orange">
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!-->-->
-
-        <!--<ImageView-->
-            <!--android:id="@+id/toolbar_back"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight=".2"/>-->
-
-        <!--<TextView-->
-            <!--style="@style/font_header_text"-->
-            <!--android:id="@+id/toolbar_title"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center"-->
-            <!--android:singleLine="true"-->
-            <!--android:layout_weight=".7"/>-->
-
-        <!--<RelativeLayout-->
-            <!--android:id="@+id/toolbar_message"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/white"-->
-            <!--android:layout_weight=".1">-->
-
-            <!--<ImageView-->
-                <!--android:layout_width="30dp"-->
-                <!--android:layout_height="30dp"-->
-                <!--android:src="@mipmap/ic_launcher"/>-->
-
-            <!--<TextView-->
-                <!--style="@style/font_messageqty"-->
-                <!--android:id="@+id/toolbar_messageQTY"/>-->
-
-        <!--</RelativeLayout>-->
-
-    <!--</LinearLayout>-->
+    android:background="@mipmap/bg_statusbar_red">
 
     <ImageView
         android:id="@+id/toolbar_back"
@@ -56,9 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:singleLine="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"/>
+        android:singleLine="true"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -68,16 +26,15 @@
 
         <ImageView
             android:id="@+id/toolbar_message"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="5dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_statusbar_white_mail"/>
 
         <TextView
             style="@style/font_messageqty"
             android:id="@+id/toolbar_messageQTY"
             android:layout_gravity="right"
-            android:visibility="gone"/>
+            android:text="4"/>
 
     </RelativeLayout>
 

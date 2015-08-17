@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_activityherder"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_common_pattern">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/bg_common_white_up"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_PreferentialName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/str_orange"
+                    android:textSize="18sp"
+                    android:text="優惠卷"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/txt_desetitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:text="@string/preferenial_desc"/>
+
+                    <TextView
+                        android:id="@+id/txt_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/txt_desetitle"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/str_orange"
+                        android:textSize="15sp"
+                        android:text="(Desc)"/>
+
+                    <TextView
+                        android:id="@+id/txt_usetitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_desetitle"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:text="@string/preferenial_usertime"/>
+
+                    <TextView
+                        android:id="@+id/txt_useTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/txt_usetitle"
+                        android:layout_below="@+id/txt_desetitle"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/str_orange"
+                        android:textSize="15sp"
+                        android:text="(2015-10-10 ~ 2015-10-10)"/>
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/img_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/test_stroe"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/btnuse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <Button
+                        style="@style/btn_Preferential"
+                        android:id="@+id/btn_Use"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/btn_common_orange"
+                        android:text="@string/btn_nowuse"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btndouble"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <Button
+                        style="@style/btn_Preferential"
+                        android:id="@+id/btn_collect"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/btn_common_orange_left"
+                        android:layout_weight="1"
+                        android:text="@string/btn_collect"/>
+
+                    <Button
+                        style="@style/btn_Preferential"
+                        android:id="@+id/btn_nowuse"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/btn_common_orange_right"
+                        android:layout_weight="1"
+                        android:text="@string/btn_nowuse"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-10dp"
+                android:background="@mipmap/bg_common_white_down">
+
+                <TextView
+                    android:id="@+id/txt_Explanation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_margin="20dp"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="30dp">
+
+                    <ImageView
+                        android:id="@+id/img_storesmailpicture"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"/>
+
+                    <TextView
+                        android:id="@+id/txt_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:layout_weight=".5"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>

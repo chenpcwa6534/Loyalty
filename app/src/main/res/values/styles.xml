@@ -10,15 +10,260 @@
     <style name="font_header_text">
         <item name="android:textSize">30sp</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:background">@mipmap/bg_statusbar_red</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="font_content">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+    </style>
+
+    <style name="font_edit">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/gray</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+    </style>
+
+    <style name="font_skip">
+        <item name="android:layout_gravity">right</item>
+        <item name="android:drawableRight">@mipmap/ic_common_arrow</item>
+        <item name="android:textColor">@color/orange</item>
+        <item name="android:layout_marginRight">20dp</item>
     </style>
 
     <style name="font_messageqty">
-        <item name="android:layout_width">20dp</item>
-        <item name="android:layout_height">20dp</item>
-        <item name="android:background">@drawable/bg_qty</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@mipmap/ic_statusbar_pink_number</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">10sp</item>
         <item name="android:gravity">center</item>
+    </style>
+    
+    <style name="font_button">
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">@drawable/btn_onclick_welcome</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+    <style name="font_name">
+        <item name="android:textColor">@color/str_name</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="font_information">
+        <item name="android:textColor">@color/str_infor</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="line_Vertical_long">
+        <item name="android:src">@mipmap/common_gary_small_line</item>
+        <item name="android:layout_weight">0.01</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="line_Vertical_short">
+        <item name="android:src">@mipmap/line_common_vertical</item>
+        <item name="android:layout_weight">0.05</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="more_status_area">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">0.24</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="pocket_qty">
+        <item name="android:textColor">@color/str_level</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="font_title_white">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="font_content_white">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="font_time_white">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="font_title_black">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="font_content_black">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="font_time_black">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="font_apiTest">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="font_searchText">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@mipmap/btn_common_red_category_normal</item>
+        <item name="android:drawableRight">@mipmap/ic_common_red_category_normal</item>
+    </style>
+
+
+    <style name="font_stroeitemcontent">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <!--/** Store Type Color **/-->
+
+    <style name="font_storeType_a">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/Brand_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_b">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/FacialBeautifiers_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_c">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/CateringTrade_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_d">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/Beverage_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_e">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/CoffeeShop_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_f">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/DepartmentStore_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_g">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/Cure_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_h">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/FacialBeautifiers_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_i">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/Sport_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_j">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/Shoe_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_k">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/ApparelStore_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_l">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/Glasses_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_m">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/HairSalon_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_n">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/Pet_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_o">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/SPA_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_p">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/Cuisine_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_q">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/ECommerce_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_storeType_r">
+        <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
+        <item name="android:textColor">@color/Shopping_ColorB</item>
+        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
+    </style>
+
+    <style name="font_substoreitem">
+        <item name="android:drawablePadding">@dimen/substore_drawablepadding</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textColor">@color/str_infor</item>
+    </style>
+
+    <style name="font_storeTitle">
+        <item name="android:drawablePadding">@dimen/substore_drawablepadding</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:textColor">@color/str_search_press</item>
+    </style>
+
+    <style name="btn_Preferential">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:drawableRight">@mipmap/ic_common_arrow</item>
+        <item name="android:drawablePadding">-70dp</item>
     </style>
 
 </resources>

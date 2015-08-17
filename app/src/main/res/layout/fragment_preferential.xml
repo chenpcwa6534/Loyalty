@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Preferential"/>
+    <friendo.mtel.loyalty.view.ConditionsSearchView
+        android:id="@+id/csv_Search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </friendo.mtel.loyalty.view.ConditionsSearchView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:scrollbars="vertical"
+        android:visibility="gone">
+
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

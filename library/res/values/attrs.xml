@@ -15,4 +15,8 @@
         <attr name="pstsTextAllCaps" format="boolean" />
     </declare-styleable>
 
+   <attr name="viewbackground" format="reference|color"/>
+
+
+
 </resources>

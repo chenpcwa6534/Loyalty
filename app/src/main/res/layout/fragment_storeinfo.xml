@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/graylight"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/str_infor"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="10"
+                    android:textSize="15sp"
+                    android:text="@string/substore_beaconcontrol"/>
+
+                <ImageButton
+                    android:id="@+id/imgbtn_beaconcontrol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@mipmap/btn_common_gary_close"
+                    android:layout_weight="1"
+                    android:layout_margin="15dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/bg_common_orange_title"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+
+                    android:text="@string/substore_title">
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_introduction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/str_infor"
+                    android:layout_margin="15dp"
+                    android:text="(Introduction)"/>
+
+                <WebView
+                    android:id="@+id/web_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </WebView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/font_substoreitem"
+                    android:id="@+id/txt_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/ic_common_brown_address"
+                    android:text="(Store Address)"/>
+
+                <TextView
+                    style="@style/font_substoreitem"
+                    android:id="@+id/txt_tel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/ic_common_brown_phone"
+                    android:autoLink="phone"
+                    android:text="(Store Tel)"/>
+
+                <TextView
+                    style="@style/font_substoreitem"
+                    android:id="@+id/txt_businesstime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/ic_common_brown_time"
+                    android:text="(Business Time)"/>
+
+                <TextView
+                    style="@style/font_substoreitem"
+                    android:id="@+id/txt_bus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/ic_common_brown_bus"
+                    android:text="(Bus)"/>
+
+                <TextView
+                    style="@style/font_substoreitem"
+                    android:id="@+id/txt_park"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/ic_common_brown_park"
+                    android:text="(Park)"/>
+
+                <TextView
+                    style="@style/font_substoreitem"
+                    android:id="@+id/txt_web"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/ic_common_brown_web"
+                    android:autoLink="web"
+                    android:text="(web)"/>
+
+                <TextView
+                    style="@style/font_substoreitem"
+                    android:id="@+id/txt_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/ic_common_brown_link"
+                    android:autoLink="web"
+                    android:text="(Link)"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_blog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/graylight"
+                android:textColor="@color/str_infor"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:drawableRight="@mipmap/ic_common_gary_blog_arrow"
+                android:text="@string/substore_blog"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

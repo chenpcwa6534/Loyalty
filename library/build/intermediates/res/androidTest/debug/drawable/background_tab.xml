@@ -3,6 +3,6 @@
 
     <item android:state_pressed="true" android:drawable="@color/background_tab_pressed" />
     <item android:state_focused="true" android:drawable="@color/background_tab_pressed"/>
-    <item android:drawable="@android:color/transparent"/>
+    <!--<item android:drawable="@android:color/transparent"/>-->
 
 </selector><!-- From: file:/Users/MTel/Desktop/Android%20Project/Loyalty/library/res/drawable/background_tab.xml --><!-- From: file:/Users/MTel/Desktop/Android%20Project/Loyalty/library/build/intermediates/bundles/debug/res/drawable/background_tab.xml -->

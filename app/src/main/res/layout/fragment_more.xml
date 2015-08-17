@@ -1,10 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="More"/>
+        android:background="@mipmap/bg_common_gary_big">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/img_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_weight="0.22"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.78"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/ly_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/bg_common_gary_big">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="0.5"/>
+
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_weight="0.5"
+           android:orientation="vertical">
+
+
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+
+               <TextView
+                   style="@style/font_name"
+                   android:id="@+id/txt_Name"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                   android:drawableRight="@mipmap/ic_common_red_change"
+                   android:text="@string/more_infromation_login"/>
+
+               <ImageView
+                   android:id="@+id/btn_facebook"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                   android:layout_marginLeft="20dp"
+                   android:src="@mipmap/btn_common_blue_facebook"/>
+
+           </LinearLayout>
+
+           <TextView
+               style="@style/font_information"
+               android:id="@+id/txt_sex"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="10dp"
+               android:drawableRight="@mipmap/ic_common_red_change"
+               android:text="@string/more_information_sex"/>
+
+           <TextView
+               style="@style/font_information"
+               android:id="@+id/txt_birthday"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="5dp"
+               android:drawableRight="@mipmap/ic_common_red_change"
+               android:text="@string/more_information_brithday"/>
+
+           <TextView
+               style="@style/font_information"
+               android:id="@+id/txt_phonenumber"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="5dp"
+               android:drawableRight="@mipmap/ic_common_red_change"
+               android:text="@string/more_information_phonenumber"/>
+
+       </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ly_information"
+        android:background="@mipmap/bg_common_gary_small"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            style="@style/more_status_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/font_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/more_server_phoneattest" />
+
+            <TextView
+                style="@style/font_information"
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0912345567"/>
+
+            <TextView
+                style="@style/font_information"
+                android:id="@+id/phonestatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_common_green_ok"
+                android:text="@string/more_serverstatus_alreadyattest"/>
+
+        </LinearLayout>
+
+        <ImageView
+            style="@style/line_Vertical_long"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            style="@style/more_status_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/font_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/more_server_Locationserver"/>
+
+            <TextView
+                style="@style/font_information"
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(GPS)"/>
+
+            <TextView
+                style="@style/font_information"
+                android:id="@+id/locationstatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_common_green_ok"
+                android:text="@string/more_serverstatus_alreadyattest"/>
+
+        </LinearLayout>
+
+        <ImageView
+            style="@style/line_Vertical_long"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            style="@style/more_status_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/font_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/more_server_bluetoothserver"/>
+
+            <TextView
+                style="@style/font_information"
+                android:id="@+id/bluetooth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""/>
+
+            <TextView
+                style="@style/font_information"
+                android:id="@+id/bluetoothstatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_common_green_ok"
+                android:text="@string/more_serverstatus_alreadyattest"/>
+
+        </LinearLayout>
+
+        <ImageView
+            style="@style/line_Vertical_long"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            style="@style/more_status_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/font_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/more_server_pushattest"/>
+
+            <TextView
+                style="@style/font_information"
+                android:id="@+id/push"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""/>
+
+            <TextView
+                style="@style/font_information"
+                android:id="@+id/pushstatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_common_green_ok"
+                android:text="@string/more_serverstatus_alreadyattest"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ly_status"
+        android:scrollbars="vertical">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>

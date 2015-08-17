@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="transparent">#00000000</color>
+
     <color name="black">#000000</color>
 
     <color name="white">#ffffff</color>
@@ -9,8 +11,84 @@
 
     <color name="red">#AA0000</color>
 
+    <color name="linkBlue">#0000ff</color>
+
     <color name="bg_splitter">#BABABA</color>
 
-    <color name="weq">#1A000000</color>
+    <color name="gray">#BABABA</color>
+    <color name="graylight">#DDDDDD</color>
 
+    <color name="btn_click_effect">#FFECECEC</color>
+    <color name="btn_fouch_effect">#00FFFFFF</color>
+    
+    
+    <!-- Custom Type Color-->
+    <color name="Brand_ColorA">#CEC0F3</color>
+    <color name="Brand_ColorB">#9983D4</color>
+    
+    <color name="Exhibition_ColorA">#92DEC8</color>
+    <color name="Exhibition_ColorB">#5BA992</color>
+
+    <color name="CateringTrade_ColorA">#FDC874</color>
+    <color name="CateringTrade_ColorB">#FAAD34</color>
+
+    <color name="Beverage_ColorA">#91BAFF</color>
+    <color name="Beverage_ColorB">#699CF1</color>
+
+    <color name="CoffeeShop_ColorA">#D1B294</color>
+    <color name="CoffeeShop_ColorB">#997B5e</color>
+
+    <color name="DepartmentStore_ColorA">#CCE253</color>
+    <color name="DepartmentStore_ColorB">#96BC22</color>
+
+    <color name="Cure_ColorA">#E4BF6F</color>
+    <color name="Cure_ColorB">#B38C37</color>
+
+    <color name="FacialBeautifiers_ColorA">#FFA8BA</color>
+    <color name="FacialBeautifiers_ColorB">#EA7992</color>
+
+    <color name="Sport_ColorA">#B1DBA2</color>
+    <color name="Sport_ColorB">#638457</color>
+
+    <color name="Shoe_ColorA">#CBA0E6</color>
+    <color name="Shoe_ColorB">#A26BC4</color>
+
+    <color name="ApparelStore_ColorA">#83DCE9</color>
+    <color name="ApparelStore_ColorB">#41A8C2</color>
+
+    <color name="Glasses_ColorA">#BAC0D9</color>
+    <color name="Glasses_ColorB">#888FAC</color>
+
+    <color name="HairSalon_ColorA">#F6B3EA</color>
+    <color name="HairSalon_ColorB">#D36EC1</color>
+
+    <color name="Pet_ColorA">#E0B6B1</color>
+    <color name="Pet_ColorB">#A17671</color>
+
+    <color name="SPA_ColorA">#BDBEE7</color>
+    <color name="SPA_ColorB">#7072C3</color>
+
+    <color name="Cuisine_ColorA">#FFB27F</color>
+    <color name="Cuisine_ColorB">#F28741</color>
+
+    <color name="ECommerce_ColorA">#8CC5C4</color>
+    <color name="ECommerce_ColorB">#619C9B</color>
+
+    <color name="Shopping_ColorA">#92C466</color>
+    <color name="Shopping_ColorB">#5B9221</color>
+
+
+    <color name="str_name">#e94e42</color>
+    <color name="str_infor">#555555</color>
+
+    <color name="str_Text_Pressed">#AD4A43</color>
+    <color name="str_search_pressed">#D5574C</color>
+    <color name="str_search_press">#595959</color>
+    <color name="str_background_gray">#d7d7d7</color>
+    <color name="str_grayDeep">#727272</color>
+    <color name="hearder_gray">#666666</color>
+    <color name="str_grayDoubleDeep">#555555</color>
+    <color name="str_orange">#f28741</color>
+    <color name="str_level">#FA5A4A</color>
+    <color name="str_orangeDeep">#fa5a48</color>
 </resources>

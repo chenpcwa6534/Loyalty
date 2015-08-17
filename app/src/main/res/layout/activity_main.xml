@@ -19,7 +19,7 @@
             android:layout_above="@+id/tabs"
             tools:context=".MainActivity" />
 
-        <com.astuetz.PagerSlidingTabStrip
+        <com.astuetz.page.sliding.PagerSlidingTabStrip
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="70dip"
