@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import de.greenrobot.event.EventBus;
 import friendo.mtel.loyalty.R;
+import friendo.mtel.loyalty.common.DeviceInformation;
 import friendo.mtel.loyalty.common.Env;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
@@ -87,7 +88,7 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if(KeyEvent.KEYCODE_ENTER == keyCode) {
             //Verification(mVerificaion.getText().toString());
-            DataManager.getInstance(getActivity()).qryVerificationOTP(mNumber.getText().toString(),mVerificaion.getText().toString(), Env.DeviceToken(),getDataResponse);
+            DataManager.getInstance(getActivity()).qryVerificationOTP(mNumber.getText().toString(),mVerificaion.getText().toString(), DeviceInformation.getDeviceToken(),getDataResponse);
         }
         return false;
     }
@@ -123,8 +124,8 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
             String data = (String) obj;
             try{
                 JSONObject jsonObject = new JSONObject(data);
-                int memberID = jsonObject.getInt("memberID");
-                LoyaltyPreference.setMemberID(getActivity(),memberID);
+                String memberID = jsonObject.getString("memberID");
+                LoyaltyPreference.setMemberID(getActivity(), memberID);
                 mGetPagesResponse.onSkip();
             }catch (Exception e){
                 Log.e(TAG,"json to int fail"+ data);

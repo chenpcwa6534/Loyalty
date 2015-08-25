@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/subView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:minHeight="100dp"
+        android:background="@color/transparent"
+        android:layout_below="@+id/selectbar"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mainlistView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:scrollbars="vertical"
+            android:visibility="invisible"
+            android:layout_weight="1">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/sublistView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:scrollbars="vertical"
+            android:visibility="invisible"
+            android:layout_weight="1">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sreachedit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@+id/edt_searchKey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/bg_search_white"
+            android:hint="@string/store_item_searchedit"
+            android:textColorHint="@color/gray"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/selectbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/sreachedit"
+        android:background="@mipmap/btn_common_red_category_normal">
+
+        <TextView
+            style="@style/font_searchText"
+            android:id="@+id/txt_Cats"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="(StoreType)"/>
+
+        <!--<ImageView-->
+        <!--style="@style/line_Vertical_short"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"/>-->
+
+        <TextView
+            style="@style/font_searchText"
+            android:id="@+id/txt_Citys"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="(Area)"/>
+
+        <!--<ImageView-->
+        <!--style="@style/line_Vertical_short"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"/>-->
+
+        <TextView
+            style="@style/font_searchText"
+            android:id="@+id/txt_Orders"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="(Order)"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

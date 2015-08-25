@@ -11,13 +11,14 @@ import friendo.mtel.loyalty.utility.Utilitys;
 public class ParamsManager {
 
     public static FrontPageInParams getfrontPageInParams(Context context){
-        FrontPageInParams frontPageInParams;
-        if(Utilitys.isGPS(context)){
-            Location location = Utilitys.getLocation(context);
-            frontPageInParams = ParamsManager.getfrontPageInParams(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), "", 0, 0, 1, "", 0);
-        }else{
-            frontPageInParams = ParamsManager.getfrontPageInParams("", "", "", 0, 0, 2, "", 0);
-        }
+//        FrontPageInParams frontPageInParams ;
+//        if(Utilitys.isGPS(context)){
+//            Location location = Utilitys.getLocation(context);
+//            frontPageInParams = ParamsManager.getfrontPageInParams(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), "", 0, 0, 1, "", 0);
+//        }else{
+//            frontPageInParams = ParamsManager.getfrontPageInParams("", "", "", 0, 0, 2, "", 0);
+//        }
+        FrontPageInParams frontPageInParams = ParamsManager.getfrontPageInParams("", "", "", 0, 0, 2, "", 0);
         return frontPageInParams;
     }
 

@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import friendo.mtel.loyalty.R;
+import friendo.mtel.loyalty.component.LimitCouponsData;
 import friendo.mtel.loyalty.components.CollectibleCoupon;
 import friendo.mtel.loyalty.components.DeluxeCoupon;
 
@@ -26,34 +27,34 @@ public class PreferentialAdapter extends RecyclerView.Adapter<PreferentialAdapte
     private  String TAG = PreferentialAdapter.class.getSimpleName();
 
     private Context mContext;
-    private CollectibleCoupon[] db_CollectibleCoupons;
+    private LimitCouponsData[] db_LimitCouponsData;
 
     private ViewHolder.ClickListener mListener;
 
-    public PreferentialAdapter(Context context, CollectibleCoupon[] data, ViewHolder.ClickListener listener){
+    public PreferentialAdapter(Context context, LimitCouponsData[] data, ViewHolder.ClickListener listener){
         this.mContext = context;
-        this.db_CollectibleCoupons = data;
+        this.db_LimitCouponsData = data;
         this.mListener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_limitpreferential, parent, false);
-        ViewHolder viewHolder = new ViewHolder(db_CollectibleCoupons,itemLayout,mListener);
+        ViewHolder viewHolder = new ViewHolder(db_LimitCouponsData,itemLayout,mListener);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.title.setText(db_CollectibleCoupons[position].getFirm_name());
-        holder.content.setText(db_CollectibleCoupons[position].getDescription());
-        holder.QTY.setText(String.format(mContext.getResources().getString(R.string.subpreferential_qty), db_CollectibleCoupons[position].getRem_cnt()));
-        PicassoUtility.load(mContext,holder.photo,db_CollectibleCoupons[position].getPicture());
+        holder.title.setText(db_LimitCouponsData[position].getName());
+        holder.content.setText(db_LimitCouponsData[position].getDesc());
+        holder.QTY.setText(String.format(mContext.getResources().getString(R.string.subpreferential_qty), db_LimitCouponsData[position].getCount()));
+        PicassoUtility.load(mContext,holder.photo,db_LimitCouponsData[position].getPicture());
     }
 
     @Override
     public int getItemCount() {
-        return db_CollectibleCoupons.length;
+        return db_LimitCouponsData.length;
     }
 
 
@@ -68,13 +69,13 @@ public class PreferentialAdapter extends RecyclerView.Adapter<PreferentialAdapte
         private TextView content;
         private TextView time;
 
-        private CollectibleCoupon[] db_CollectibleCoupons;
+        private LimitCouponsData[] db_LimitCouponsData;
 
         private ClickListener mListener;
-        public ViewHolder(CollectibleCoupon[] data, View itemView,ClickListener listener) {
+        public ViewHolder(LimitCouponsData[] data, View itemView,ClickListener listener) {
             super(itemView);
             this.mListener = listener;
-            this.db_CollectibleCoupons = data;
+            this.db_LimitCouponsData = data;
             photo = (ImageView) itemView.findViewById(R.id.img_photo);
             QTY = (TextView) itemView.findViewById(R.id.txt_QTY);
             itemView = (View) itemView.findViewById(R.id.preferentail);
@@ -87,11 +88,11 @@ public class PreferentialAdapter extends RecyclerView.Adapter<PreferentialAdapte
 
         @Override
         public void onClick(View v) {
-            mListener.onClick(db_CollectibleCoupons[getPosition()]);
+            mListener.onClick(db_LimitCouponsData[getPosition()].getCouponID());
         }
 
         public interface ClickListener {
-            void onClick(CollectibleCoupon data);
+            void onClick(int couponID);
         }
     }
 }

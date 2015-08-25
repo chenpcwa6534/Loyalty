@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.astuetz.utility.PicassoUtility;
 
 import friendo.mtel.loyalty.R;
+import friendo.mtel.loyalty.component.MemberExChangeData;
 import friendo.mtel.loyalty.components.MemberCouponsData;
 import friendo.mtel.loyalty.components.MemberRedeemLogData;
 import friendo.mtel.loyalty.data.GetListResponse;
@@ -22,10 +23,10 @@ public class PocketExchangeAdapter  extends RecyclerView.Adapter<PocketExchangeA
     private String TAG = PocketExchangeAdapter.class.getSimpleName();
 
     private Context mContext;
-    private MemberRedeemLogData[] db_data;
+    private MemberExChangeData[] db_data;
     private GetListResponse mGetListResponse;
 
-    public PocketExchangeAdapter(Context context, MemberRedeemLogData[] data, GetListResponse getListResponse) {
+    public PocketExchangeAdapter(Context context, MemberExChangeData[] data, GetListResponse getListResponse) {
         super();
         this.mContext = context;
         this.db_data = data;
@@ -41,10 +42,10 @@ public class PocketExchangeAdapter  extends RecyclerView.Adapter<PocketExchangeA
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        PicassoUtility.load(mContext,holder.mImage,db_data[position].getFirm_picture());
-        holder.mTitle.setText(db_data[position].getFirm_name());
-        holder.mContent.setText(db_data[position].getRedeem_rule());
-        holder.mTime.setText(db_data[position].getRedeem_date());
+        PicassoUtility.load(mContext,holder.mImage,db_data[position].getPicture());
+        holder.mTitle.setText(db_data[position].getName());
+        holder.mContent.setText(db_data[position].getDescription());
+        holder.mTime.setText(db_data[position].getConvertdate());
     }
 
     @Override
@@ -61,10 +62,10 @@ public class PocketExchangeAdapter  extends RecyclerView.Adapter<PocketExchangeA
         private TextView mTime;
         private View mView;
 
-        private MemberRedeemLogData[] db_data;
+        private MemberExChangeData[] db_data;
         private GetListResponse mGetListResponse;
 
-        public ViewHolder(View itemView, MemberRedeemLogData[] data, GetListResponse getListResponse) {
+        public ViewHolder(View itemView, MemberExChangeData[] data, GetListResponse getListResponse) {
             super(itemView);
             this.mGetListResponse = getListResponse;
             this.db_data = data;

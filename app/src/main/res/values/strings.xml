@@ -31,6 +31,7 @@
     <string name="substore_distanceUtil">\n公尺</string>
     <string name="substore_pointtitle">集點注意事項</string>
     <string name="subpreferential_qty">剩%1$d張</string>
+    <string name="subpreferential_day">剩%1$d天</string>
 
     <string name="more_infromation_login">尚未登入</string>
     <string name="more_information_sex">性別：</string>

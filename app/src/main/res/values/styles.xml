@@ -266,4 +266,11 @@
         <item name="android:drawablePadding">-70dp</item>
     </style>
 
+    <style name="SuccessDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
 </resources>

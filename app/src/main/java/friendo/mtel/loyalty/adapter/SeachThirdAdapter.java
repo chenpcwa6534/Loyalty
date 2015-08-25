@@ -5,15 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.Objects;
-
 import friendo.mtel.loyalty.R;
-import friendo.mtel.loyalty.components.AreaData;
-import friendo.mtel.loyalty.components.FilterCatData;
-import friendo.mtel.loyalty.components.OrderData;
 import friendo.mtel.loyalty.components.SubAreaData;
 import friendo.mtel.loyalty.components.SubCatData;
 
@@ -37,7 +31,7 @@ public class SeachThirdAdapter extends RecyclerView.Adapter<SeachThirdAdapter.Vi
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_searchthird, parent, false);
+        View itemLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemLayout,mData,mListener);
         return viewHolder;
     }
@@ -70,7 +64,7 @@ public class SeachThirdAdapter extends RecyclerView.Adapter<SeachThirdAdapter.Vi
             super(itemView);
             this.mListener = clickListener;
             this.mData = data;
-            mSubCatName = (TextView) itemView.findViewById(R.id.txt_subcatsName);
+            mSubCatName = (TextView) itemView.findViewById(R.id.txt_Name);
             itemView.setOnClickListener(this);
         }
 

@@ -17,12 +17,17 @@ import friendo.mtel.loyalty.HttpsParams.ParamsManager;
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.activity.SubPreferentialActivity;
 import friendo.mtel.loyalty.adapter.PreferentialAdapter;
+import friendo.mtel.loyalty.common.DeviceInformation;
 import friendo.mtel.loyalty.common.Env;
+import friendo.mtel.loyalty.component.LimitCouponsData;
 import friendo.mtel.loyalty.components.CollectibleCoupon;
 import friendo.mtel.loyalty.components.DeluxeCoupon;
+import friendo.mtel.loyalty.data.DataCache;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
+import friendo.mtel.loyalty.data.GetSearchResponse;
 import friendo.mtel.loyalty.view.ConditionsSearchView;
+import friendo.mtel.loyalty.view.SearchBarView;
 
 /**
  * Created by MTel on 2015/6/24.
@@ -32,7 +37,8 @@ public class PreferentialFragment extends CommonFragment{
 
     private View mView;
     private RecyclerView mList;
-    private ConditionsSearchView mSearchbar;
+    private SearchBarView mSearchbar;
+    private int page = 1;
 
     public PreferentialFragment() {
         super();
@@ -54,10 +60,10 @@ public class PreferentialFragment extends CommonFragment{
     @Override
     public void onResume() {
         super.onResume();
-        FrontPageInParams frontPageInParams = ParamsManager.getfrontPageInParams(getActivity());
         Gson gson = new Gson();
-        String userFilter = gson.toJson(frontPageInParams);
-        DataManager.getInstance(getActivity()).qryDeluxeCouponData(getActivity(), Env.getMemberID(), Env.DeviceToken(), "1", userFilter, false, getDataResponse);
+        String userFilter = gson.toJson(DataCache.cacheFrontPageInParamsLimit);
+        DataManager.getInstance(getActivity()).qryLimitCoupons(userFilter,page,getDataResponse);
+        //DataManager.getInstance(getActivity()).qryDeluxeCouponData(getActivity(), Env.getMemberID(getActivity()), DeviceInformation.getDeviceToken(), "1", userFilter, false, getDataResponse);
     }
 
     @Override
@@ -71,11 +77,12 @@ public class PreferentialFragment extends CommonFragment{
     }
 
     private void findView(View v){
-        mSearchbar = (ConditionsSearchView) v.findViewById(R.id.csv_Search);
+        mSearchbar = (SearchBarView) v.findViewById(R.id.csv_Search);
+        mSearchbar.setCallback(getSearchResponse);
     }
 
-    private void initPreferential(DeluxeCoupon data){
-        PreferentialAdapter moreAdapter = new PreferentialAdapter(getActivity(),data.getCollectiblecoupon(),onItemClickListener);
+    private void initPreferential(LimitCouponsData[] data){
+        PreferentialAdapter moreAdapter = new PreferentialAdapter(getActivity(),data,onItemClickListener);
         mList = (RecyclerView) mView.findViewById(R.id.listView);
         mList.setVisibility(View.VISIBLE);
         mList.setAdapter(moreAdapter);
@@ -85,13 +92,24 @@ public class PreferentialFragment extends CommonFragment{
 
     private PreferentialAdapter.ViewHolder.ClickListener onItemClickListener = new PreferentialAdapter.ViewHolder.ClickListener() {
         @Override
-        public void onClick(CollectibleCoupon data) {
+        public void onClick(int couponID) {
             Intent intent = new Intent(getActivity(), SubPreferentialActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putInt("allotID",-1);
-            bundle.putSerializable("data",data);
+            bundle.putInt("couponID", couponID);
             intent.putExtras(bundle);
             getActivity().startActivity(intent);
+        }
+    };
+
+    private GetSearchResponse getSearchResponse = new GetSearchResponse() {
+        @Override
+        public void onFirmSearch(String userFilter) {
+            String data = userFilter;
+        }
+
+        @Override
+        public void onLimitSearch(String userFilter) {
+            String data = userFilter;
         }
     };
 
@@ -103,13 +121,13 @@ public class PreferentialFragment extends CommonFragment{
 
         @Override
         public void onSuccess(Object obj) {
-            DeluxeCoupon firmCouponData = (DeluxeCoupon) obj;
-            initPreferential(firmCouponData);
+
         }
 
         @Override
         public void onSuccess(Object[] obj) {
-
+            LimitCouponsData[] limitCouponsData = (LimitCouponsData[]) obj;
+            initPreferential(limitCouponsData);
         }
 
         @Override

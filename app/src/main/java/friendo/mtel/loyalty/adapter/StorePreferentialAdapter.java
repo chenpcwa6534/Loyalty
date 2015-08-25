@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.astuetz.utility.PicassoUtility;
 
 import friendo.mtel.loyalty.R;
+import friendo.mtel.loyalty.component.FirmCouponsData;
 import friendo.mtel.loyalty.components.MemberCouponsData;
 
 /**
@@ -20,10 +21,10 @@ public class StorePreferentialAdapter  extends RecyclerView.Adapter<StorePrefere
     private String TAG = StorePreferentialAdapter.class.getSimpleName();
 
     private Context mContext;
-    private MemberCouponsData[] db_firmCoupons;
+    private FirmCouponsData[] db_firmCoupons;
     private ViewHolder.ClickListener mListener;
 
-    public StorePreferentialAdapter(Context context, MemberCouponsData[] data,ViewHolder.ClickListener onListener){
+    public StorePreferentialAdapter(Context context, FirmCouponsData[] data,ViewHolder.ClickListener onListener){
         this.mContext = context;
         this.mListener = onListener;
         this.db_firmCoupons = data;
@@ -39,7 +40,9 @@ public class StorePreferentialAdapter  extends RecyclerView.Adapter<StorePrefere
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mTitle.setText(db_firmCoupons[position].getDescription());
-        PicassoUtility.load(mContext,holder.mPhoto,db_firmCoupons[position].getPicture());
+        PicassoUtility.load(mContext, holder.mPhoto, db_firmCoupons[position].getPicture());
+        holder.mSheet.setText(String .format(mContext.getResources().getString(R.string.subpreferential_qty),db_firmCoupons[position].getExpireDay()));
+
 
 //        if(db_firmCoupons[position].getCoupon_rule_type().equals("latest")){
 //            holder.mBackgroundView.setBackgroundResource(R.mipmap.bg_common_orange_big);
@@ -66,9 +69,9 @@ public class StorePreferentialAdapter  extends RecyclerView.Adapter<StorePrefere
         private TextView mTime;
 
         private ClickListener mListener;
-        private MemberCouponsData[] db_firmCoupons;
+        private FirmCouponsData[] db_firmCoupons;
 
-        public ViewHolder(View itemView, MemberCouponsData[] data,ClickListener listener) {
+        public ViewHolder(View itemView, FirmCouponsData[] data,ClickListener listener) {
             super(itemView);
             this.db_firmCoupons = data;
             this.mListener = listener;
@@ -86,14 +89,14 @@ public class StorePreferentialAdapter  extends RecyclerView.Adapter<StorePrefere
             if(mListener != null){
                 switch (v.getId()){
                     case R.id.itemView:
-                        mListener.onClick(db_firmCoupons[getPosition()].getAllot_id());
+                        mListener.onClick(db_firmCoupons[getPosition()].getCouponID());
                         break;
                 }
             }
         }
 
         public interface ClickListener {
-            void onClick(int allotID);
+            void onClick(int couponID);
         }
     }
 }

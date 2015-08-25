@@ -9,6 +9,25 @@ package com.astuetz.pagerslidingtabstrip.test;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>firm</code></td><td>0</td><td></td></tr>
+<tr><td><code>limit</code></td><td>1</td><td></td></tr>
+</table>
+         */
+        public static final int OrderType=0x7f01000c;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int SearchKey=0x7f01000d;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -126,8 +145,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ic_launcher=0x7f020003;
     }
     public static final class id {
-        public static final int ViewPager=0x7f050000;
-        public static final int dot=0x7f050001;
+        public static final int ViewPager=0x7f050002;
+        public static final int dot=0x7f050003;
+        public static final int firm=0x7f050000;
+        public static final int limit=0x7f050001;
     }
     public static final class layout {
         public static final int layout_viewpager=0x7f030000;
@@ -331,5 +352,51 @@ containing a value of this type.
           @attr name com.astuetz.pagerslidingtabstrip.test:pstsUnderlineHeight
         */
         public static final int PagerSlidingTabStrip_pstsUnderlineHeight = 4;
+        /** Attributes that can be used with a SearchBarAttr.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SearchBarAttr_OrderType com.astuetz.pagerslidingtabstrip.test:OrderType}</code></td><td></td></tr>
+           <tr><td><code>{@link #SearchBarAttr_SearchKey com.astuetz.pagerslidingtabstrip.test:SearchKey}</code></td><td></td></tr>
+           </table>
+           @see #SearchBarAttr_OrderType
+           @see #SearchBarAttr_SearchKey
+         */
+        public static final int[] SearchBarAttr = {
+            0x7f01000c, 0x7f01000d
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.astuetz.pagerslidingtabstrip.test.R.attr#OrderType}
+          attribute's value can be found in the {@link #SearchBarAttr} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>firm</code></td><td>0</td><td></td></tr>
+<tr><td><code>limit</code></td><td>1</td><td></td></tr>
+</table>
+          @attr name com.astuetz.pagerslidingtabstrip.test:OrderType
+        */
+        public static final int SearchBarAttr_OrderType = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.astuetz.pagerslidingtabstrip.test.R.attr#SearchKey}
+          attribute's value can be found in the {@link #SearchBarAttr} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.astuetz.pagerslidingtabstrip.test:SearchKey
+        */
+        public static final int SearchBarAttr_SearchKey = 1;
     };
 }

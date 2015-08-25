@@ -17,15 +17,19 @@ import friendo.mtel.loyalty.HttpsParams.ParamsManager;
 import friendo.mtel.loyalty.activity.SubFrontPageActivity;
 import friendo.mtel.loyalty.adapter.FirmsAdapter;
 import friendo.mtel.loyalty.HttpsParams.FrontPageInParams;
-import friendo.mtel.loyalty.common.DeviceInformation;
-import friendo.mtel.loyalty.common.Env;
+import friendo.mtel.loyalty.component.AdsInfoData;
+import friendo.mtel.loyalty.component.AdvertisingData;
+import friendo.mtel.loyalty.component.FirmListData;
 import friendo.mtel.loyalty.components.FrontPageAdData;
 import friendo.mtel.loyalty.components.FrontPageFirmData;
 import friendo.mtel.loyalty.components.FrontPageRTNData;
+import friendo.mtel.loyalty.data.DataCache;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
+import friendo.mtel.loyalty.data.GetSearchResponse;
 import friendo.mtel.loyalty.fragment.CommonFragment;
 import friendo.mtel.loyalty.view.ConditionsSearchView;
+import friendo.mtel.loyalty.view.SearchBarView;
 
 /**
  * Created by MTel on 2015/7/24.
@@ -37,7 +41,7 @@ public class FrontPageFragment extends CommonFragment {
 
     private RecyclerView mListView;
     private PageSlidingPagerView mAdverising;
-    private ConditionsSearchView mSearchbar;
+    private SearchBarView mSearchbar;
     private View mGeneralModeView;
     private View mMapModeView;
     private FirmsAdapter firmsAdapter;
@@ -45,7 +49,7 @@ public class FrontPageFragment extends CommonFragment {
     private String[] url;
     private int pageIndex = 1 ;
 
-    private FrontPageRTNData db_frontPageRTNData;
+    private FirmListData[] db_firmListData;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -63,10 +67,12 @@ public class FrontPageFragment extends CommonFragment {
     @Override
     public void onResume() {
         super.onResume();
+        DataManager.getInstance(getActivity()).qryAdvertising(getDataResponse);
         FrontPageInParams frontPageInParams = ParamsManager.getfrontPageInParams(getActivity());
+        DataCache.cacheFrontPageInParams = frontPageInParams;
         Gson gson = new Gson();
         String userFilter = gson.toJson(frontPageInParams);
-        DataManager.getInstance(getActivity()).qryFrontPageRTNData(getActivity(), Env.getMemberID(getActivity()), DeviceInformation.getDeviceToken(), String.valueOf(pageIndex), userFilter, false, getDataResponse);
+        DataManager.getInstance(getActivity()).qryFirmList(pageIndex,userFilter,getDataResponse);
     }
 
     @Override
@@ -80,15 +86,15 @@ public class FrontPageFragment extends CommonFragment {
     }
 
     private void findView(View v){
-        mSearchbar = (ConditionsSearchView) v.findViewById(R.id.csv_Search);
-        mSearchbar.setCallback(onSearchResponse);
+        mSearchbar = (SearchBarView) v.findViewById(R.id.csv_Search);
+        mSearchbar.setCallback(getSearchResponse);
         mAdverising = (PageSlidingPagerView) v.findViewById(R.id.csv_Advertising);
         mGeneralModeView = (View) v.findViewById(R.id.generalMode);
         mMapModeView = (View) v.findViewById(R.id.mapMode);
 
     }
 
-    private void initAdverisingView(FrontPageAdData[] adsData){
+    private void initAdverisingView(AdsInfoData[] adsData){
         if(adsData != null){
             url = new String[adsData.length];
             for(int i=0; i<adsData.length; i++){
@@ -99,12 +105,12 @@ public class FrontPageFragment extends CommonFragment {
         mAdverising.show();
     }
 
-    private void initFirms(FrontPageFirmData[] frontPageFirmData){
-        if(frontPageFirmData.length != 0){
+    private void initFirms(FirmListData[] firmListDatas){
+        if(firmListDatas.length != 0){
             mListView = (RecyclerView) mView.findViewById(R.id.listView);
             mListView.setVisibility(View.VISIBLE);
 
-            firmsAdapter = new FirmsAdapter(getActivity(),frontPageFirmData,onClickListener);
+            firmsAdapter = new FirmsAdapter(getActivity(),firmListDatas,onClickListener);
             mListView.setAdapter(firmsAdapter);
             mListView.setItemAnimator(new DefaultItemAnimator());
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -118,19 +124,36 @@ public class FrontPageFragment extends CommonFragment {
 
         @Override
         public void onClick(int position) {
+            FirmListData firmListData = db_firmListData[position];
             Intent intent = new Intent(getActivity(), SubFrontPageActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putInt("firmID",db_frontPageRTNData.getFirms()[position].getFirm_id());
+            bundle.putInt("firmID",db_firmListData[position].getFirmID());
+            bundle.putString("firmName", db_firmListData[position].getFirmName());
+            bundle.putString("picture",db_firmListData[position].getPicture());
+            bundle.putBoolean("partner",db_firmListData[position].isPartner());
+            bundle.putString("partnermessage",db_firmListData[position].getPartnerMessage());
             intent.putExtras(bundle);
             startActivity(intent);
         }
     };
 
-    private ConditionsSearchView.SearchResponse onSearchResponse = new ConditionsSearchView.SearchResponse() {
+//    private SearchBarView.ClickListener onReSearchListener = new SearchBarView.ClickListener() {
+//        @Override
+//        public void onSearch(String userFilter) {
+//            //重新搜資料
+//            String data = userFilter;
+//        }
+//    };
+
+    private GetSearchResponse getSearchResponse = new GetSearchResponse() {
         @Override
-        public void onSearch(FrontPageInParams data) {
-            Gson gson = new Gson();
-            String json = gson.toJson(data);
+        public void onFirmSearch(String userFilter) {
+            String data = userFilter;
+        }
+
+        @Override
+        public void onLimitSearch(String userFilter) {
+            String data = userFilter;
         }
     };
 
@@ -142,15 +165,19 @@ public class FrontPageFragment extends CommonFragment {
 
         @Override
         public void onSuccess(Object obj) {
-            FrontPageRTNData frontPageRTNData = (FrontPageRTNData) obj;
-            db_frontPageRTNData = frontPageRTNData;
-            initAdverisingView(frontPageRTNData.getAds());
-            initFirms(frontPageRTNData.getFirms());
+            if(obj instanceof AdvertisingData){
+                AdvertisingData advertisingData = (AdvertisingData) obj;
+                initAdverisingView(advertisingData.getAdsInfo());
+            }
         }
 
         @Override
         public void onSuccess(Object[] obj) {
-
+            if(obj instanceof FirmListData[]){
+                FirmListData[] firmListData = (FirmListData[]) obj;
+                db_firmListData = firmListData;
+                initFirms(firmListData);
+            }
         }
 
         @Override

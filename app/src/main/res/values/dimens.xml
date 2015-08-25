@@ -3,7 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="store_itemtitle_textSize">12sp</dimen>
+    <dimen name="store_itemtitle_textSize">16sp</dimen>
     <dimen name="store_itemtitle_margin">10dp</dimen>
 
     <dimen name="substore_drawablepadding">10dp</dimen>

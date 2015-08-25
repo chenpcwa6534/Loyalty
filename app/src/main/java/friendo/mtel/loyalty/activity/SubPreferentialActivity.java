@@ -9,17 +9,10 @@ import android.widget.TextView;
 
 import com.astuetz.utility.PicassoUtility;
 
-import org.w3c.dom.Text;
-
 import friendo.mtel.loyalty.R;
-import friendo.mtel.loyalty.components.CollectibleCoupon;
-import friendo.mtel.loyalty.components.MyCouponData;
-import friendo.mtel.loyalty.components.PeriodData;
+import friendo.mtel.loyalty.component.CouponDetailData;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
-import friendo.mtel.loyalty.fragment.PocketFragment;
-import friendo.mtel.loyalty.utility.JudgeRule;
-import friendo.mtel.loyalty.utility.Utilitys;
 
 /**
  * Created by MTel on 2015/7/27.
@@ -44,6 +37,11 @@ public class SubPreferentialActivity extends CommonActionBarActivity implements 
     private TextView mExplanation;
     private ImageView mStorePicture;
     private TextView mAddress;
+
+    private CouponDetailData db_data;
+
+    private int STATUS_USE = 1;
+    private int STATUS_COLLECT = 0;
 
 
     @Override
@@ -98,42 +96,66 @@ public class SubPreferentialActivity extends CommonActionBarActivity implements 
 
     private void initData(){
         Bundle bundle = getIntent().getExtras();
-        int allotID = bundle.getInt("allotID");
-        if(allotID !=-1){
-            DataManager.getInstance(this).qryMyCouponData(this, String.valueOf(allotID), true, getDataResponse);
+        int CouponID = bundle.getInt("couponID");
+        DataManager.getInstance(this).qryCouponDetail(CouponID, getDataResponse);
+    }
+
+    private void initView(CouponDetailData data){
+        db_data = data;
+        String firmName = getIntent().getExtras().getString("firmName");
+        if(data.isCollect()){
+            mBtnUseView.setVisibility(View.VISIBLE);
+            mUse = (Button) findViewById(R.id.btn_Use);
+            mUse.setOnClickListener(this);
         }else{
-            CollectibleCoupon data = (CollectibleCoupon) bundle.getSerializable("data");
-            initView(data);
+            mBtnDoubleView.setVisibility(View.VISIBLE);
+            mCollect = (Button) findViewById(R.id.btn_collect);
+            mUse = (Button) findViewById(R.id.btn_nowuse);
+            mCollect.setOnClickListener(this);
+            mUse.setOnClickListener(this);
         }
 
-    }
-
-    private void initView(CollectibleCoupon data){
-        mBtnDoubleView.setVisibility(View.VISIBLE);
-        mCollect = (Button) findViewById(R.id.btn_collect);
-        mUse = (Button) findViewById(R.id.btn_nowuse);
-
-        mToolsbarTitle.setText(data.getFirm_name());
-        mPreferenialTitle.setText(JudgeRule.getCouponType(this, data.getCoupon_rule_type()));
+        mToolsbarTitle.setText(firmName);
+        mPreferenialTitle.setText(data.getTitle());
         mDesc.setText(data.getDescription());
-        mDeadline.setText(data.getBegin_time()+"~"+data.getEnd_time());
+        mDeadline.setText(data.getAvailable());
         PicassoUtility.load(this, mPreferenialPicture, data.getPicture());
-        PicassoUtility.load(this,mStorePicture,data.getFirm_picture());
-        mAddress.setText(data.getAddress());
+        PicassoUtility.load(this, mStorePicture, data.getStoreInfo().getPicture());
+        mAddress.setText(data.getStoreInfo().getAddress());
 
-        mCollect.setOnClickListener(this);
-        mUse.setOnClickListener(this);
+        if(data.getCancellationStatus() == 1){
+            //SHOW DIALOG 等待店家確認中
+        }else if(data.getCancellationStatus() == 2){
+            //SHOW DIALOG 已兌換
+        }
     }
 
-    private void initView(MyCouponData data){
-        mBtnUseView.setVisibility(View.VISIBLE);
-        mUse = (Button) findViewById(R.id.btn_Use);
-        mDesc.setText(data.getCoupon_conf().getDescription());
-        PicassoUtility.load(this, mPreferenialPicture, data.getCoupon_conf().getPicture().getUrl());
-        mExplanation.setText(data.getProd_conf().getDescription());
 
-        mUse.setOnClickListener(this);
+    private void couponControl(int status,int couponID){
+        switch (status){
+            case 0:
+                DataManager.getInstance(this).qryCouponControl(couponID,status, getCouponControlResponse);
+                break;
+            case 1:
+                convertControl(status,couponID);
+                break;
+        }
     }
+
+    private void convertControl(int status,int couponID){
+        switch (db_data.getCancellationType()){
+            case 1:
+                DataManager.getInstance(this).qryCouponControl(couponID,status, getCouponControlResponse);
+                break;
+            case 2:
+                break;
+            case 3:
+                //SHOW DIALOG請感應beacon
+                //感應到才送 api
+                break;
+        }
+    }
+
 
     private void onFinish(){
         this.finish();
@@ -146,13 +168,18 @@ public class SubPreferentialActivity extends CommonActionBarActivity implements 
                 onFinish();
                 break;
             case R.id.btn_collect:
+                couponControl(STATUS_COLLECT,getIntent().getExtras().getInt("couponID"));
                 break;
             case R.id.btn_nowuse:
+                couponControl(STATUS_USE,getIntent().getExtras().getInt("couponID"));
                 break;
             case R.id.btn_Use:
+                couponControl(STATUS_USE,getIntent().getExtras().getInt("couponID"));
                 break;
         }
     }
+
+
 
     private GetDataResponse getDataResponse = new GetDataResponse() {
         @Override
@@ -162,8 +189,36 @@ public class SubPreferentialActivity extends CommonActionBarActivity implements 
 
         @Override
         public void onSuccess(Object obj) {
-            MyCouponData data = (MyCouponData) obj;
+            CouponDetailData data = (CouponDetailData) obj;
             initView(data);
+        }
+
+        @Override
+        public void onSuccess(Object[] obj) {
+
+        }
+
+        @Override
+        public void onFailure(Object obj) {
+
+        }
+
+        @Override
+        public void onFinish() {
+
+        }
+    };
+
+    private GetDataResponse getCouponControlResponse = new GetDataResponse() {
+        @Override
+        public void onStart() {
+
+        }
+
+        @Override
+        public void onSuccess(Object obj) {
+            boolean restlt = (boolean) obj;
+            //SHOW DIALOG
         }
 
         @Override

@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.astuetz.utility.PicassoUtility;
 
 import friendo.mtel.loyalty.R;
+import friendo.mtel.loyalty.component.FirmPointData;
+import friendo.mtel.loyalty.component.RedeemData;
 import friendo.mtel.loyalty.components.MemberPointData;
 
 /**
@@ -21,9 +23,9 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder>{
 
     private Context mContext;
     private ViewHolder.ClickListener mListener;
-    private MemberPointData db_memberPointData;
+    private FirmPointData db_memberPointData;
 
-    public PointAdapter(Context context, MemberPointData data,ViewHolder.ClickListener onListener) {
+    public PointAdapter(Context context, FirmPointData data,ViewHolder.ClickListener onListener) {
         super();
         this.mContext = context;
         this.mListener = onListener;
@@ -33,29 +35,33 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_point, parent, false);
-        ViewHolder viewHolder = new ViewHolder(mContext,itemLayout,mListener);
+        ViewHolder viewHolder = new ViewHolder(mContext,itemLayout, db_memberPointData.getRedeem(),mListener);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if(position < db_memberPointData.getPoint()){
+        if(position < db_memberPointData.getCurrentPoint()){
             holder.mStamp.setVisibility(View.VISIBLE);
+        }else{
+            holder.mStamp.setVisibility(View.INVISIBLE);
         }
-        if(db_memberPointData.getPoint_redeem() != null){
-            for(int i=0; i<db_memberPointData.getPoint_redeem().length; i++){
-                if(position+1 == 5){
-                    holder.mStamp.setImageResource(R.mipmap.ic_common_orange_stamp_small);
-                    PicassoUtility.load(mContext,holder.mBackground,db_memberPointData.getPoint_redeem()[i].getPicture().getUrl());
+        if(db_memberPointData.getRedeem() != null  || db_memberPointData.getRedeem().length != 0){
+            for(int i=0; i<db_memberPointData.getRedeem().length; i++){
+                if(position+1 == db_memberPointData.getRedeem()[i].getPoint()){
+                    holder.mBackground.setVisibility(View.VISIBLE);
+                    PicassoUtility.load(mContext,holder.mBackground,db_memberPointData.getRedeem()[i].getAdpicture());
+                }else{
+                    holder.mBackground.setVisibility(View.GONE);
                 }
             }
-        }
+       }
         holder.mNo.setText(position+1+"");
     }
 
     @Override
     public int getItemCount() {
-        return 33;
+        return db_memberPointData.getMaxPoint();
     }
 
 
@@ -68,31 +74,41 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder>{
         private ImageView mStamp;
         private ImageView mBackground;
         private TextView mNo;
+        private RedeemData[] mRedeem;
 
-        public ViewHolder(Context context, View itemView, ClickListener listener) {
+        public ViewHolder(Context context, View itemView, RedeemData[] redeem, ClickListener listener) {
             super(itemView);
             this.mContext = context;
             this.mListener = listener;
+            this.mRedeem = redeem;
 
             mView = (View) itemView.findViewById(R.id.point);
             mStamp = (ImageView) itemView.findViewById(R.id.img_stamp);
             mNo = (TextView) itemView.findViewById(R.id.txt_no);
             mBackground = (ImageView) itemView.findViewById(R.id.img_background);
 
-            mView.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.point:
-                    mListener.onClick(getPosition());
+                    for(int i=0; i<mRedeem.length; i++){
+                        if(getPosition()+1 == mRedeem[i].getPoint()){
+                            int[] couponsID = new int[mRedeem[i].getConvertlist().length];
+                            for(int ii= 0; ii<mRedeem[i].getConvertlist().length; i++){
+                                couponsID[ii] = mRedeem[i].getConvertlist()[ii].getCouponID();
+                            }
+                            mListener.onClick(couponsID);
+                        }
+                    }
                     break;
             }
         }
 
         public interface ClickListener {
-            void onClick(int position);
+            void onClick(int[] couponsID);
         }
     }
 }

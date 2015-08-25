@@ -1,3 +1,5 @@
+int attr OrderType 0x7f01000c
+int attr SearchKey 0x7f01000d
 int attr pstsDividerColor 0x7f010003
 int attr pstsDividerPadding 0x7f010006
 int attr pstsIndicatorColor 0x7f010001
@@ -18,8 +20,10 @@ int drawable background_tab 0x7f020000
 int drawable dot_gray 0x7f020001
 int drawable dot_white 0x7f020002
 int drawable ic_launcher 0x7f020003
-int id ViewPager 0x7f050000
-int id dot 0x7f050001
+int id ViewPager 0x7f050002
+int id dot 0x7f050003
+int id firm 0x7f050000
+int id limit 0x7f050001
 int layout layout_viewpager 0x7f030000
 int[] styleable PagerSlidingTabStrip { 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b }
 int styleable PagerSlidingTabStrip_pstsDividerColor 2
@@ -33,3 +37,6 @@ int styleable PagerSlidingTabStrip_pstsTabPaddingLeftRight 6
 int styleable PagerSlidingTabStrip_pstsTextAllCaps 10
 int styleable PagerSlidingTabStrip_pstsUnderlineColor 1
 int styleable PagerSlidingTabStrip_pstsUnderlineHeight 4
+int[] styleable SearchBarAttr { 0x7f01000c, 0x7f01000d }
+int styleable SearchBarAttr_OrderType 0
+int styleable SearchBarAttr_SearchKey 1

@@ -4,10 +4,10 @@ package friendo.mtel.loyalty.component;
  * Created by MTel on 2015/8/14.
  */
 public class VersionControlData {
-    private String verUpdateTime ;
+    private String verUpdateTime;
     private boolean updateStatus;
     private boolean serviceupdate;
-    private Protitle protitle;
+    private ProtitleData protitle;
 
     public String getVerUpdateTime() {
         return verUpdateTime;
@@ -33,11 +33,11 @@ public class VersionControlData {
         this.serviceupdate = serviceupdate;
     }
 
-    public Protitle getProtitle() {
+    public ProtitleData getProtitleData() {
         return protitle;
     }
 
-    public void setProtitle(Protitle protitle) {
-        this.protitle = protitle;
+    public void setProtitleData(ProtitleData protitleData) {
+        this.protitle = protitleData;
     }
 }

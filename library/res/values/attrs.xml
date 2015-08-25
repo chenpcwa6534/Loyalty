@@ -15,7 +15,15 @@
         <attr name="pstsTextAllCaps" format="boolean" />
     </declare-styleable>
 
-   <attr name="viewbackground" format="reference|color"/>
+    <attr name="viewbackground" format="reference|color"/>
+
+    <declare-styleable name="SearchBarAttr">
+        <attr name="OrderType" format="enum">
+            <enum name="firm" value="0"/>
+            <enum name="limit" value="1"/>
+        </attr>
+        <attr name="SearchKey" format="boolean"/>
+    </declare-styleable>
 
 
 

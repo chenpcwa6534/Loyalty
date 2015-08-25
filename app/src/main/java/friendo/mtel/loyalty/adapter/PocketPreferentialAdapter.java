@@ -2,7 +2,6 @@ package friendo.mtel.loyalty.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import com.astuetz.utility.PicassoUtility;
 
 import friendo.mtel.loyalty.R;
-import friendo.mtel.loyalty.components.MemberCouponsData;
+import friendo.mtel.loyalty.component.MemberCouponsData;
 import friendo.mtel.loyalty.data.GetListResponse;
 
 /**
@@ -42,9 +41,9 @@ public class PocketPreferentialAdapter extends RecyclerView.Adapter<PocketPrefer
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         PicassoUtility.load(mContext,holder.mImage,db_data[position].getPicture());
-        holder.mTitle.setText(db_data[position].getFirm_name());
+        holder.mTitle.setText(db_data[position].getName());
         holder.mContent.setText(db_data[position].getDescription());
-        holder.mTime.setText(db_data[position].getEnd_time());
+        holder.mTime.setText(String.format(mContext.getResources().getString(R.string.subpreferential_day), db_data[position].getExpireDay()));
         holder.mNO.setText(""+(position+1));
     }
 
@@ -83,7 +82,7 @@ public class PocketPreferentialAdapter extends RecyclerView.Adapter<PocketPrefer
 
         @Override
         public void onClick(View v) {
-            mGetListResponse.onCouponResponse(db_data[getPosition()].getAllot_id());
+            mGetListResponse.onCouponResponse(db_data[getPosition()].getCouponID());
         }
     }
 }

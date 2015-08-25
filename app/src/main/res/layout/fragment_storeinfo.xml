@@ -103,13 +103,35 @@
                     android:autoLink="phone"
                     android:text="(Store Tel)"/>
 
-                <TextView
-                    style="@style/font_substoreitem"
-                    android:id="@+id/txt_businesstime"
+                <!--<TextView-->
+                    <!--style="@style/font_substoreitem"-->
+                    <!--android:id="@+id/txt_businesstime"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:drawableLeft="@mipmap/ic_common_brown_time"-->
+                    <!--android:text="(Business Time)"/>-->
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@mipmap/ic_common_brown_time"
-                    android:text="(Business Time)"/>
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/font_substoreitem"
+                        android:id="@+id/txt_bgicon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/ic_common_brown_time"/>
+
+                    <LinearLayout
+                        android:id="@+id/weekView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_toRightOf="@+id/txt_bgicon">
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
                 <TextView
                     style="@style/font_substoreitem"
@@ -136,14 +158,37 @@
                     android:autoLink="web"
                     android:text="(web)"/>
 
-                <TextView
-                    style="@style/font_substoreitem"
-                    android:id="@+id/txt_link"
+                <!--<TextView-->
+                    <!--style="@style/font_substoreitem"-->
+                    <!--android:id="@+id/txt_link"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:drawableLeft="@mipmap/ic_common_brown_link"-->
+                    <!--android:autoLink="web"-->
+                    <!--android:text="(Link)"/>-->
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@mipmap/ic_common_brown_link"
-                    android:autoLink="web"
-                    android:text="(Link)"/>
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/font_substoreitem"
+                        android:id="@+id/txt_bgiconlink"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/ic_common_brown_link"/>
+
+                    <LinearLayout
+                        android:id="@+id/linkView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_toRightOf="@+id/txt_bgiconlink">
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
             </LinearLayout>
 

@@ -14,7 +14,7 @@ import android.widget.Toast;
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.activity.SubPreferentialActivity;
 import friendo.mtel.loyalty.adapter.StorePreferentialAdapter;
-import friendo.mtel.loyalty.common.Env;
+import friendo.mtel.loyalty.component.FirmCouponsData;
 import friendo.mtel.loyalty.components.MemberCouponsData;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
@@ -28,10 +28,11 @@ public class StorePreferentialFragmemt extends CommonFragment {
     private View mView;
     private RecyclerView mList;
 
-    public static StorePreferentialFragmemt newInstance(int firmID){
+    public static StorePreferentialFragmemt newInstance(int firmID, String firmName){
         StorePreferentialFragmemt storePreferentialFragmemt = new StorePreferentialFragmemt();
         Bundle bundle = new Bundle();
         bundle.putInt("firmID", firmID);
+        bundle.putString("firmName",firmName);
         storePreferentialFragmemt.setArguments(bundle);
         return storePreferentialFragmemt;
     }
@@ -48,7 +49,7 @@ public class StorePreferentialFragmemt extends CommonFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_preferential,container,false);
+        mView = inflater.inflate(R.layout.fragment_storepreferential,container,false);
         return mView;
     }
 
@@ -56,7 +57,7 @@ public class StorePreferentialFragmemt extends CommonFragment {
     public void onResume() {
         super.onResume();
         String firmID = String.valueOf(getArguments().getInt("firmID"));
-        DataManager.getInstance(getActivity()).qryFirmCouponData(getActivity(), Env.getMemberID(),firmID,Env.DeviceToken(),false,getDataResponse);
+        DataManager.getInstance(getActivity()).qryFirmCoupons(firmID, getDataResponse);
     }
 
     @Override
@@ -69,7 +70,7 @@ public class StorePreferentialFragmemt extends CommonFragment {
         super.onDestroy();
     }
 
-    private void initStorePreferential(MemberCouponsData[] firmCouponData){
+    private void initStorePreferential(FirmCouponsData[] firmCouponData){
         if(firmCouponData.length != 0){
             mList = (RecyclerView) mView.findViewById(R.id.listView);
             mList.setVisibility(View.VISIBLE);
@@ -94,8 +95,8 @@ public class StorePreferentialFragmemt extends CommonFragment {
 
         @Override
         public void onSuccess(Object[] obj) {
-            MemberCouponsData[] firmCoupons = (MemberCouponsData[]) obj;
-            initStorePreferential(firmCoupons);
+            FirmCouponsData[] firmCouponDatas = (FirmCouponsData[]) obj;
+            initStorePreferential(firmCouponDatas);
         }
 
         @Override
@@ -111,15 +112,16 @@ public class StorePreferentialFragmemt extends CommonFragment {
 
     StorePreferentialAdapter.ViewHolder.ClickListener onClickListener = new StorePreferentialAdapter.ViewHolder.ClickListener() {
         @Override
-        public void onClick(int allotID) {
-            if(allotID != 0){
+        public void onClick(int couponid) {
+            if(couponid != 0){
                 Intent intent = new Intent(getActivity(), SubPreferentialActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("allotID",allotID);
+                bundle.putString("firmName",getArguments().getString("firmName"));
+                bundle.putInt("couponID",couponid);
                 intent.putExtras(bundle);
                 getActivity().startActivity(intent);
             }
-            Toast.makeText(getActivity(),"id:"+allotID,Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"id:"+couponid,Toast.LENGTH_SHORT).show();
         }
     };
 }

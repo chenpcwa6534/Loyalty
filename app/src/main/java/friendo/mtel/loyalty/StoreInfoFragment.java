@@ -1,22 +1,23 @@
 package friendo.mtel.loyalty;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 import android.webkit.JavascriptInterface;
 
-import friendo.mtel.loyalty.components.FirmInfoData;
-import friendo.mtel.loyalty.data.DataCache;
+import friendo.mtel.loyalty.component.FirmInfoData;
+import friendo.mtel.loyalty.data.DataManager;
+import friendo.mtel.loyalty.data.GetDataResponse;
 import friendo.mtel.loyalty.fragment.CommonFragment;
 import friendo.mtel.loyalty.utility.Utilitys;
 
@@ -33,17 +34,26 @@ public class StoreInfoFragment extends CommonFragment implements ImageButton.OnC
     private WebView mMap;
     private TextView mAddress;
     private TextView mTel;
-    private TextView mBusinessTime;
+    private LinearLayout mBusinessTime;
     private TextView mBus;
     private TextView mPark;
     private TextView mWeb;
-    private TextView mLink;
+    private LinearLayout mLink;
     private TextView mBlog;
 
     int beaconIcon_Close = R.mipmap.btn_common_gary_close;
     int beaconIcon_Open = R.mipmap.btn_common_orange_open;
     //test
     boolean  beaconstatus = false;
+
+
+    public static StoreInfoFragment newInstance(int firmID){
+        StoreInfoFragment storeInfoFragment = new StoreInfoFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("firmID", firmID);
+        storeInfoFragment.setArguments(bundle);
+        return storeInfoFragment;
+    }
 
     public StoreInfoFragment() {
         super();
@@ -58,9 +68,8 @@ public class StoreInfoFragment extends CommonFragment implements ImageButton.OnC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_storeinfo,container,false);
-        db_frimInfo = DataCache.cacheFirmInfoData;
         findView(v);
-        initView();
+        initData();
         return v;
     }
 
@@ -86,7 +95,7 @@ public class StoreInfoFragment extends CommonFragment implements ImageButton.OnC
                 BeaconControl();
                 break;
             case R.id.txt_blog:
-                intentGoogleSearch(db_frimInfo.getFirm_name());
+                intentGoogleSearch(db_frimInfo.getBlogConnnent());
                 break;
             case R.id.txt_address:
                 intentMap(db_frimInfo.getAddress());
@@ -102,33 +111,74 @@ public class StoreInfoFragment extends CommonFragment implements ImageButton.OnC
 
         mAddress = (TextView) v.findViewById(R.id.txt_address);
         mTel = (TextView) v.findViewById(R.id.txt_tel);
-        mBusinessTime = (TextView) v.findViewById(R.id.txt_businesstime);
+        mBusinessTime = (LinearLayout) v.findViewById(R.id.weekView);
         mBus = (TextView) v.findViewById(R.id.txt_bus);
         mPark = (TextView) v.findViewById(R.id.txt_park);
         mWeb = (TextView) v.findViewById(R.id.txt_web);
-        mLink = (TextView) v.findViewById(R.id.txt_link);
+        mLink = (LinearLayout) v.findViewById(R.id.linkView);
         mBlog = (TextView) v.findViewById(R.id.txt_blog);
     }
 
-    private void initView(){
+    private void initData(){
+        int firmID = getArguments().getInt("firmID");
+        DataManager.getInstance(getActivity()).qryFirmInfo(firmID,getDataResponse);
+    }
+
+    private void initView(FirmInfoData data){
         mBeaconControl.setBackgroundResource(beaconstatus ? beaconIcon_Open : beaconIcon_Close);
         mBeaconControl.setOnClickListener(this);
         mBlog.setOnClickListener(this);
         mAddress.setOnClickListener(this);
 
-        mIntroductio.setText(db_frimInfo.getDescription());
-        mAddress.setText(db_frimInfo.getAddress());
-        mTel.setText(db_frimInfo.getTel());
-        mBusinessTime.setText(db_frimInfo.getOpenhours_remark());
-        mBus.setText(db_frimInfo.getTraffic());
-        mPark.setText(db_frimInfo.getParking());
-        mWeb.setText(db_frimInfo.getOfficial_site());
-        mLink.setText("");
+        mIntroductio.setText(data.getDescription());
+        mAddress.setText(data.getAddress());
+        mTel.setText(data.getNumber());
+        setBusinessTime(data.getBusinessWeek());
+        mBus.setText(data.getTraffic());
+        mPark.setText(data.getCarpark());
+        setWebLink(data.getWebUrl());
 
         mMap.setWebViewClient(new WebViewClient());
         mMap.getSettings().setJavaScriptEnabled(true);
 //        mMap.addJavascriptInterface(getActivity(), "AndroidFunction")
         mMap.loadUrl("file:///android_asset/index.html");
+    }
+
+    private void setBusinessTime(String[] businessTime){
+        int today = Utilitys.getTodayWeekDay();
+
+        for(int i=0; i<businessTime.length; i++){
+            TextView businessList = new TextView(getActivity());
+            businessList.setText(businessTime[i]);
+            if(i+1 == today){
+                businessList.setTextColor(getActivity().getResources().getColor(R.color.red));
+            }else{
+                businessList.setTextColor(getActivity().getResources().getColor(R.color.str_infor));
+            }
+            businessList.setLayoutParams(getParmas());
+            mBusinessTime.addView(businessList);
+        }
+    }
+
+    private void setWebLink(String[] link){
+        for(int i=0; i<link.length; i++){
+            if(i == 0){
+                mWeb.setText(link[i]);
+            }else{
+                TextView linktext = new TextView(getActivity());
+                linktext.setText(link[i]);
+                linktext.setTextColor(getActivity().getResources().getColor(R.color.str_infor));
+                linktext.setLayoutParams(getParmas());
+                linktext.setAutoLinkMask(Linkify.WEB_URLS);
+                mLink.addView(linktext);
+            }
+        }
+    }
+
+    private LayoutParams getParmas(){
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
+        params.setMargins(0, Utilitys.dpToPx(10), 0, 0);
+        return params;
     }
 
     @JavascriptInterface
@@ -150,4 +200,33 @@ public class StoreInfoFragment extends CommonFragment implements ImageButton.OnC
             beaconstatus = true;
         }
     }
+
+    private GetDataResponse getDataResponse = new GetDataResponse() {
+        @Override
+        public void onStart() {
+
+        }
+
+        @Override
+        public void onSuccess(Object obj) {
+            FirmInfoData firmInfoData = (FirmInfoData) obj;
+            db_frimInfo = firmInfoData;
+            initView(firmInfoData);
+        }
+
+        @Override
+        public void onSuccess(Object[] obj) {
+
+        }
+
+        @Override
+        public void onFailure(Object obj) {
+
+        }
+
+        @Override
+        public void onFinish() {
+
+        }
+    };
 }

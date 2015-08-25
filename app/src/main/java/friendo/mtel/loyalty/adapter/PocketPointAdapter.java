@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.astuetz.utility.PicassoUtility;
 
 import friendo.mtel.loyalty.R;
+import friendo.mtel.loyalty.component.MemberPointData;
 import friendo.mtel.loyalty.components.MemberCouponsData;
 import friendo.mtel.loyalty.components.PointedFirmData;
 import friendo.mtel.loyalty.data.GetListResponse;
@@ -22,10 +23,10 @@ public class PocketPointAdapter extends RecyclerView.Adapter<PocketPointAdapter.
     private String TAG = PocketPointAdapter.class.getSimpleName();
 
     private Context mContext;
-    private PointedFirmData[] db_data;
+    private MemberPointData[] db_data;
     private GetListResponse mGetListResponse;
 
-    public PocketPointAdapter(Context context, PointedFirmData[] data, GetListResponse getListResponse) {
+    public PocketPointAdapter(Context context, MemberPointData[] data, GetListResponse getListResponse) {
         super();
         this.mContext = context;
         this.db_data = data;
@@ -41,10 +42,10 @@ public class PocketPointAdapter extends RecyclerView.Adapter<PocketPointAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        PicassoUtility.load(mContext,holder.mImage,db_data[position].getThumbnail());
-        holder.mTitle.setText(db_data[position].getFirm_name());
+        PicassoUtility.load(mContext,holder.mImage,db_data[position].getPicture());
+        holder.mTitle.setText(db_data[position].getName());
         holder.mContent.setText(db_data[position].getDescription());
-        holder.mTime.setText(db_data[position].getRedeemprompt());
+        holder.mTime.setText(db_data[position].getDay());
     }
 
     @Override
@@ -61,11 +62,11 @@ public class PocketPointAdapter extends RecyclerView.Adapter<PocketPointAdapter.
         private TextView mTime;
         private View mView;
 
-        private PointedFirmData[] db_data;
+        private MemberPointData[] db_data;
 
         private GetListResponse mGetListResponse;
 
-        public ViewHolder(View itemView, PointedFirmData[] data, GetListResponse getListResponse) {
+        public ViewHolder(View itemView, MemberPointData[] data, GetListResponse getListResponse) {
             super(itemView);
             this.db_data = data;
             this.mGetListResponse = getListResponse;

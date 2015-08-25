@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import friendo.mtel.loyalty.activity.CommonActionBarActivity;
 import friendo.mtel.loyalty.adapter.TabPageAdapter;
 import friendo.mtel.loyalty.components.Test;
+import friendo.mtel.loyalty.data.DataCache;
 import friendo.mtel.loyalty.fragment.MoreFragment;
 import friendo.mtel.loyalty.fragment.PocketFragment;
 import friendo.mtel.loyalty.fragment.PreferentialFragment;
@@ -64,6 +65,7 @@ public class MainActivity extends CommonActionBarActivity {
         initToolbar();
         initTabView();
         initPagerView();
+        DataCache.initFrontPageInParams(this); // 初始化搜尋條件
     }
 
     private void initToolbar(){
@@ -96,6 +98,7 @@ public class MainActivity extends CommonActionBarActivity {
         PreferentialFragment preferentialpage = new PreferentialFragment();
         PocketFragment pocketpage = new PocketFragment();
         MoreFragment morepage = new MoreFragment();
+//        Fragment morepage = new Fragment();
 
         pages = new ArrayList<Fragment>();
         pages.add(frontPageFragment);

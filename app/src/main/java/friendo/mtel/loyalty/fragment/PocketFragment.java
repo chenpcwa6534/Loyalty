@@ -1,8 +1,6 @@
 package friendo.mtel.loyalty.fragment;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -17,14 +15,13 @@ import java.util.ArrayList;
 
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.activity.SubPreferentialActivity;
-import friendo.mtel.loyalty.adapter.PocketAdapter;
 import friendo.mtel.loyalty.adapter.PocketExchangeAdapter;
 import friendo.mtel.loyalty.adapter.PocketPointAdapter;
 import friendo.mtel.loyalty.adapter.PocketPreferentialAdapter;
-import friendo.mtel.loyalty.components.MemberCouponsData;
-import friendo.mtel.loyalty.components.MemberLoyaltyData;
-import friendo.mtel.loyalty.components.MemberRedeemLogData;
-import friendo.mtel.loyalty.components.PointedFirmData;
+import friendo.mtel.loyalty.component.MemberExChangeData;
+import friendo.mtel.loyalty.component.MemberInfoData;
+import friendo.mtel.loyalty.component.MemberPointData;
+import friendo.mtel.loyalty.component.MemberCouponsData;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
 import friendo.mtel.loyalty.data.GetListResponse;
@@ -54,10 +51,9 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
     private RecyclerView mPages_myPoint;
     private RecyclerView mPages_myPreferential;
     private RecyclerView mPages_myExchange;
-
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
     private int currentposition;
+
+    private int page;
 
     public PocketFragment() {
         super();
@@ -71,9 +67,8 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_pocket,container,false);
+        findView(mView);
         initData();
-        initFindView(mView);
-        initView();
         return mView;
     }
 
@@ -93,14 +88,19 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initData(){
-        DataManager.getInstance(getActivity()).qryMemberLoyaltyData(getActivity(),true,getDataResponse);
+//        DataManager.getInstance(getActivity()).qryMemberLoyaltyData(getActivity(),true,getDataResponse);
+//
+//        DataManager.getInstance(getActivity()).qryMemberCouponsData(getActivity(), true, getDataResponse);
+//
+//        DataManager.getInstance(getActivity()).qryMemberRedeemLogDataData(getActivity(), true, getDataResponse);
 
-        DataManager.getInstance(getActivity()).qryMemberCouponsData(getActivity(), true, getDataResponse);
-
-        DataManager.getInstance(getActivity()).qryMemberRedeemLogDataData(getActivity(), true, getDataResponse);
+        DataManager.getInstance(getActivity()).qryMemberInfo(getDataResponse);
+        DataManager.getInstance(getActivity()).qryMemberPoint(getDataResponse);
+        DataManager.getInstance(getActivity()).qryMemberCoupons(getDataResponse);
+        DataManager.getInstance(getActivity()).qryMemberExChange(page,getDataResponse);
     }
 
-    private void initFindView(View v){
+    private void findView(View v){
         mLevel = (TextView) v.findViewById(R.id.txt_level);
         mStoreQTY = (TextView) v.findViewById(R.id.txt_storeQTY);
         mPointQTY = (TextView) v.findViewById(R.id.txt_pointQTY);
@@ -112,29 +112,27 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
         mExchange = (TextView) v.findViewById(R.id.txt_myExchange);
 
 
+        mPoint.setOnClickListener(this);
+        mPreferential.setOnClickListener(this);
+        mExchange.setOnClickListener(this);
 
+        setNonPress();
+        setPressed(mPoint);
+        changePages(0);
 
     }
 
-    private void initInformation(MemberLoyaltyData[] data){
-        for(MemberLoyaltyData informat : data){
-            mLevel.setText(""+informat.getGrade_no());
-            mStoreQTY.setText(""+informat.getVisited_firm_cnt());
-            mPointQTY.setText(""+informat.getTotal_point());
-            mFrequencyQTY.setText(""+informat.getPointed_cnt());
-            mMoneyQTY.setText("$" + informat.getSaved_money());
-        }
+    private void initInformation(MemberInfoData data){
+            mLevel.setText(""+data.getLV());
+            mStoreQTY.setText(""+data.getStore());
+            mPointQTY.setText(""+data.getPoint());
+            mFrequencyQTY.setText(""+data.getCount());
+            mMoneyQTY.setText("$" + data.getMoney());
     }
 
-    private void initPointView(PointedFirmData[] data){
+    private void initPointView(MemberPointData[] data){
         mPages_myPoint = (RecyclerView) mView.findViewById(R.id.myPoint);
-        PointedFirmData[] adapterData;
-        if(data != null){
-            adapterData = data;
-        }else{
-            adapterData = new PointedFirmData[0];
-        }
-        PocketPointAdapter pointAdapter = new PocketPointAdapter(getActivity(),adapterData,null);
+        PocketPointAdapter pointAdapter = new PocketPointAdapter(getActivity(),data,null);
         mPages_myPoint.setAdapter(pointAdapter);
         mPages_myPoint.setItemAnimator(new DefaultItemAnimator());
         mPages_myPoint.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -148,8 +146,8 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
         mPages_myPreferential.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
-    private void initExchange(MemberRedeemLogData[] data){
-
+    private void initExchange(MemberExChangeData[] data){
+        mPages_myExchange = (RecyclerView) mView.findViewById(R.id.myExchange);
         PocketExchangeAdapter exchangeAdapter = new PocketExchangeAdapter(getActivity(),data,null);
         mPages_myExchange.setAdapter(exchangeAdapter);
         mPages_myExchange.setItemAnimator(new DefaultItemAnimator());
@@ -158,15 +156,7 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
 
 
     private void initView(){
-        mPages_myExchange = (RecyclerView) mView.findViewById(R.id.myExchange);
-        mPoint.setOnClickListener(this);
-        mPreferential.setOnClickListener(this);
-        mExchange.setOnClickListener(this);
 
-        initExchange(new MemberRedeemLogData[0]);
-        setNonPress();
-        setPressed(mPoint);
-        changePages(0);
     }
 
     @Override
@@ -235,18 +225,19 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
 
         @Override
         public void onSuccess(Object obj) {
-
+            if(obj instanceof MemberInfoData){
+                initInformation((MemberInfoData) obj);
+            }
         }
 
         @Override
         public void onSuccess(Object[] obj) {
-            if(obj instanceof MemberCouponsData[]){
+            if(obj instanceof MemberPointData[]){
+                initPointView((MemberPointData[]) obj);
+            }else if(obj instanceof MemberCouponsData[]){
                 initPreferentialView((MemberCouponsData[]) obj);
-            }else if(obj instanceof MemberLoyaltyData[]){
-                initInformation((MemberLoyaltyData[]) obj);
-                initPointView(((MemberLoyaltyData[]) obj)[0].getPointed_firm());
-            }else if(obj instanceof  MemberRedeemLogData[]){
-                initExchange((MemberRedeemLogData[]) obj);
+            }else if(obj instanceof MemberExChangeData[]){
+                initExchange((MemberExChangeData[]) obj);
             }
         }
 
@@ -268,10 +259,10 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
         }
 
         @Override
-        public void onCouponResponse(int allotID) {
+        public void onCouponResponse(int couponID) {
             Intent intent = new Intent(getActivity(), SubPreferentialActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putInt("allotID", allotID);
+            bundle.putInt("couponID", couponID);
             intent.putExtras(bundle);
             getActivity().startActivity(intent);
         }

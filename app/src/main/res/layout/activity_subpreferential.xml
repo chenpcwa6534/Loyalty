@@ -10,7 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/bg_common_pattern">
+        android:background="@mipmap/bg_common_pattern_coupon">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -2,10 +2,14 @@ package friendo.mtel.loyalty.utility;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
+import android.content.res.Resources;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import friendo.mtel.loyalty.R;
@@ -43,8 +47,8 @@ public class Utilitys {
     }
 
     public static boolean isLogin(Context context){
-        int memerID = LoyaltyPreference.getMemberID(context);
-        if(memerID == -1){
+        String memerID = LoyaltyPreference.getMemberID(context);
+        if(memerID.equals("")){
             return false;
         }else{
             return true;
@@ -66,27 +70,14 @@ public class Utilitys {
         return location;
     }
 
-    public static double getDistance(Context context,double latitude, double longitude){
-        double EARTH_RADIUS = 6378137.0;
-        double radLat1 = (locationServiceInital(context).getLatitude() * Math.PI /180.0);
-        double radLat2 = (latitude * Math.PI / 180.0);
-        double radLat = radLat1 - radLat2;
-        double radlng = (locationServiceInital(context).getLongitude() - longitude) * Math.PI / 180.0;
-        double distance = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(radLat / 2), 2)+Math.cos(radLat1)* Math.cos(radLat2) * Math.pow(Math.sin(radlng/2),2)));
-        distance = distance * EARTH_RADIUS;
-        distance = Math.round(distance * 10000) / 10000;
-        return distance;
+    public static int dpToPx(int dp) {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
 
-    public static String codeToWeekday(Context context, int daycode){
-        String[] weekday = context.getResources().getStringArray(R.array.weekday);
-        return weekday[daycode];
-    }
 
-    public static String codeToWeekday(Context context, int[] daycode){
-        String weekdays;
-        String[] weekday = context.getResources().getStringArray(R.array.weekday);
-        return weekday[daycode[0]] +" ~ " +weekday[daycode[daycode.length-1]];
+    public static int getTodayWeekDay(){
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.DAY_OF_WEEK);
     }
 
 }
