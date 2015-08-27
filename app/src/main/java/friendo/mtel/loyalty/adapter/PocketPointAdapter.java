@@ -12,8 +12,6 @@ import com.astuetz.utility.PicassoUtility;
 
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.component.MemberPointData;
-import friendo.mtel.loyalty.components.MemberCouponsData;
-import friendo.mtel.loyalty.components.PointedFirmData;
 import friendo.mtel.loyalty.data.GetListResponse;
 
 /**
@@ -82,7 +80,7 @@ public class PocketPointAdapter extends RecyclerView.Adapter<PocketPointAdapter.
 
         @Override
         public void onClick(View v) {
-
-        }
+            mGetListResponse.onFirmResponse(getPosition());
+    }
     }
 }

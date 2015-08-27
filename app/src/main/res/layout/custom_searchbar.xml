@@ -45,7 +45,7 @@
         <EditText
             android:id="@+id/edt_searchKey"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:background="@mipmap/bg_search_white"
             android:hint="@string/store_item_searchedit"
             android:textColorHint="@color/gray"
@@ -57,7 +57,7 @@
     <LinearLayout
         android:id="@+id/selectbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:orientation="horizontal"
         android:layout_below="@+id/sreachedit"
         android:background="@mipmap/btn_common_red_category_normal">
@@ -95,6 +95,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="(Order)"/>
+
+        <Button
+            android:id="@+id/btn_mode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@mipmap/btn_common_red_list_normal"/>
 
     </LinearLayout>
 

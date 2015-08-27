@@ -1,23 +1,28 @@
 package friendo.mtel.loyalty.component;
 
+import java.io.Serializable;
+
 /**
  * Created by MTel on 2015/8/20.
  */
-public class FirmListData {
+public class FirmListData implements Serializable{
     private int firmID;
     private String firmName;
     private String picture;
     private String picturePath;
     private String pointDesc;
     private String firstDesc;
+    private String number;
     private int distance;
     private String latitude;
     private String longitude;
+    private String address;
     private int catID;
     private String thumbnail;
     private String thumbnailPath;
     private boolean partner;
     private String partnerMessage;
+    private String partnerUrl;
 
     public int getFirmID() {
         return firmID;
@@ -67,6 +72,14 @@ public class FirmListData {
         this.firstDesc = firstDesc;
     }
 
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     public int getDistance() {
         return distance;
     }
@@ -89,6 +102,14 @@ public class FirmListData {
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getCatID() {
@@ -129,5 +150,13 @@ public class FirmListData {
 
     public void setPartnerMessage(String partnerMessage) {
         this.partnerMessage = partnerMessage;
+    }
+
+    public String getPartnerUrl() {
+        return partnerUrl;
+    }
+
+    public void setPartnerUrl(String partnerUrl) {
+        this.partnerUrl = partnerUrl;
     }
 }

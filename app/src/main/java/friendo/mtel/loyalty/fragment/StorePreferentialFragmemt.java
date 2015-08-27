@@ -15,7 +15,6 @@ import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.activity.SubPreferentialActivity;
 import friendo.mtel.loyalty.adapter.StorePreferentialAdapter;
 import friendo.mtel.loyalty.component.FirmCouponsData;
-import friendo.mtel.loyalty.components.MemberCouponsData;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
 
@@ -28,11 +27,10 @@ public class StorePreferentialFragmemt extends CommonFragment {
     private View mView;
     private RecyclerView mList;
 
-    public static StorePreferentialFragmemt newInstance(int firmID, String firmName){
+    public static StorePreferentialFragmemt newInstance(int firmID){
         StorePreferentialFragmemt storePreferentialFragmemt = new StorePreferentialFragmemt();
         Bundle bundle = new Bundle();
         bundle.putInt("firmID", firmID);
-        bundle.putString("firmName",firmName);
         storePreferentialFragmemt.setArguments(bundle);
         return storePreferentialFragmemt;
     }
@@ -116,7 +114,6 @@ public class StorePreferentialFragmemt extends CommonFragment {
             if(couponid != 0){
                 Intent intent = new Intent(getActivity(), SubPreferentialActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("firmName",getArguments().getString("firmName"));
                 bundle.putInt("couponID",couponid);
                 intent.putExtras(bundle);
                 getActivity().startActivity(intent);

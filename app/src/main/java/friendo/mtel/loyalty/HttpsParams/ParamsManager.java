@@ -11,14 +11,13 @@ import friendo.mtel.loyalty.utility.Utilitys;
 public class ParamsManager {
 
     public static FrontPageInParams getfrontPageInParams(Context context){
-//        FrontPageInParams frontPageInParams ;
-//        if(Utilitys.isGPS(context)){
-//            Location location = Utilitys.getLocation(context);
-//            frontPageInParams = ParamsManager.getfrontPageInParams(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), "", 0, 0, 1, "", 0);
-//        }else{
-//            frontPageInParams = ParamsManager.getfrontPageInParams("", "", "", 0, 0, 2, "", 0);
-//        }
-        FrontPageInParams frontPageInParams = ParamsManager.getfrontPageInParams("", "", "", 0, 0, 2, "", 0);
+        FrontPageInParams frontPageInParams ;
+        Location location = Utilitys.getLocation(context);
+        if(Utilitys.isGPS(context) && location != null){
+            frontPageInParams = ParamsManager.getfrontPageInParams(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), "", 0, 0, 1, "", 0);
+        }else{
+            frontPageInParams = ParamsManager.getfrontPageInParams("", "", "", 0, 0, 2, "", 0);
+        }
         return frontPageInParams;
     }
 
@@ -37,15 +36,5 @@ public class ParamsManager {
 
         frontPageInParams.setUserfilter(userFilterResponse);
         return frontPageInParams;
-    }
-
-    public static CouponAllotParams getcouponAllotParams(int allotID,boolean allotStauts, int couponsID, String device_token){
-        CouponAllotParams couponAllotParams = new CouponAllotParams();
-        couponAllotParams.setAllot_id(allotID);
-        couponAllotParams.setAllot_status(allotStauts);
-        couponAllotParams.setCoupons_id(couponsID);
-        couponAllotParams.setDevice_token(device_token);
-
-        return couponAllotParams;
     }
 }

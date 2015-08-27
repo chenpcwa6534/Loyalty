@@ -12,8 +12,6 @@ import com.astuetz.utility.PicassoUtility;
 
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.component.MemberExChangeData;
-import friendo.mtel.loyalty.components.MemberCouponsData;
-import friendo.mtel.loyalty.components.MemberRedeemLogData;
 import friendo.mtel.loyalty.data.GetListResponse;
 
 /**

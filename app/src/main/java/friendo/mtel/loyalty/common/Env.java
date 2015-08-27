@@ -1,12 +1,6 @@
 package friendo.mtel.loyalty.common;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.os.Build;
-import android.util.Log;
-
-import friendo.mtel.loyalty.components.MemberCouponsData;
-import friendo.mtel.loyalty.components.Test;
 import friendo.mtel.loyalty.preferences.LoyaltyPreference;
 
 /**

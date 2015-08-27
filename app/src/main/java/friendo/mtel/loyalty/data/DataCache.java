@@ -12,15 +12,10 @@ import friendo.mtel.loyalty.component.LimitCouponsData;
 import friendo.mtel.loyalty.component.MemberExChangeData;
 import friendo.mtel.loyalty.component.MemberInfoData;
 import friendo.mtel.loyalty.component.VersionControlData;
-import friendo.mtel.loyalty.components.DeluxeCoupon;
 import friendo.mtel.loyalty.component.FilterData;
 import friendo.mtel.loyalty.component.FirmInfoData;
-import friendo.mtel.loyalty.components.FrontPageRTNData;
 import friendo.mtel.loyalty.component.MemberCouponsData;
-import friendo.mtel.loyalty.components.MemberLoyaltyData;
 import friendo.mtel.loyalty.component.MemberPointData;
-import friendo.mtel.loyalty.components.MemberRedeemLogData;
-import friendo.mtel.loyalty.components.MyCouponData;
 
 /**
  * Created by MTel on 2015/7/17.
@@ -55,18 +50,4 @@ public class DataCache {
         cacheFrontPageInParams = ParamsManager.getfrontPageInParams(context);
         cacheFrontPageInParamsLimit = ParamsManager.getfrontPageInParams(context);
     }
-
-
-    //old
-
-    public static MemberCouponsData[] cacheMemberCouponsData = null;
-    public static MemberLoyaltyData cacheMemberLoyaltyData = null;
-    public static MemberRedeemLogData cacheMemberRedeemLogData = null;
-    public static MyCouponData cacheMyCouponData = null;
-    public static FrontPageRTNData cacheFrontPageRTNData = null;
-    public static MemberPointData[] cacheMemberPointData = null;
-    public static MemberCouponsData[] cacheFirmCoupons = null;
-    public static DeluxeCoupon cacheDeluxeCoupon = null;
-
-
 }

@@ -42,8 +42,6 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
 
     private View mView;
 
-    private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
     public MoreFragment() {
         super();
     }
@@ -96,7 +94,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
     private void initView(){
         mListView = (RecyclerView) mView.findViewById(R.id.listView);
         String[] data = getResources().getStringArray(R.array.more_List);
-        MoreAdapter moreAdapter = new MoreAdapter(getActivity(),data);
+        MoreAdapter moreAdapter = new MoreAdapter(getActivity(),data,listener);
         mListView.setAdapter(moreAdapter);
         mListView.setItemAnimator(new DefaultItemAnimator());
         mListView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -188,4 +186,11 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
                 break;
         }
     }
+
+    private MoreAdapter.ViewHolder.ClickListener listener = new MoreAdapter.ViewHolder.ClickListener() {
+        @Override
+        public void onClickPage(int position) {
+
+        }
+    };
 }

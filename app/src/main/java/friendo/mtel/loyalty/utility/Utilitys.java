@@ -21,9 +21,8 @@ import friendo.mtel.loyalty.preferences.LoyaltyPreference;
 public class Utilitys {
 
     public static boolean isBluetooth(){
-//        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-//        return bluetoothAdapter.isEnabled();
-        return false;
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        return bluetoothAdapter.isEnabled();
     }
 
     public static boolean isGPS(Context context){

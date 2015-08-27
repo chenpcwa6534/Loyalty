@@ -26,7 +26,7 @@
         </activity>
 
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".activity.WelcomeActivity"
             android:label="CommonActionBarActivity"
             android:screenOrientation="portrait"/>
 
@@ -36,17 +36,12 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:label="LoginActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.ApiTestActivity"
-            android:label="apiActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:label="apiActivity"
             android:screenOrientation="portrait"/>
 

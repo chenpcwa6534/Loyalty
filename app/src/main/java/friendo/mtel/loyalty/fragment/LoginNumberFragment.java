@@ -79,7 +79,6 @@ public class LoginNumberFragment extends Fragment implements View.OnClickListene
                 Toast.makeText(getActivity(),getActivity().getString(R.string.login_trip),Toast.LENGTH_SHORT).show();
                 opKeyBroad();
             }else{
-                //mGetPagesResponse.onPhoneNumber(mNumber.getText().toString());
                 DataManager.getInstance(getActivity()).qryAskOTP(mNumber.getText().toString(),getDataResponse);
             }
         }

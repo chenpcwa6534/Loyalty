@@ -1,7 +1,6 @@
 package friendo.mtel.loyalty.activity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -15,13 +14,10 @@ import com.astuetz.utility.PicassoUtility;
 import java.util.ArrayList;
 
 import friendo.mtel.loyalty.R;
-import friendo.mtel.loyalty.StoreInfoFragment;
+import friendo.mtel.loyalty.component.FirmListData;
+import friendo.mtel.loyalty.fragment.StoreInfoFragment;
 import friendo.mtel.loyalty.adapter.TabPageAdapter;
-import friendo.mtel.loyalty.components.FirmInfoData;
-import friendo.mtel.loyalty.data.DataManager;
-import friendo.mtel.loyalty.data.GetDataResponse;
 import friendo.mtel.loyalty.fragment.PointFragment;
-import friendo.mtel.loyalty.fragment.PreferentialFragment;
 import friendo.mtel.loyalty.fragment.StorePreferentialFragmemt;
 import friendo.mtel.loyalty.utility.UtilityInitial;
 
@@ -42,11 +38,12 @@ public class SubFrontPageActivity extends CommonActionBarActivity implements Vie
     private ViewPager mPage;
     private ArrayList<Fragment> pages;
 
-    private int db_firmID;
-    private String db_firmName;
-    private String db_picture;
-    private String db_partnerMessage;
-    private boolean db_ispartner;
+//    private int db_firmID;
+//    private String db_firmName;
+//    private String db_picture;
+//    private String db_partnerMessage;
+//    private boolean db_ispartner;
+    private FirmListData db_firmData;
 
     private ImageView mStorePicture;
 
@@ -59,14 +56,15 @@ public class SubFrontPageActivity extends CommonActionBarActivity implements Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subfrontpage);
-        findView();
         if(initData()){
-            db_firmID = savedInstanceState.getInt("firmID");
-            db_firmName = savedInstanceState.getString("firmName");
-            db_picture = savedInstanceState.getString("picture");
-            db_ispartner = savedInstanceState.getBoolean("partner");
-            db_partnerMessage = savedInstanceState.getString("partnermessage");
+//            db_firmID = savedInstanceState.getInt("firmID");
+//            db_firmName = savedInstanceState.getString("firmName");
+//            db_picture = savedInstanceState.getString("picture");
+//            db_ispartner = savedInstanceState.getBoolean("partner");
+//            db_partnerMessage = savedInstanceState.getString("partnermessage");
+            db_firmData = (FirmListData) savedInstanceState.getSerializable("value");
         }
+        findView();
         initView();
         initTabView();
         initPagerView();
@@ -90,26 +88,21 @@ public class SubFrontPageActivity extends CommonActionBarActivity implements Vie
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("firmID", db_firmID);
-        outState.putString("firmName",db_firmName);
-        outState.putString("picture", db_picture);
-        outState.putString("partnermessage",db_partnerMessage);
-        outState.putBoolean("partner", db_ispartner);
+        outState.putSerializable("value", db_firmData);
     }
 
     private Boolean initData(){
        if(getIntent().getExtras() != null){
-           db_firmID = getIntent().getExtras().getInt("firmID");
-           db_firmName = getIntent().getExtras().getString("firmName");
-           db_picture = getIntent().getExtras().getString("picture");
-           db_ispartner = getIntent().getExtras().getBoolean("partner");
-           db_partnerMessage = getIntent().getExtras().getString("partnermessage");
+//           db_firmID = getIntent().getExtras().getInt("firmID");
+//           db_firmName = getIntent().getExtras().getString("firmName");
+//           db_picture = getIntent().getExtras().getString("picture");
+//           db_ispartner = getIntent().getExtras().getBoolean("partner");
+//           db_partnerMessage = getIntent().getExtras().getString("partnermessage");
+           db_firmData = (FirmListData) getIntent().getExtras().getSerializable("value");
            return false;
        }else{
            return true;
        }
-        //DataManager.getInstance(this).qryFirmInfoData(this, String.valueOf(db_firmID), true, getDataResponse);
-
     }
 
     private void findView(){
@@ -128,14 +121,14 @@ public class SubFrontPageActivity extends CommonActionBarActivity implements Vie
         mBack.setOnClickListener(this);
         mPartner.setOnClickListener(this);
 
-        if(db_ispartner){
+        if(db_firmData.isPartner()){
             mPartner.setVisibility(View.VISIBLE);
         }
     }
 
     private void initView(){
-        mToolsbarTitle.setText(db_firmName);
-        PicassoUtility.load(this,mStorePicture,db_picture);
+        mToolsbarTitle.setText(db_firmData.getFirmName());
+        PicassoUtility.load(this,mStorePicture,db_firmData.getPicture());
     }
 
     private void initPagerView(){
@@ -152,9 +145,12 @@ public class SubFrontPageActivity extends CommonActionBarActivity implements Vie
     }
 
     private void initTabView(){
-        StorePreferentialFragmemt storePreferentialFragmemt = StorePreferentialFragmemt.newInstance(db_firmID,db_firmName);
-        PointFragment pointFragment = PointFragment.newInstance(db_firmID,db_firmName);
-        StoreInfoFragment storeInfoFragment = StoreInfoFragment.newInstance(db_firmID);
+        //店家優惠卷
+        StorePreferentialFragmemt storePreferentialFragmemt = StorePreferentialFragmemt.newInstance(db_firmData.getFirmID());
+        //店家集點
+        PointFragment pointFragment = PointFragment.newInstance(db_firmData.getFirmID());
+        //關於店家
+        StoreInfoFragment storeInfoFragment = StoreInfoFragment.newInstance(db_firmData);
 
         pages = new ArrayList<Fragment>();
         pages.add(storePreferentialFragmemt);

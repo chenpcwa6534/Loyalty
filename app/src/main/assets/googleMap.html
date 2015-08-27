@@ -1,45 +1,79 @@
-<!DOCTYPE html>
+<!DOCTYPEhtml>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Google Maps JavaScript API v3 Example: Marker Animations</title>
-    <link href="/maps/documentation/javascript/examples/default.css" rel="stylesheet">
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script>
-      var centerPoint = new google.maps.LatLng(24.217712, 120.580806); //弘光科技大學，台中市中棲路34號
-      var marker;
-      var map;
-      var image = 'taxi-icon.png';//image變數指向計程車圖示檔案，圖示檔案請放在相同目錄
-      function mark(lat, log){//標註座標函式
-        var m = new google.maps.LatLng(lat, log);
-        marker = new google.maps.Marker({
-          map:map,
-          draggable:true,
-          position: m,
-          icon: image //指定標示圖案為image
-        });
-      }
+    <title>單一Marker</title>
+    <hand set="utf-8">
+        <style>
+            html,body,#map-canvas {
+            height: 100%;
+            margin: 0px;
+            padding: 0px
+            }
+        </style>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&language=zh_TW"></script>
+        <!-- 上述的url參數,v=3.exp，表示為api版本代號;language=zh_TW,表示設定語系為zh_TW，如要簡體就設定
+        zh_CN -->
+        <script type="text/javascript">
+function initialize() {
+var lat = new Array();
+var lng = new Array();
+var icon = new Array();
+var maker = new Array('icon/ic_location_a.png',
+                      'icon/ic_location_b.png',
+                      'icon/ic_location_c.png',
+                      'icon/ic_location_d.png',
+                      'icon/ic_location_e.png',
+                      'icon/ic_location_f.png',
+                      'icon/ic_location_g.png',
+                      'icon/ic_location_h.png',
+                      'icon/ic_location_i.png',
+                      'icon/ic_location_j.png',
+                      'icon/ic_location_k.png',
+                      'icon/ic_location_l.png',
+                      'icon/ic_location_m.png',
+                      'icon/ic_location_n.png',
+                      'icon/ic_location_o.png',
+                      'icon/ic_location_p.png',
+                      'icon/ic_location_q.png',
+                      'icon/ic_location_r.png');
+if(window.android){
+    lat = JSON.parse(window.android.getLatitude());
+    lng = JSON.parse(window.android.getLongitude());
+    icon = JSON.parse(window.android.getIcon());
+}
+var mapOptions = {
+    panControl: false, //要不要出現可以上下左右移動的面板，如圖1
+    zoomControl: true, //要不要出現可以放大縮小的面板，如圖3
+    mapTypeControl: false, //切換地圖檢視類型的面板，如圖4
+    scaleControl: false, //比例尺資訊，如圖5
+    streetViewControl: false,  //顯示街景服務的面板，如圖2
+    overviewMapControl: true, //總覽圖的面板，在右下力有個開合的圖示，如圖6
+    center: new google.maps.LatLng(lat[0], lng[0]), //台北車站的經度,緯度
+    zoom: 14 //縮放的大小，0-18，0最小，18最大
+  };
+var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+      map.panTo(map.getCenter());
+//產生marker，如圖7
+for(var i=0; i<lat.length; i++){
+var marker = new google.maps.Marker({
+    map: map,
+    position: new google.maps.LatLng(lat[i], lng[i]),
+    icon:maker[icon[i]]
+  });
+}
 
-      function initialize() {
-        var mapOptions = {
-          zoom: 15,
-          mapTypeId: google.maps.MapTypeId.ROADMAP,
-          center: centerPoint
-        };
 
-        map = new google.maps.Map(document.getElementById('map_canvas'),
-                mapOptions);
-
-      }
-
-      function centerAt(latitude, longitude){//地圖以給予的座標為中心，即移動地圖至給定的座標
-          myLatlng = new google.maps.LatLng(latitude,longitude);
-          map.panTo(myLatlng);
-      }
-
-    </script>
-</head>
-<body onload="initialize()">
-<div id="map_canvas" style="width: device-width; height: 460px;">map div</div>
+var infowindow = new google.maps.InfoWindow();
+  infowindow.setContent('<b>Metl<b>');
+  google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(map, marker);
+  });
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+    </hand>
+<body>
+<div id="map-canvas"style="width:100%; height:100%"></div>
 </body>
 </html>

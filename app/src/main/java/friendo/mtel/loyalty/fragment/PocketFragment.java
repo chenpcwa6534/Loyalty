@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import friendo.mtel.loyalty.R;
+import friendo.mtel.loyalty.activity.SubFrontPageActivity;
 import friendo.mtel.loyalty.activity.SubPreferentialActivity;
 import friendo.mtel.loyalty.adapter.PocketExchangeAdapter;
 import friendo.mtel.loyalty.adapter.PocketPointAdapter;
@@ -53,7 +54,7 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
     private RecyclerView mPages_myExchange;
     private int currentposition;
 
-    private int page;
+    private int page = 1;
 
     public PocketFragment() {
         super();
@@ -88,16 +89,10 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initData(){
-//        DataManager.getInstance(getActivity()).qryMemberLoyaltyData(getActivity(),true,getDataResponse);
-//
-//        DataManager.getInstance(getActivity()).qryMemberCouponsData(getActivity(), true, getDataResponse);
-//
-//        DataManager.getInstance(getActivity()).qryMemberRedeemLogDataData(getActivity(), true, getDataResponse);
-
         DataManager.getInstance(getActivity()).qryMemberInfo(getDataResponse);
         DataManager.getInstance(getActivity()).qryMemberPoint(getDataResponse);
         DataManager.getInstance(getActivity()).qryMemberCoupons(getDataResponse);
-        DataManager.getInstance(getActivity()).qryMemberExChange(page,getDataResponse);
+        DataManager.getInstance(getActivity()).qryMemberExChange(page, getDataResponse);
     }
 
     private void findView(View v){
@@ -125,8 +120,8 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
     private void initInformation(MemberInfoData data){
             mLevel.setText(""+data.getLV());
             mStoreQTY.setText(""+data.getStore());
-            mPointQTY.setText(""+data.getPoint());
-            mFrequencyQTY.setText(""+data.getCount());
+            mPointQTY.setText("" + data.getPoint());
+            mFrequencyQTY.setText("" + data.getCount());
             mMoneyQTY.setText("$" + data.getMoney());
     }
 
@@ -152,11 +147,6 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
         mPages_myExchange.setAdapter(exchangeAdapter);
         mPages_myExchange.setItemAnimator(new DefaultItemAnimator());
         mPages_myExchange.setLayoutManager(new LinearLayoutManager(getActivity()));
-    }
-
-
-    private void initView(){
-
     }
 
     @Override
@@ -253,8 +243,9 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
     };
 
     private GetListResponse getPreferentialListResponse = new GetListResponse() {
+
         @Override
-        public void onFirmResponse(String firmID) {
+        public void onFirmResponse(int position) {
 
         }
 

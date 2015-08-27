@@ -2,7 +2,6 @@ package friendo.mtel.loyalty.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -12,14 +11,11 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
-import de.greenrobot.event.EventBus;
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.common.DeviceInformation;
-import friendo.mtel.loyalty.common.Env;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
 import friendo.mtel.loyalty.data.GetPagesResponse;
@@ -87,7 +83,6 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if(KeyEvent.KEYCODE_ENTER == keyCode) {
-            //Verification(mVerificaion.getText().toString());
             DataManager.getInstance(getActivity()).qryVerificationOTP(mNumber.getText().toString(),mVerificaion.getText().toString(), DeviceInformation.getDeviceToken(),getDataResponse);
         }
         return false;

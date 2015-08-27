@@ -2,7 +2,6 @@ package friendo.mtel.loyalty.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,9 +15,7 @@ import android.widget.TextView;
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.activity.SubPreferentialActivity;
 import friendo.mtel.loyalty.adapter.PointAdapter;
-import friendo.mtel.loyalty.common.Env;
 import friendo.mtel.loyalty.component.FirmPointData;
-import friendo.mtel.loyalty.components.MemberPointData;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
 
@@ -32,11 +29,10 @@ public class PointFragment extends Fragment {
     private TextView mDesc;
     private RecyclerView mPointList;
 
-    public static PointFragment newInstance(int firmID, String firmName){
+    public static PointFragment newInstance(int firmID){
         PointFragment pointFragment = new PointFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("firmID", firmID);
-        bundle.putString("firmName", firmName);
         pointFragment.setArguments(bundle);
         return pointFragment;
     }
@@ -81,7 +77,6 @@ public class PointFragment extends Fragment {
     private void initData(){
         int firmID = getArguments().getInt("firmID");
         DataManager.getInstance(getActivity()).qryFirmPoint(firmID,getDataResponse);
-        //DataManager.getInstance(getActivity()).qryMemberPointData(getActivity(), Env.getMemberID(getActivity()),firmID,true,getDataResponse);
     }
 
     private void initView(FirmPointData data){
@@ -98,7 +93,7 @@ public class PointFragment extends Fragment {
         mPointList.setLayoutManager(manager);
     }
 
-    private void showCouponDetail(int couponID, String firmName){
+    private void showCouponDetail(int couponID){
         Intent intent = new Intent(getActivity(), SubPreferentialActivity.class);
         Bundle bundle = new Bundle();
         bundle.putInt("couponID",couponID);
@@ -111,11 +106,10 @@ public class PointFragment extends Fragment {
         @Override
         public void onClick(int[] couponsID) {
             if(couponsID.length == 1){
-                showCouponDetail(couponsID[0],getArguments().getString("firmName"));
+                showCouponDetail(couponsID[0]);
             }else{
                 //SHOW DIALOG
             }
-
         }
     };
 

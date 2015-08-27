@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_StorePicture"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/test_mypointpicture"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/font_storeType_a"
+                android:id="@+id/txt_StoreName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Collectpoint"/>
+
+            <TextView
+                style="@style/font_stroeitemcontent"
+                android:id="@+id/txt_StoreAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="新竹事勝利路12號"/>
+
+            <TextView
+                style="@style/font_stroeitemcontent"
+                android:id="@+id/txt_Storenumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0222222222"/>
+
+            <TextView
+                style="@style/font_storeTitle"
+                android:id="@+id/txt_StoreDistance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="目前距離 303公尺"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

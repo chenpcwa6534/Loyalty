@@ -1,7 +1,6 @@
 package friendo.mtel.loyalty.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import friendo.mtel.loyalty.R;
-import friendo.mtel.loyalty.activity.ApiTestActivity;
 
 /**
  * Created by MTel on 2015/7/8.
@@ -21,15 +19,16 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.ViewHolder>{
     private ViewHolder.ClickListener mListener;
 
 
-    public MoreAdapter(Context context,String[] data) {
+    public MoreAdapter(Context context,String[] data,ViewHolder.ClickListener listener) {
         this.mContext = context;
         this.data = data;
+        this.mListener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_morelayout, parent, false);
-        ViewHolder viewHolder = new ViewHolder(mContext,itemLayout,mListener);
+        ViewHolder viewHolder = new ViewHolder(itemLayout,mListener);
         return viewHolder;
     }
 
@@ -45,13 +44,13 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.ViewHolder>{
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private Context mContext;
         private TextView mListItem;
         private View mListView;
+        private ClickListener mListener;
 
-        public ViewHolder(Context context,View itemView, ClickListener listener) {
+        public ViewHolder(View itemView, ClickListener listener) {
             super(itemView);
-            this.mContext = context;
+            this.mListener = listener;
 
             mListItem = (TextView) itemView.findViewById(R.id.txt_funtion);
             mListView = (View) itemView.findViewById(R.id.ly_listView);
@@ -61,14 +60,11 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.ViewHolder>{
 
         @Override
         public void onClick(View v) {
-            if(getPosition() == 5){
-                Intent intent = new Intent(mContext, ApiTestActivity.class);
-                mContext.startActivity(intent);
-            }
+            mListener.onClickPage(getPosition());
         }
 
         public interface ClickListener {
-
+            void onClickPage(int position);
         }
     }
 }

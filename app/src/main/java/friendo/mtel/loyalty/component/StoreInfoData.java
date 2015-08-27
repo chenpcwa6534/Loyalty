@@ -8,6 +8,7 @@ public class StoreInfoData {
     private String picturePath;
     private String address;
     private String number;
+    private String firmName;
 
     public String getPicture() {
         return picture;
@@ -39,5 +40,13 @@ public class StoreInfoData {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public String getFirmName() {
+        return firmName;
+    }
+
+    public void setFirmName(String firmName) {
+        this.firmName = firmName;
     }
 }

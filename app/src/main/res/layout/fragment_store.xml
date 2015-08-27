@@ -2,91 +2,142 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app = "http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white">
 
 
-    <RelativeLayout
-        android:id="@+id/generalMode"
+    <ViewSwitcher
+        android:id="@+id/textSwitcher"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical">
-
+        android:layout_marginTop="90dp">
 
         <LinearLayout
-            android:id="@+id/searchbarbackground"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/bg_search_white"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/btn_common_red_category_normal"/>
-
-        </LinearLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/advbarview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/searchbarbackground"
-            android:background="@color/orange">
 
             <com.astuetz.page.sliding.PageSlidingPagerView
                 android:id="@+id/csv_Advertising"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@color/white">
+                android:background="@color/white"/>
 
-            </com.astuetz.page.sliding.PageSlidingPagerView>
-        </RelativeLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/advbarview"
-            android:paddingTop="15dp"
-            android:background="@color/white"
-            android:scrollbars="vertical"
-            android:visibility="gone">
-
-        </android.support.v7.widget.RecyclerView>
-
-        <LinearLayout
-            android:id="@+id/searchbarview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <friendo.mtel.loyalty.view.SearchBarView
-                android:id="@+id/csv_Search"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/listView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:OrderType="firm"
-                app:SearchKey="true">
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:background="@color/white"
+                android:scrollbars="vertical">
 
-            </friendo.mtel.loyalty.view.SearchBarView>
+            </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
 
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <friendo.mtel.loyalty.view.WebMapJSInterface
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"/>
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/listViewMap"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp"
+                    android:background="@color/white"
+                    android:scrollbars="vertical">
+
+                </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+    </ViewSwitcher>
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginTop="90dp"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<ViewSwitcher-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/textSwitcher"-->
+            <!--android:layout_below="@+id/advbarview">-->
+
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/listViewMap"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:paddingTop="15dp"-->
+                <!--android:background="@color/white"-->
+                <!--android:scrollbars="vertical"-->
+                <!--android:visibility="gone">-->
+
+            <!--</android.support.v7.widget.RecyclerView>-->
+
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/listView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+
+                <!--android:paddingTop="15dp"-->
+                <!--android:background="@color/white"-->
+                <!--android:scrollbars="vertical"-->
+                <!--android:visibility="gone">-->
+
+            <!--</android.support.v7.widget.RecyclerView>-->
+
+        <!--</ViewSwitcher>-->
+
+
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/advbarview"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/orange">-->
+
+            <!--<com.astuetz.page.sliding.PageSlidingPagerView-->
+                <!--android:id="@+id/csv_Advertising"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:background="@color/white">-->
+
+            <!--</com.astuetz.page.sliding.PageSlidingPagerView>-->
+
+            <!--<friendo.mtel.loyalty.view.WebMapJSInterface-->
+                <!--android:id="@+id/map"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:visibility="gone">-->
+
+            <!--</friendo.mtel.loyalty.view.WebMapJSInterface>-->
+
+        <!--</RelativeLayout>-->
+
+    <!--</RelativeLayout>-->
 
     <LinearLayout
-        android:id="@+id/mapMode"
+        android:id="@+id/searchbarview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <friendo.mtel.loyalty.view.SearchBarView
+            android:id="@+id/csv_Search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:OrderType="firm"
+            app:SearchKey="true">
+
+        </friendo.mtel.loyalty.view.SearchBarView>
 
     </LinearLayout>
+
 </RelativeLayout>

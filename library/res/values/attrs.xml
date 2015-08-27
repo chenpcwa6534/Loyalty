@@ -23,6 +23,7 @@
             <enum name="limit" value="1"/>
         </attr>
         <attr name="SearchKey" format="boolean"/>
+        <attr name="Mode" format="boolean"/>
     </declare-styleable>
 
 

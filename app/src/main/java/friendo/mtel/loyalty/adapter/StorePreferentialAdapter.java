@@ -12,7 +12,6 @@ import com.astuetz.utility.PicassoUtility;
 
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.component.FirmCouponsData;
-import friendo.mtel.loyalty.components.MemberCouponsData;
 
 /**
  * Created by MTel on 2015/7/22.

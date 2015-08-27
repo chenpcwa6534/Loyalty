@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -43,11 +44,13 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
     private TextView mCats;
     private TextView mCitys;
     private TextView mOrders;
+    private Button mMode;
 
     private GetSearchResponse mListener;
 
     private int OrderTypeAttr; //default = 0,  0 is firmlist, 1 is limitlist
     private boolean SearchKeyOpen;
+    private boolean Mode;      // mode 切換功能扭 default is true
 
 
 //    public interface ClickListener{
@@ -74,7 +77,8 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
     private void getAttr(Context context , AttributeSet attrs){
         TypedArray typedArray = context.obtainStyledAttributes(attrs,R.styleable.SearchBarAttr);
         OrderTypeAttr = typedArray.getInt(R.styleable.SearchBarAttr_OrderType,0);
-        SearchKeyOpen = typedArray.getBoolean(R.styleable.SearchBarAttr_SearchKey,true);
+        SearchKeyOpen = typedArray.getBoolean(R.styleable.SearchBarAttr_SearchKey, true);
+        Mode = typedArray.getBoolean(R.styleable.SearchBarAttr_Mode,true);
     }
 
     private void initView(){
@@ -89,11 +93,15 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
         mOrders = (TextView) mView.findViewById(R.id.txt_Orders);
         mMainListView = (RecyclerView) mView.findViewById(R.id.mainlistView);
         mSubListView = (RecyclerView) mView.findViewById(R.id.sublistView);
+        mMode = (Button) mView.findViewById(R.id.btn_mode);
 
         mCats.setOnClickListener(this);
         mCitys.setOnClickListener(this);
         mOrders.setOnClickListener(this);
+        mMode.setOnClickListener(this);
 
+
+        mMode.setTag(0);
         //Tag value is check open status
         // 0 is not open ; 1 is open
         mCats.setTag(0);
@@ -105,6 +113,12 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
             mSearchKey.setVisibility(View.VISIBLE);
         }else{
             mSearchKey.setVisibility(View.GONE);
+        }
+
+        if(Mode){
+            mMode.setVisibility(View.VISIBLE);
+        }else{
+            mMode.setVisibility(View.GONE);
         }
 
         initValue();
@@ -213,6 +227,20 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
         mSubListView.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * 0 : 代表清單模式 1 : 代表地圖模式
+     */
+    private void modeOnClickEvent(){
+        if((int) mMode.getTag() == 0){
+            mMode.setBackground(mContext.getResources().getDrawable(R.mipmap.btn_common_red_list_normal));
+            mMode.setTag(1);
+        }else if((int) mMode.getTag() == 1){
+            mMode.setBackground(mContext.getResources().getDrawable(R.mipmap.btn_common_red_location_normal));
+            mMode.setTag(0);
+        }
+        mListener.onModeChange((int) mMode.getTag());
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -234,6 +262,9 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
                 }
                 mMainListView.setAdapter(orderAdapter);
                 mSubListView.setVisibility(View.INVISIBLE);
+                break;
+            case R.id.btn_mode:
+                modeOnClickEvent();
                 break;
         }
         openControl(v);

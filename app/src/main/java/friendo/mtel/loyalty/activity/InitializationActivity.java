@@ -6,11 +6,8 @@ import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import friendo.mtel.loyalty.MainActivity;
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.TestDataJson.ErrorMessageResult;
-import friendo.mtel.loyalty.WelcomeActivity;
-import friendo.mtel.loyalty.common.Env;
 import friendo.mtel.loyalty.component.ErrorMessageData;
 import friendo.mtel.loyalty.component.FilterData;
 import friendo.mtel.loyalty.component.VersionControlData;

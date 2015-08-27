@@ -254,7 +254,7 @@
 
     <style name="font_storeTitle">
         <item name="android:drawablePadding">@dimen/substore_drawablepadding</item>
-        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_margin">2dp</item>
         <item name="android:textColor">@color/str_search_press</item>
     </style>
 

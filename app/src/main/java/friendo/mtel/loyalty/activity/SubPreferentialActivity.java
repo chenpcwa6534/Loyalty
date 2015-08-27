@@ -102,7 +102,6 @@ public class SubPreferentialActivity extends CommonActionBarActivity implements 
 
     private void initView(CouponDetailData data){
         db_data = data;
-        String firmName = getIntent().getExtras().getString("firmName");
         if(data.isCollect()){
             mBtnUseView.setVisibility(View.VISIBLE);
             mUse = (Button) findViewById(R.id.btn_Use);
@@ -115,7 +114,7 @@ public class SubPreferentialActivity extends CommonActionBarActivity implements 
             mUse.setOnClickListener(this);
         }
 
-        mToolsbarTitle.setText(firmName);
+        mToolsbarTitle.setText(data.getStoreInfo().getFirmName());
         mPreferenialTitle.setText(data.getTitle());
         mDesc.setText(data.getDescription());
         mDeadline.setText(data.getAvailable());

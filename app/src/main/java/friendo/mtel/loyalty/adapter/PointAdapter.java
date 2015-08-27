@@ -13,7 +13,6 @@ import com.astuetz.utility.PicassoUtility;
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.component.FirmPointData;
 import friendo.mtel.loyalty.component.RedeemData;
-import friendo.mtel.loyalty.components.MemberPointData;
 
 /**
  * Created by MTel on 2015/8/4.

@@ -7,4 +7,5 @@ public interface GetSearchResponse {
 
     void onFirmSearch(String userFilter);
     void onLimitSearch(String userFilter);
+    void onModeChange(int modeCode);
 }

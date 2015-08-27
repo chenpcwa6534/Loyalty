@@ -12,21 +12,14 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 
-import friendo.mtel.loyalty.HttpsParams.FrontPageInParams;
-import friendo.mtel.loyalty.HttpsParams.ParamsManager;
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.activity.SubPreferentialActivity;
 import friendo.mtel.loyalty.adapter.PreferentialAdapter;
-import friendo.mtel.loyalty.common.DeviceInformation;
-import friendo.mtel.loyalty.common.Env;
 import friendo.mtel.loyalty.component.LimitCouponsData;
-import friendo.mtel.loyalty.components.CollectibleCoupon;
-import friendo.mtel.loyalty.components.DeluxeCoupon;
 import friendo.mtel.loyalty.data.DataCache;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
 import friendo.mtel.loyalty.data.GetSearchResponse;
-import friendo.mtel.loyalty.view.ConditionsSearchView;
 import friendo.mtel.loyalty.view.SearchBarView;
 
 /**
@@ -63,7 +56,6 @@ public class PreferentialFragment extends CommonFragment{
         Gson gson = new Gson();
         String userFilter = gson.toJson(DataCache.cacheFrontPageInParamsLimit);
         DataManager.getInstance(getActivity()).qryLimitCoupons(userFilter,page,getDataResponse);
-        //DataManager.getInstance(getActivity()).qryDeluxeCouponData(getActivity(), Env.getMemberID(getActivity()), DeviceInformation.getDeviceToken(), "1", userFilter, false, getDataResponse);
     }
 
     @Override
@@ -110,6 +102,11 @@ public class PreferentialFragment extends CommonFragment{
         @Override
         public void onLimitSearch(String userFilter) {
             String data = userFilter;
+        }
+
+        @Override
+        public void onModeChange(int modeCode) {
+
         }
     };
 

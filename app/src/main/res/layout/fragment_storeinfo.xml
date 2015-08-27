@@ -70,12 +70,13 @@
                     android:layout_margin="15dp"
                     android:text="(Introduction)"/>
 
-                <WebView
+                <friendo.mtel.loyalty.view.WebMapJSInterface
                     android:id="@+id/web_map"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_width="330dp"
+                    android:layout_height="160dp"
+                    android:layout_gravity="center_horizontal">
 
-                </WebView>
+                </friendo.mtel.loyalty.view.WebMapJSInterface>
 
             </LinearLayout>
 
