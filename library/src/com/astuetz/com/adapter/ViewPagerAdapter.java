@@ -74,7 +74,9 @@ public class ViewPagerAdapter extends PagerAdapter implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        listener.onClick((int) v.getId());
+        if(listener != null){
+            listener.onClick((int) v.getId());
+        }
     }
 
     public interface ViewpageCallback{

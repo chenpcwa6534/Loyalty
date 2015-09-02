@@ -20,7 +20,16 @@
 
     <color name="btn_click_effect">#FFECECEC</color>
     <color name="btn_fouch_effect">#00FFFFFF</color>
-    
+
+    <color name="font_content_style_login">#3f3f3f</color>
+    <color name="font_skip">#d4837c</color>
+    <color name="font_hint">#999999</color>
+    <color name="font_dialogTitle">#fa5a4a</color>
+    <color name="font_dialogContent">#555555</color>
+
+
+    <color name="bg_full_style_login">#e8e8e8</color>
+    <color name="bg_dialog">#cc000000</color>
     
     <!-- Custom Type Color-->
     <color name="Brand_ColorA">#CEC0F3</color>

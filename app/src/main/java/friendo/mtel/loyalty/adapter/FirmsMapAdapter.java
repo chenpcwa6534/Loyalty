@@ -13,6 +13,7 @@ import com.astuetz.utility.PicassoUtility;
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.component.FirmListData;
 import friendo.mtel.loyalty.data.GetListResponse;
+import friendo.mtel.loyalty.utility.ColorTable;
 
 /**
  * Created by MTel on 2015/8/26.
@@ -41,8 +42,11 @@ public class FirmsMapAdapter extends RecyclerView.Adapter<FirmsMapAdapter.ViewHo
     @Override
     public void onBindViewHolder(FirmsMapAdapter.ViewHolder holder, int position) {
         holder.mName.setText(db_firmListDatas[position].getFirmName());
-        holder.mAddress.setText(db_firmListDatas[position].getAddress());
-        holder.mNumber.setText(db_firmListDatas[position].getNumber());
+        holder.mName.setTextColor(ColorTable.getInstance(mContext).getTextColor(db_firmListDatas[position].getCatID()));
+//        holder.mAddress.setText(db_firmListDatas[position].getAddress());
+//        holder.mNumber.setText(db_firmListDatas[position].getNumber());
+        holder.mAddress.setText("新竹市勝利路112號");
+        holder.mNumber.setText("0223456789");
         holder.mDistance.setText(String.format(mContext.getResources().getString(R.string.subpreferential_dis), db_firmListDatas[position].getDistance()));
 
         PicassoUtility.load(mContext,holder.mPicture,db_firmListDatas[position].getPicture());
@@ -76,7 +80,7 @@ public class FirmsMapAdapter extends RecyclerView.Adapter<FirmsMapAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-
+            mListener.onFirmResponse(getPosition());
         }
     }
 }

@@ -3,6 +3,7 @@ package friendo.mtel.loyalty.fragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import friendo.mtel.loyalty.R;
+import friendo.mtel.loyalty.Request.RequestManager;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
 import friendo.mtel.loyalty.data.GetPagesResponse;
@@ -79,7 +81,9 @@ public class LoginNumberFragment extends Fragment implements View.OnClickListene
                 Toast.makeText(getActivity(),getActivity().getString(R.string.login_trip),Toast.LENGTH_SHORT).show();
                 opKeyBroad();
             }else{
-                DataManager.getInstance(getActivity()).qryAskOTP(mNumber.getText().toString(),getDataResponse);
+                String userfilter = RequestManager.setAskOPTResquest(mNumber.getText().toString());
+                Log.d(TAG,"AspOTP request data = "+ userfilter);
+                DataManager.getInstance(getActivity()).qryAskOTP(userfilter,getDataResponse);
             }
         }
         return false;

@@ -1,1 +1,1 @@
-include ':app', ':library', ':android-volley'
+include ':app', ':library', ':android-volley', ':samples:SwitchUserSample', ':samples:Scrumptious', ':facebook', ':samples:ShareIt', ':samples:Iconicus', ':samples:RPSSample', ':samples:MessengerSendSample', ':samples:HelloFacebookSample'

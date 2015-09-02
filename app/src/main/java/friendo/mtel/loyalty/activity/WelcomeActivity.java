@@ -21,7 +21,6 @@ public class WelcomeActivity extends Activity implements View.OnClickListener{
     private PageSlidingPagerView mAdverising;
     private View mLoginView;
     private Button mAppStart;
-    private int[] draw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

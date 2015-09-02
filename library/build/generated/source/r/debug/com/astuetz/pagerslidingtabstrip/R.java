@@ -9,6 +9,14 @@ package com.astuetz.pagerslidingtabstrip;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int Mode=0x7f01000e;
         /** <p>Must be one of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -358,15 +366,31 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SearchBarAttr_Mode com.astuetz.pagerslidingtabstrip:Mode}</code></td><td></td></tr>
            <tr><td><code>{@link #SearchBarAttr_OrderType com.astuetz.pagerslidingtabstrip:OrderType}</code></td><td></td></tr>
            <tr><td><code>{@link #SearchBarAttr_SearchKey com.astuetz.pagerslidingtabstrip:SearchKey}</code></td><td></td></tr>
            </table>
+           @see #SearchBarAttr_Mode
            @see #SearchBarAttr_OrderType
            @see #SearchBarAttr_SearchKey
          */
         public static final int[] SearchBarAttr = {
-            0x7f01000c, 0x7f01000d
+            0x7f01000c, 0x7f01000d, 0x7f01000e
         };
+        /**
+          <p>This symbol is the offset where the {@link com.astuetz.pagerslidingtabstrip.R.attr#Mode}
+          attribute's value can be found in the {@link #SearchBarAttr} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.astuetz.pagerslidingtabstrip:Mode
+        */
+        public static int SearchBarAttr_Mode = 2;
         /**
           <p>This symbol is the offset where the {@link com.astuetz.pagerslidingtabstrip.R.attr#OrderType}
           attribute's value can be found in the {@link #SearchBarAttr} array.

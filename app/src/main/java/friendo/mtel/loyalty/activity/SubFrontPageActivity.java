@@ -38,11 +38,6 @@ public class SubFrontPageActivity extends CommonActionBarActivity implements Vie
     private ViewPager mPage;
     private ArrayList<Fragment> pages;
 
-//    private int db_firmID;
-//    private String db_firmName;
-//    private String db_picture;
-//    private String db_partnerMessage;
-//    private boolean db_ispartner;
     private FirmListData db_firmData;
 
     private ImageView mStorePicture;
@@ -57,11 +52,6 @@ public class SubFrontPageActivity extends CommonActionBarActivity implements Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subfrontpage);
         if(initData()){
-//            db_firmID = savedInstanceState.getInt("firmID");
-//            db_firmName = savedInstanceState.getString("firmName");
-//            db_picture = savedInstanceState.getString("picture");
-//            db_ispartner = savedInstanceState.getBoolean("partner");
-//            db_partnerMessage = savedInstanceState.getString("partnermessage");
             db_firmData = (FirmListData) savedInstanceState.getSerializable("value");
         }
         findView();
@@ -93,11 +83,6 @@ public class SubFrontPageActivity extends CommonActionBarActivity implements Vie
 
     private Boolean initData(){
        if(getIntent().getExtras() != null){
-//           db_firmID = getIntent().getExtras().getInt("firmID");
-//           db_firmName = getIntent().getExtras().getString("firmName");
-//           db_picture = getIntent().getExtras().getString("picture");
-//           db_ispartner = getIntent().getExtras().getBoolean("partner");
-//           db_partnerMessage = getIntent().getExtras().getString("partnermessage");
            db_firmData = (FirmListData) getIntent().getExtras().getSerializable("value");
            return false;
        }else{

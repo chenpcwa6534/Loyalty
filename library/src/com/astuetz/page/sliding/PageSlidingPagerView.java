@@ -36,9 +36,6 @@ public class PageSlidingPagerView extends RelativeLayout implements ViewPager.On
     private ViewPagerAdapter mViewpagerAdapter;
     private PagerSlidingCallBack mPagerSlidingCallBack;
 
-
-
-    private ViewPagerAdapter.ViewpageCallback listener;
     private ArrayList<View> pages;
     private int currentIndex;
     private Handler handler = new Handler();
@@ -75,7 +72,7 @@ public class PageSlidingPagerView extends RelativeLayout implements ViewPager.On
 
     private void initViewPager(){
         mViewPager = new ViewPager(mContext);
-        mViewpagerAdapter = new ViewPagerAdapter(mContext,pages,listener);
+        mViewpagerAdapter = new ViewPagerAdapter(mContext,pages,viewpageCallback);
         mViewPager.setAdapter(mViewpagerAdapter);
         mViewPager.setOnPageChangeListener(this);
     }
@@ -313,7 +310,9 @@ public class PageSlidingPagerView extends RelativeLayout implements ViewPager.On
     private ViewPagerAdapter.ViewpageCallback viewpageCallback = new ViewPagerAdapter.ViewpageCallback() {
         @Override
         public void onClick(int position) {
-            mPagerSlidingCallBack.onClick(position);
+           if(mPagerSlidingCallBack != null){
+               mPagerSlidingCallBack.onClick(position);
+           }
         }
     };
 }

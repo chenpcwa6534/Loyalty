@@ -9,6 +9,7 @@ import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.data.GetPagesResponse;
 import friendo.mtel.loyalty.fragment.LoginNumberFragment;
 import friendo.mtel.loyalty.fragment.LoginVerificationFragment;
+import friendo.mtel.loyalty.view.MessageDialog;
 
 /**
  * Created by MTel on 2015/7/23.
@@ -18,6 +19,7 @@ public class LoginActivity extends CommonActionBarActivity implements View.OnCli
 
     private Button mReg;
     private Button mAppStart;
+    private String[] mResMsg;
 
 
 
@@ -71,6 +73,19 @@ public class LoginActivity extends CommonActionBarActivity implements View.OnCli
         startActivity(intent);
     }
 
+    private void showMessage(String[] msg){
+        MessageDialog msgDialog = new MessageDialog(LoginActivity.this);
+        msgDialog.setTitle(getResources().getString(R.string.rsg_success));
+        msgDialog.setContent(msg);
+        msgDialog.setLogo(MessageDialog.LogoType.Success);
+        msgDialog.setCallback(dialogCallback);
+        String[] button = new String[2];
+        button[0] = getResources().getString(R.string.login_btn_fbbuding);
+        button[1] = getResources().getString(R.string.login_btn_dialog);
+        msgDialog.setButton(button);
+        msgDialog.show();
+    }
+
     private GetPagesResponse getPagesResponse = new GetPagesResponse() {
 
         @Override
@@ -79,13 +94,27 @@ public class LoginActivity extends CommonActionBarActivity implements View.OnCli
         }
 
         @Override
-        public void onVerification() {
-            intentActivity();
+        public void onVerification(String[] msg) {
+            mResMsg = msg;
+            showMessage(msg);
         }
 
         @Override
         public void onSkip() {
             intentActivity();
+        }
+    };
+
+    private MessageDialog.DialogCallback dialogCallback = new MessageDialog.DialogCallback() {
+        @Override
+        public void onClick(int position, String btnStr) {
+            switch (position){
+                case 0:
+                    break;
+                case 1:
+                    intentActivity();
+                    break;
+            }
         }
     };
 }

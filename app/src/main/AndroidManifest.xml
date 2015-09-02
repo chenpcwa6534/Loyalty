@@ -2,12 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="friendo.mtel.loyalty" >
 
+    <!-- 網路權限 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <!-- 休眠喚醒權限 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 推播權限 -->
+    <permission
+        android:name="friendo.mtel.loyalty.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="friendo.mtel.loyalty.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
 
     <application
         android:allowBackup="true"
@@ -54,6 +66,17 @@
             android:name=".activity.SubFrontPageActivity"
             android:label="SubFrontPageActivity"
             android:screenOrientation="portrait"/>
+
+        <!-- 推播相關 -->
+        <receiver
+            android:name="friendo.mtel.loyalty.Receiver.GCMReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="friendo.mtel.loyalty" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

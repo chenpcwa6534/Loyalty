@@ -21,49 +21,41 @@
         style="@style/font_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/login_number"/>
 
     <TextView
         android:id="@+id/phonenumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textSize="20sp"
         android:textColor="@color/orange"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <TextView
+        style="@style/font_content"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        android:text="@string/login_verification"/>
 
-        <TextView
-            style="@style/font_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_verification"
-            android:layout_weight=".7"/>
-
-        <TextView
-            style="@style/font_skip"
-            android:id="@+id/skip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/login_skip"
-            android:layout_weight=".3"/>
-
-    </LinearLayout>
 
     <EditText
         style="@style/font_edit"
         android:id="@+id/verifvation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/login_verificationHint">
+        android:hint="@string/login_verificationHint"
+        android:textColor="@color/orange">
         <requestFocus/>
     </EditText>
+
+    <TextView
+        style="@style/font_skip"
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_skip"/>
 
 </LinearLayout>

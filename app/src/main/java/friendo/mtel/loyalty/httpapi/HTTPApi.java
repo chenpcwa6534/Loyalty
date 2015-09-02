@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
+import friendo.mtel.loyalty.Request.RegRequest;
 import friendo.mtel.loyalty.TestDataJson.TestDataJson;
 import friendo.mtel.loyalty.common.Env;
 import friendo.mtel.loyalty.component.AdvertisingData;
@@ -24,6 +25,7 @@ import friendo.mtel.loyalty.component.LimitCouponsData;
 import friendo.mtel.loyalty.component.MemberCouponsData;
 import friendo.mtel.loyalty.component.MemberExChangeData;
 import friendo.mtel.loyalty.component.MemberInfoData;
+import friendo.mtel.loyalty.component.VerificationData;
 import friendo.mtel.loyalty.component.VersionControlData;
 import friendo.mtel.loyalty.component.FilterData;
 import friendo.mtel.loyalty.component.FirmInfoData;
@@ -216,113 +218,88 @@ public class HTTPApi {
     /**
      * use phone number get verification code
      * @param context
-     * @param number
+     * @param userFilter
      * @param callAPIResponse
      */
-    public void qryAskOTP(Context context, String number,final CallAPIResponse callAPIResponse){
-        String apiName = "";
+    public void qryAskOTP(Context context, final String userFilter,final CallAPIResponse callAPIResponse){
+        String apiName = "members/AskOTP";
         final JSONObject jsonObject = new JSONObject();
 
-//        VolleyAsyncHttpClient.getInstance(context).post(Env.serviceURL + apiName, jsonObject,new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
-//
-//            @Override
-//            public void onStart() {
-//                Log.i(TAG,"qryFilter onStart");
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                Log.i(TAG,"qryFilter onFinish");
-//            }
-//
-//            @Override
-//            public void onFailure(String msg) {
-//                Log.i(TAG,"qryFilter onFailure msg:" +msg);
-//            }
-//
-//            @Override
-//            public void onSuccess(JSONObject response) {
-//                Log.i(TAG, "qryFilter onSuccess=" + response);
-//                try {
-//                    String data = response.getString("data");
-//                    Gson gson = new Gson();
-//
-//                    if(callAPIResponse != null) callAPIResponse.onSuccess(filterData);
-//
-//                }catch (Exception e) {
-//                    Log.e(TAG, e.getMessage());
-//                }
-//            }
-//        });
+        VolleyAsyncHttpClient.getInstance(context).post(VolleyAsyncHttpClient.MATHOD_POST, Env.serviceURL + apiName, jsonObject, userFilter, new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
 
-        Log.d(TAG,"AskOTP Json : "+ TestDataJson.getAskOTPResponseData().toString());
-        if(getResult(TestDataJson.getAskOTPResponseData())){
-            if(callAPIResponse != null){
-                callAPIResponse.onSuccess(number);
+            @Override
+            public void onStart() {
+                Log.i(TAG,"qryAskOTP onStart");
             }
-        }else{
-            if(callAPIResponse != null){
-                callAPIResponse.onFailure(getError(context,TestDataJson.getResponseError()));
+
+            @Override
+            public void onFinish() {
+                Log.i(TAG,"qryAskOTP onFinish");
             }
-        }
+
+            @Override
+            public void onFailure(String msg) {
+                Log.i(TAG,"qryAskOTP onFailure msg:" +msg);
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+                Log.i(TAG, "qryAskOTP onSuccess=" + response);
+                try {
+                    if(getResult(response)){
+                        Gson gson = new Gson();
+                        RegRequest regRequest = gson.fromJson(userFilter, RegRequest.class);
+                        if(callAPIResponse != null) callAPIResponse.onSuccess(regRequest.getCell_no());
+                    }
+                }catch (Exception e) {
+                    Log.e(TAG, "api AskOTP (HTTPApi.class line 254) Exception :" +e.getMessage());
+                }
+            }
+        });
     }
 
 
     /**
      * register
      * @param context
-     * @param number
-     * @param VerificationCode
-     * @param deviceToken
      * @param callAPIResponse
      */
-    public void qryVerificationOTP(Context context, String number, String VerificationCode, String deviceToken ,final CallAPIResponse callAPIResponse){
-        String apiName = "";
+    public void qryVerificationOTP(Context context, String userFilter ,final CallAPIResponse callAPIResponse){
+        String apiName = "members/mobilelogin/VerificationOTP";
         final JSONObject jsonObject = new JSONObject();
 
-//        VolleyAsyncHttpClient.getInstance(context).post(Env.serviceURL + apiName, jsonObject,new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
-//
-//            @Override
-//            public void onStart() {
-//                Log.i(TAG,"qryFilter onStart");
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                Log.i(TAG,"qryFilter onFinish");
-//            }
-//
-//            @Override
-//            public void onFailure(String msg) {
-//                Log.i(TAG,"qryFilter onFailure msg:" +msg);
-//            }
-//
-//            @Override
-//            public void onSuccess(JSONObject response) {
-//                Log.i(TAG, "qryFilter onSuccess=" + response);
-//                try {
-//                    String data = response.getString("data");
-//                    Gson gson = new Gson();
-//
-//                    if(callAPIResponse != null) callAPIResponse.onSuccess(filterData);
-//
-//                }catch (Exception e) {
-//                    Log.e(TAG, e.getMessage());
-//                }
-//            }
-//        });
-        Log.d(TAG,"Verification Json : "+ TestDataJson.getVerificationCodeResponseData().toString());
-        if(getResult(TestDataJson.getVerificationCodeResponseData())){
-            String data = getData(TestDataJson.getVerificationCodeResponseData());
-            Log.d(TAG,"Verification Data : "+ data);
-            if(callAPIResponse != null){
-                callAPIResponse.onSuccess(data);
+        VolleyAsyncHttpClient.getInstance(context).post(VolleyAsyncHttpClient.MATHOD_POST, Env.serviceURL + apiName, jsonObject, userFilter, new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback() {
+
+            @Override
+            public void onStart() {
+                Log.i(TAG, "qryVerificationOTP onStart");
             }
-        }else{
-            if(callAPIResponse != null){
-                callAPIResponse.onFailure(getError(context,TestDataJson.getResponseError()));
+
+            @Override
+            public void onFinish() {
+                Log.i(TAG, "qryVerificationOTP onFinish");
             }
-        }
+
+            @Override
+            public void onFailure(String msg) {
+                Log.i(TAG, "qryVerificationOTP onFailure msg:" + msg);
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+                Log.i(TAG, "qryVerificationOTP onSuccess=" + response);
+                try {
+                    if (getResult(response)) {
+                        String data = getData(response);
+                        Gson gson = new Gson();
+                        VerificationData regRequest = gson.fromJson(data, VerificationData.class);
+                        if (callAPIResponse != null) callAPIResponse.onSuccess(regRequest);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "api VerifcationOTP (HTTPApi.class line 297) Exception :" + e.getMessage());
+                }
+            }
+        });
     }
 
 

@@ -83,7 +83,7 @@ public class DataManager {
             }
         };
         Gson gson = new Gson();
-        VerControlRequest verControlRequest = RequestManager.setVerControlRequest(DeviceInformation.getAppVersion(), DeviceInformation.getOSVersion(), DeviceInformation.getDeviceToken(), DeviceInformation.getDeviceModel());
+        VerControlRequest verControlRequest = RequestManager.setVerControlRequest(DeviceInformation.getAppVersion(), DeviceInformation.getOSVersion(), DeviceInformation.getDeviceToken(mContext), DeviceInformation.getDeviceModel());
         String body = gson.toJson(verControlRequest);
         (new HTTPApi()).qryVersionControl(mContext, Env.getMemberID(mContext), verUpdateTime, body, callAPIResponse);
     }
@@ -196,10 +196,10 @@ public class DataManager {
 
     /**
      * Send Phone number get verifiation code
-     * @param number
+     * @param userFilter          phone number to Json
      * @param getDataResponse
      */
-    public void qryAskOTP( String number, final GetDataResponse getDataResponse){
+    public void qryAskOTP( String userFilter, final GetDataResponse getDataResponse){
         CallAPIResponse callAPIResponse = new CallAPIResponse() {
             @Override
             public void onStart() {
@@ -236,18 +236,15 @@ public class DataManager {
                 }
             }
         };
-        (new HTTPApi()).qryAskOTP(mContext, number, callAPIResponse);
+        (new HTTPApi()).qryAskOTP(mContext, userFilter, callAPIResponse);
     }
 
 
     /**
      * register
-     * @param number
-     * @param verificationCode
-     * @param deviceToken
      * @param getDataResponse
      */
-    public void qryVerificationOTP( String number, String verificationCode, String deviceToken , final GetDataResponse getDataResponse){
+    public void qryVerificationOTP(String userFilter , final GetDataResponse getDataResponse){
 
         CallAPIResponse callAPIResponse = new CallAPIResponse() {
             @Override
@@ -285,7 +282,7 @@ public class DataManager {
                 }
             }
         };
-        (new HTTPApi()).qryVerificationOTP(mContext, number, verificationCode, deviceToken, callAPIResponse);
+        (new HTTPApi()).qryVerificationOTP(mContext, userFilter, callAPIResponse);
     }
 
 

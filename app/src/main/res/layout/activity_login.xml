@@ -15,8 +15,12 @@
             android:id="@+id/btn_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="60dp"
             android:background="@mipmap/btn_common_red"
+            android:drawableLeft="@mipmap/ic_common_phone"
+            android:drawablePadding="-60dp"
             android:textSize="20sp"
+            android:layout_gravity="center"
             android:text="@string/welcome_reg"/>
 
         <Button

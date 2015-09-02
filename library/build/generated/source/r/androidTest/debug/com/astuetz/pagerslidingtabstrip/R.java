@@ -8,6 +8,7 @@ package com.astuetz.pagerslidingtabstrip;
 
 public final class R {
 	public static final class attr {
+		public static final int Mode = 0x7f01000e;
 		public static final int OrderType = 0x7f01000c;
 		public static final int SearchKey = 0x7f01000d;
 		public static final int pstsDividerColor = 0x7f010003;
@@ -57,7 +58,8 @@ public final class R {
 		public static final int PagerSlidingTabStrip_pstsTextAllCaps = 10;
 		public static final int PagerSlidingTabStrip_pstsUnderlineColor = 1;
 		public static final int PagerSlidingTabStrip_pstsUnderlineHeight = 4;
-		public static final int[] SearchBarAttr = { 0x7f01000c, 0x7f01000d };
+		public static final int[] SearchBarAttr = { 0x7f01000c, 0x7f01000d, 0x7f01000e };
+		public static final int SearchBarAttr_Mode = 2;
 		public static final int SearchBarAttr_OrderType = 0;
 		public static final int SearchBarAttr_SearchKey = 1;
 	}

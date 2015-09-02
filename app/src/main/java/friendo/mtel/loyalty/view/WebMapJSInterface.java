@@ -21,6 +21,7 @@ public class WebMapJSInterface extends WebView {
     private ArrayList<String> latitude = new ArrayList<>();
     private ArrayList<String> longitude = new ArrayList<>();
     private ArrayList<Integer> icon = new ArrayList<>();
+    private int defaultPosition = 0;
 
     //控制地圖縮放大小  0~18 , 0:最遠 18：最近
     private int zoom = 14;
@@ -63,6 +64,14 @@ public class WebMapJSInterface extends WebView {
         latitude.add(lat);
         longitude.add(lng);
         icon.add(getLocationIcon(catID));
+    }
+
+    public void centerAt(int position){
+        final String centerURL = "javascript:centerAt(" +
+                latitude.get(position) + "," +
+                longitude.get(position)+ ")";
+        this.loadUrl(centerURL);
+        defaultPosition = position;
     }
 
     public void locateMap(){
@@ -166,7 +175,10 @@ public class WebMapJSInterface extends WebView {
             String icon = defaultIcon;
             return icon;
         }
+        @android.webkit.JavascriptInterface
+        public int getPosition(){
+            int position = defaultPosition;
+            return position;
+        }
     }
-
-
 }

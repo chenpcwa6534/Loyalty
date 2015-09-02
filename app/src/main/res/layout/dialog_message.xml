@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="200dp"
+        android:gravity="center_horizontal"
+        android:background="@mipmap/bg_dialog"
+        android:layout_below="@+id/img_msglogo"
+        android:layout_marginTop="-40dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:textSize="25sp"
+            android:textColor="@color/font_dialogTitle"
+            android:text="手機號碼認證成功！"/>
+
+        <TextView
+            android:id="@+id/txt_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_dialogContent"
+            android:layout_marginTop="15dp"
+            android:textSize="16sp"
+            android:text="你在魚霸已成功集點十點"/>
+
+        <LinearLayout
+            android:id="@+id/areabutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+            <!--<Button-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@mipmap/btn_dialog_red"-->
+                <!--android:text="去看看"/>-->
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/img_msglogo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_dialog_success"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

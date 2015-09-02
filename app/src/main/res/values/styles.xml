@@ -8,15 +8,15 @@
 
 
     <style name="font_header_text">
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@mipmap/bg_statusbar_red</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="font_content">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/font_content_style_login</item>
         <item name="android:layout_marginRight">20dp</item>
         <item name="android:layout_marginLeft">20dp</item>
     </style>
@@ -24,7 +24,7 @@
     <style name="font_edit">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textColorHint">@color/gray</item>
+        <item name="android:textColorHint">@color/font_hint</item>
         <item name="android:layout_marginRight">20dp</item>
         <item name="android:layout_marginLeft">20dp</item>
     </style>
@@ -32,8 +32,9 @@
     <style name="font_skip">
         <item name="android:layout_gravity">right</item>
         <item name="android:drawableRight">@mipmap/ic_common_arrow</item>
-        <item name="android:textColor">@color/orange</item>
-        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:textColor">@color/font_skip</item>
+        <item name="android:layout_marginRight">50dp</item>
+        <item name="android:layout_marginTop">10dp</item>
     </style>
 
     <style name="font_messageqty">
@@ -133,7 +134,6 @@
     <style name="font_stroeitemcontent">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <!--/** Store Type Color **/-->
@@ -141,109 +141,91 @@
     <style name="font_storeType_a">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/Brand_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_b">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/FacialBeautifiers_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_c">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/CateringTrade_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_d">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/Beverage_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_e">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/CoffeeShop_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_f">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/DepartmentStore_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_g">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/Cure_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_h">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/FacialBeautifiers_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_i">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/Sport_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_j">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/Shoe_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_k">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/ApparelStore_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_l">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/Glasses_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_m">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/HairSalon_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_n">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/Pet_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_o">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/SPA_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_p">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/Cuisine_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_q">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/ECommerce_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_storeType_r">
         <item name="android:textSize">@dimen/store_itemtitle_textSize</item>
         <item name="android:textColor">@color/Shopping_ColorB</item>
-        <item name="android:layout_margin">@dimen/store_itemtitle_margin</item>
     </style>
 
     <style name="font_substoreitem">
@@ -271,6 +253,28 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="DialogStyle"
+        parent="Theme.AppCompat.Dialog">
+        <!--windowFrame框为無 -->
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- 除去背景 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--是否浮現在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 去掉覆蓋層 -->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <!-- Dialog動畫 -->
+    <style
+        name="dialogWindowAnim"
+        parent="android:Animation">
+
     </style>
 
 </resources>

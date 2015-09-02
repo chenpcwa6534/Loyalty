@@ -292,6 +292,7 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
         hidden.setDuration(DURATIONTIME);
         SubView.startAnimation(hidden);
         SubView.setVisibility(View.GONE);
+        mSubListView.setVisibility(View.INVISIBLE);
         isOpen_SubView = false;
     }
 

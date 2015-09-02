@@ -11,6 +11,8 @@
 
     <string name="welcome_reg">手機號碼/註冊登入</string>
     <string name="welcome_guest">馬上玩玩</string>
+    <string name="rsg_success">手機號碼認證成功</string>
+    <string name="rsg_fail">手機號碼認失敗</string>
 
     <string name="login_title">粉多熟客卡</string>
     <string name="login_content1">粉多熟客卡利用手機號碼作為集點帳戶，讓您集點、兌換都輕鬆方便。</string>
@@ -21,6 +23,8 @@
     <string name="login_number">手機號碼：</string>
     <string name="login_verification">驗證碼(30分內有效)</string>
     <string name="login_verificationHint">請輸入簡訊驗證碼</string>
+    <string name="login_btn_dialog">去看看</string>
+    <string name="login_btn_fbbuding">FB綁定</string>
 
     <string name="store_item_pointTitle">集點</string>
     <string name="store_item_experienceTitle">首次體驗</string>

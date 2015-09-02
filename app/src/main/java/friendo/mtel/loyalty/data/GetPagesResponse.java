@@ -7,7 +7,7 @@ public interface GetPagesResponse {
 
     public void onPhoneNumber(String phonenumber);
 
-    public void onVerification();
+    public void onVerification(String[] msg);
 
     public void onSkip();
 }

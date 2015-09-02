@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.astuetz.page.sliding.PageSlidingPagerView;
@@ -155,6 +156,7 @@ public class FrontPageFragment extends CommonFragment {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             mListViewMap.setLayoutManager(linearLayoutManager);
+            mListViewMap.setOnScrollListener(onScrollListener);
         }
     }
 
@@ -227,6 +229,31 @@ public class FrontPageFragment extends CommonFragment {
 
         @Override
         public void onFinish() {
+
+        }
+    };
+
+    @Override
+    public void intentGoogleSearch(String str) {
+        super.intentGoogleSearch(str);
+    }
+
+    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            if(newState == RecyclerView.SCROLL_STATE_IDLE){
+                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+                int position = ((LinearLayoutManager)layoutManager).findLastVisibleItemPosition();
+                mMap.centerAt(position);
+                mMap.locateMap();
+                Toast.makeText(getActivity(),"pos:"+position,Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
 
         }
     };

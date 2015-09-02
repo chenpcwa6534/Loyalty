@@ -14,12 +14,18 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
+import friendo.mtel.loyalty.GCM.Utility;
 import friendo.mtel.loyalty.R;
+import friendo.mtel.loyalty.Receiver.GetReceverResponse;
+import friendo.mtel.loyalty.Receiver.ReceiverManager;
+import friendo.mtel.loyalty.Request.RequestManager;
 import friendo.mtel.loyalty.common.DeviceInformation;
+import friendo.mtel.loyalty.component.VerificationData;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
 import friendo.mtel.loyalty.data.GetPagesResponse;
 import friendo.mtel.loyalty.preferences.LoyaltyPreference;
+import friendo.mtel.loyalty.utility.Utilitys;
 
 /**
  * Created by MTel on 2015/7/2.
@@ -59,6 +65,7 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
     @Override
     public void onResume() {
         super.onResume();
+        ReceiverManager.registerSMSReceiver(getActivity(),getReceverResponse);
     }
 
     @Override
@@ -69,6 +76,7 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
     @Override
     public void onDestroy() {
         super.onDestroy();
+        ReceiverManager.unregisterSMSReceiver(getActivity());
     }
 
     @Override
@@ -83,7 +91,9 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if(KeyEvent.KEYCODE_ENTER == keyCode) {
-            DataManager.getInstance(getActivity()).qryVerificationOTP(mNumber.getText().toString(),mVerificaion.getText().toString(), DeviceInformation.getDeviceToken(),getDataResponse);
+            String token = LoyaltyPreference.getDeviceToken(getActivity());
+            String userfilter = RequestManager.setVerificationOTPRequese(mNumber.getText().toString(), mVerificaion.getText().toString(), token);
+            DataManager.getInstance(getActivity()).qryVerificationOTP(userfilter,getDataResponse);
         }
         return false;
     }
@@ -116,14 +126,13 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
 
         @Override
         public void onSuccess(Object obj) {
-            String data = (String) obj;
+            VerificationData verificationData = (VerificationData) obj;
             try{
-                JSONObject jsonObject = new JSONObject(data);
-                String memberID = jsonObject.getString("memberID");
+                String memberID = verificationData.getMember_id();
                 LoyaltyPreference.setMemberID(getActivity(), memberID);
-                mGetPagesResponse.onSkip();
+                mGetPagesResponse.onVerification(verificationData.getMessage());
             }catch (Exception e){
-                Log.e(TAG,"json to int fail"+ data);
+                Log.e(TAG,"VerifcationOTP parse fail (LoginVerificationFragment.class line 132) Exception :" + e.getMessage());
             }
         }
 
@@ -140,6 +149,14 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
         @Override
         public void onFinish() {
 
+        }
+    };
+
+    private GetReceverResponse getReceverResponse = new GetReceverResponse() {
+        @Override
+        public void onSMSRecever(String msg) {
+            mVerificaion.setText(msg);
+            mVerificaion.requestFocus();
         }
     };
 

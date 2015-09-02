@@ -42,14 +42,13 @@
             <friendo.mtel.loyalty.view.WebMapJSInterface
                 android:id="@+id/map"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"/>
+                android:layout_height="242dp"/>
 
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/listViewMap"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingTop="5dp"
                     android:background="@color/white"
                     android:scrollbars="vertical">
 
@@ -58,70 +57,6 @@
         </LinearLayout>
 
     </ViewSwitcher>
-
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_marginTop="90dp"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<ViewSwitcher-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:id="@+id/textSwitcher"-->
-            <!--android:layout_below="@+id/advbarview">-->
-
-            <!--<android.support.v7.widget.RecyclerView-->
-                <!--android:id="@+id/listViewMap"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:paddingTop="15dp"-->
-                <!--android:background="@color/white"-->
-                <!--android:scrollbars="vertical"-->
-                <!--android:visibility="gone">-->
-
-            <!--</android.support.v7.widget.RecyclerView>-->
-
-            <!--<android.support.v7.widget.RecyclerView-->
-                <!--android:id="@+id/listView"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-
-                <!--android:paddingTop="15dp"-->
-                <!--android:background="@color/white"-->
-                <!--android:scrollbars="vertical"-->
-                <!--android:visibility="gone">-->
-
-            <!--</android.support.v7.widget.RecyclerView>-->
-
-        <!--</ViewSwitcher>-->
-
-
-        <!--<RelativeLayout-->
-            <!--android:id="@+id/advbarview"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/orange">-->
-
-            <!--<com.astuetz.page.sliding.PageSlidingPagerView-->
-                <!--android:id="@+id/csv_Advertising"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="100dp"-->
-                <!--android:background="@color/white">-->
-
-            <!--</com.astuetz.page.sliding.PageSlidingPagerView>-->
-
-            <!--<friendo.mtel.loyalty.view.WebMapJSInterface-->
-                <!--android:id="@+id/map"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="100dp"-->
-                <!--android:visibility="gone">-->
-
-            <!--</friendo.mtel.loyalty.view.WebMapJSInterface>-->
-
-        <!--</RelativeLayout>-->
-
-    <!--</RelativeLayout>-->
 
     <LinearLayout
         android:id="@+id/searchbarview"

@@ -18,6 +18,7 @@ function initialize() {
 var lat = new Array();
 var lng = new Array();
 var icon = new Array();
+var position;
 var maker = new Array('icon/ic_location_a.png',
                       'icon/ic_location_b.png',
                       'icon/ic_location_c.png',
@@ -40,6 +41,7 @@ if(window.android){
     lat = JSON.parse(window.android.getLatitude());
     lng = JSON.parse(window.android.getLongitude());
     icon = JSON.parse(window.android.getIcon());
+    position = window.android.getPosition();
 }
 var mapOptions = {
     panControl: false, //要不要出現可以上下左右移動的面板，如圖1
@@ -48,7 +50,7 @@ var mapOptions = {
     scaleControl: false, //比例尺資訊，如圖5
     streetViewControl: false,  //顯示街景服務的面板，如圖2
     overviewMapControl: true, //總覽圖的面板，在右下力有個開合的圖示，如圖6
-    center: new google.maps.LatLng(lat[0], lng[0]), //台北車站的經度,緯度
+    center: new google.maps.LatLng(lat[position], lng[position]), //台北車站的經度,緯度
     zoom: 14 //縮放的大小，0-18，0最小，18最大
   };
 var map = new google.maps.Map(document.getElementById('map-canvas'),
@@ -70,6 +72,10 @@ var infowindow = new google.maps.InfoWindow();
       infowindow.open(map, marker);
   });
 }
+function centerAt(latitude, longitude){//地圖以給予的座標為中心，即移動地圖至給定的座標
+          myLatlng = new google.maps.LatLng(latitude,longitude);
+          map.panTo(myLatlng);
+      }
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
     </hand>

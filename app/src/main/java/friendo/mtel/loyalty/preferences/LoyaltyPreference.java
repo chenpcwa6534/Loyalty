@@ -14,6 +14,35 @@ public class LoyaltyPreference extends BasePreferences {
         void onSharedPreferenceChange(String key, Object value);
     }
 
+    public static final String DEVICE_TOKEN = "DEVICETOKEN";
+    private static final String DEFAULT_DEVICE_TOKEN = "";
+    private static String PAR_DEVICE_TOKEN = DEFAULT_DEVICE_TOKEN;
+    public static void setDeviceToken(Context context, String token){
+        try{
+            if(editor == null) load(context);
+            editor.putString(DEVICE_TOKEN, token);
+            PAR_DEVICE_TOKEN = token;
+            save();
+
+        }catch (Exception e){
+            Log.e(TAG,"set device token fail Exception:"+e);
+        }
+    }
+
+    public static String getDeviceToken(Context context){
+        try{
+            if(settings == null) load(context);
+            if(settings != null) {
+                String token = settings.getString(DEVICE_TOKEN, DEFAULT_DEVICE_TOKEN);
+                PAR_DEVICE_TOKEN = token;
+                return token;
+            }
+        }catch (Exception e){
+            Log.e(TAG,"get memberiD fail Exception:"+e);
+        }
+        return DEFAULT_PERSON_MEMBERID;
+    }
+
     public static final String PERSON_MEMBERID = "MEMBERID";
     private static final String DEFAULT_PERSON_MEMBERID = "";
     private static String PAR_PERSON_MEMBER = DEFAULT_PERSON_MEMBERID;
@@ -25,7 +54,7 @@ public class LoyaltyPreference extends BasePreferences {
             save();
 
         }catch (Exception e){
-            Log.e(TAG,"Exception:"+e);
+            Log.e(TAG,"set memberID fail Exception:"+e);
         }
     }
 
@@ -38,7 +67,7 @@ public class LoyaltyPreference extends BasePreferences {
                 return memberID;
             }
         }catch (Exception e){
-            Log.e(TAG,"Exception:"+e);
+            Log.e(TAG,"get memberiD fail Exception:"+e);
         }
         return DEFAULT_PERSON_MEMBERID;
     }

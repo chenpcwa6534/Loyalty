@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import friendo.mtel.loyalty.GCM.GetGCMResponse;
+import friendo.mtel.loyalty.GCM.RegisterTask;
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.TestDataJson.ErrorMessageResult;
 import friendo.mtel.loyalty.component.ErrorMessageData;
@@ -19,7 +21,7 @@ import friendo.mtel.loyalty.utility.Utilitys;
 /**
  * Created by MTel on 2015/8/13.
  */
-public class InitializationActivity extends Activity{
+public class InitializationActivity extends Activity {
 
     private String TAG = InitializationActivity.class.getSimpleName();
 
@@ -37,6 +39,7 @@ public class InitializationActivity extends Activity{
     @Override
     protected void onResume() {
         super.onResume();
+        new RegisterTask(this,getGCMResponse).execute();
         DataManager.getInstance(this).qryVersionControl("", getDataResponse);
         DataManager.getInstance(this).qryErrorMessage("", getDataResponse);
         DataManager.getInstance(this).qryFilter("", true, getDataResponse);
@@ -58,7 +61,7 @@ public class InitializationActivity extends Activity{
     }
 
     private void initView(){
-        if(Utilitys.isLogin(this)){
+        if(!Utilitys.isLogin(this)){
             intentPage(WelcomeActivity.class);
         }else{
             intentPage(MainActivity.class);
@@ -113,6 +116,23 @@ public class InitializationActivity extends Activity{
 
         @Override
         public void onFinish() {
+
+        }
+    };
+
+    private GetGCMResponse getGCMResponse = new GetGCMResponse() {
+        @Override
+        public void onSuccess(String type, String token) {
+            LoyaltyPreference.setDeviceToken(InitializationActivity.this,token);
+        }
+
+        @Override
+        public void onFail(String type) {
+
+        }
+
+        @Override
+        public void onMessage(String msg) {
 
         }
     };
