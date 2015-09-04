@@ -5,58 +5,58 @@ package friendo.mtel.loyalty.Request;
  */
 public class VerControlRequest {
 
-    private String AppVer;
-    private String OSVer;
-    private String deviceToken;
-    private String deviceMode;
-    private int OperationType;
-    private String verUpdateTime;
+    private String app_ver;
+    private String os_ver;
+    private String device_token;
+    private String device_model;
+    private int device_type;
+    private String chenkno;
 
-    public String getAppVer() {
-        return AppVer;
+    public String getApp_ver() {
+        return app_ver;
     }
 
-    public void setAppVer(String appVer) {
-        AppVer = appVer;
+    public void setApp_ver(String app_ver) {
+        this.app_ver = app_ver;
     }
 
-    public String getOSVer() {
-        return OSVer;
+    public String getOs_ver() {
+        return os_ver;
     }
 
-    public void setOSVer(String OSVer) {
-        this.OSVer = OSVer;
+    public void setOs_ver(String os_ver) {
+        this.os_ver = os_ver;
     }
 
-    public String getDeviceToken() {
-        return deviceToken;
+    public String getDevice_token() {
+        return device_token;
     }
 
-    public void setDeviceToken(String deviceToken) {
-        this.deviceToken = deviceToken;
+    public void setDevice_token(String device_token) {
+        this.device_token = device_token;
     }
 
-    public String getDeviceMode() {
-        return deviceMode;
+    public String getDevice_model() {
+        return device_model;
     }
 
-    public void setDeviceMode(String deviceMode) {
-        this.deviceMode = deviceMode;
+    public void setDevice_model(String device_model) {
+        this.device_model = device_model;
     }
 
-    public int getOperationType() {
-        return OperationType;
+    public int getDevice_type() {
+        return device_type;
     }
 
-    public void setOperationType(int operationType) {
-        OperationType = operationType;
+    public void setDevice_type(int device_type) {
+        this.device_type = device_type;
     }
 
-    public String getVerUpdateTime() {
-        return verUpdateTime;
+    public String getChenkno() {
+        return chenkno;
     }
 
-    public void setVerUpdateTime(String verUpdateTime) {
-        this.verUpdateTime = verUpdateTime;
+    public void setChenkno(String chenkno) {
+        this.chenkno = chenkno;
     }
 }

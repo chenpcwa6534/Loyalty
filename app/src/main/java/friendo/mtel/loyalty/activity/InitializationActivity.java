@@ -3,8 +3,11 @@ package friendo.mtel.loyalty.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.facebook.FacebookSdk;
 
 import friendo.mtel.loyalty.GCM.GetGCMResponse;
 import friendo.mtel.loyalty.GCM.RegisterTask;
@@ -17,6 +20,7 @@ import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
 import friendo.mtel.loyalty.preferences.LoyaltyPreference;
 import friendo.mtel.loyalty.utility.Utilitys;
+import friendo.mtel.loyalty.view.MessageDialog;
 
 /**
  * Created by MTel on 2015/8/13.
@@ -28,21 +32,29 @@ public class InitializationActivity extends Activity {
     private ProgressBar mProgressBar;
     private TextView mLoadMessage;
 
-    private int progress = 0;
+    private int inspectioncount = 2;
+    private int inspection_success = 0;
+    private int inspection_fail = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initalzation);
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        new RegisterTask(this,getGCMResponse).execute();
-        DataManager.getInstance(this).qryVersionControl("", getDataResponse);
-        DataManager.getInstance(this).qryErrorMessage("", getDataResponse);
-        DataManager.getInstance(this).qryFilter("", true, getDataResponse);
+        try{
+            new RegisterTask(this,getGCMResponse).execute();
+            String VerControl_UpdateTime = LoyaltyPreference.getAPIRequestTime(this, LoyaltyPreference.API.VersionControl);
+            DataManager.getInstance(this).qryVersionControl(VerControl_UpdateTime, getDataResponse);
+            //error message 改為V2 使用
+            //DataManager.getInstance(this).qryErrorMessage("", getDataResponse);
+            String Filter_UpdateTime = LoyaltyPreference.getAPIRequestTime(this, LoyaltyPreference.API.Filter);
+            DataManager.getInstance(this).qryFilter(Filter_UpdateTime, true, getDataResponse);
+        }catch (Exception e){
+            Log.e(TAG,"DataManager call api fail (InitializationActivity.class line 51) Exception:"+e.getMessage());
+        }
     }
 
     @Override
@@ -74,6 +86,19 @@ public class InitializationActivity extends Activity {
         startActivity(intent);
     }
 
+    private void inspection(){
+        if(inspectioncount == inspection_fail+inspection_success && inspection_fail != 0 ){
+            MessageDialog messageDialog = new MessageDialog(this);
+            messageDialog.setLogo(MessageDialog.LogoType.Question);
+            messageDialog.setTitle(getResources().getString(R.string.app_system_fail));
+            messageDialog.setButton(getResources().getString(R.string.app_system_ok));
+            messageDialog.setCallback(dialogCallback);
+            messageDialog.show();
+        }else if(inspectioncount == inspection_success){
+            initView();
+        }
+    }
+
     private GetDataResponse getDataResponse = new GetDataResponse() {
         @Override
         public void onStart() {
@@ -84,39 +109,35 @@ public class InitializationActivity extends Activity {
         public void onSuccess(Object obj) {
             if(obj instanceof VersionControlData){
                 VersionControlData versionControlData = (VersionControlData) obj;
-                LoyaltyPreference.setPersonInformation(InitializationActivity.this,versionControlData.getProtitleData().getName(),versionControlData.getProtitleData().getBirthday(),versionControlData.getProtitleData().getGender(),versionControlData.getProtitleData().getPicture());
-                progress +=33;
+                LoyaltyPreference.setPersonInformation(InitializationActivity.this,versionControlData.getProtitle().getName(),versionControlData.getProtitle().getBirthday(),versionControlData.getProtitle().getGender(),versionControlData.getProtitle().getPicture());
+                inspection_success +=1;
             }else if(obj instanceof ErrorMessageResult){
                 //save data
-                progress += 33;
+                inspection_success += 1;
             }else if(obj instanceof FilterData){
-                progress += 34;
+                inspection_success += 1;
             }
 
-            if(progress == 100){
-                initView();
-            }
+            inspection();
         }
 
         @Override
         public void onSuccess(Object[] obj) {
             if(obj instanceof ErrorMessageData[]){
-                progress += 33;
+                inspection_success += 1;
             }
-
-            if(progress == 100){
-                initView();
-            }
+            inspection();
         }
 
         @Override
         public void onFailure(Object obj) {
-
+            inspection_fail += 1;
+            inspection();
         }
 
         @Override
         public void onFinish() {
-
+            inspection();
         }
     };
 
@@ -124,16 +145,26 @@ public class InitializationActivity extends Activity {
         @Override
         public void onSuccess(String type, String token) {
             LoyaltyPreference.setDeviceToken(InitializationActivity.this,token);
+            inspection_success += 1;
+            inspection();
         }
 
         @Override
         public void onFail(String type) {
-
+            inspection_fail += 1;
+            inspection();
         }
 
         @Override
         public void onMessage(String msg) {
 
+        }
+    };
+
+    private MessageDialog.DialogCallback dialogCallback = new MessageDialog.DialogCallback() {
+        @Override
+        public void onClick(int position, String btnStr) {
+            finish();
         }
     };
 }

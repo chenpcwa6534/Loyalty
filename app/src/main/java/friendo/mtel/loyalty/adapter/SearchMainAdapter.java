@@ -3,14 +3,13 @@ package friendo.mtel.loyalty.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.component.CatsData;
-import friendo.mtel.loyalty.component.CitysData;
+import friendo.mtel.loyalty.component.AreaData;
 import friendo.mtel.loyalty.component.OrderData;
 import friendo.mtel.loyalty.component.SubAreaData;
 import friendo.mtel.loyalty.component.SubCatsData;
@@ -43,13 +42,13 @@ public class SearchMainAdapter extends RecyclerView.Adapter<SearchMainAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         String text = "";
         if(db_data instanceof CatsData[]){
-            text = ((CatsData[]) db_data)[position].getCatName();
-        }else if(db_data instanceof CitysData[]){
-            text = ((CitysData[]) db_data)[position].getCityName();
+            text = ((CatsData[]) db_data)[position].getCat_name();
+        }else if(db_data instanceof AreaData[]){
+            text = ((AreaData[]) db_data)[position].getCity_name();
         }else if(db_data instanceof SubCatsData[]){
-            text = ((SubCatsData[]) db_data)[position].getSubcatName();
+            text = ((SubCatsData[]) db_data)[position].getSubcat_name();
         }else if(db_data instanceof SubAreaData[]){
-            text = ((SubAreaData[]) db_data)[position].getSubareaName();
+            text = ((SubAreaData[]) db_data)[position].getSubarea_name();
         }else if(db_data instanceof OrderData[]){
             text = ((OrderData[]) db_data)[position].getOrderName();
         }
@@ -80,14 +79,14 @@ public class SearchMainAdapter extends RecyclerView.Adapter<SearchMainAdapter.Vi
         public void onClick(View v) {
             if(db_data instanceof CatsData[]){
                 mListener.onCats(getPosition());
-            }else if(db_data instanceof CitysData[]){
+            }else if(db_data instanceof AreaData[]){
                 mListener.onCitys(getPosition());
             }else if(db_data instanceof SubCatsData[]){
                 SubCatsData[] subCatsData = (SubCatsData[]) db_data;
-                mListener.onSubCats(getPosition(), subCatsData[getPosition()].getSubcatID(),subCatsData[getPosition()].getSubcatName());
+                mListener.onSubCats(getPosition(), subCatsData[getPosition()].getSubcat_id(),subCatsData[getPosition()].getSubcat_name());
             }else if(db_data instanceof SubAreaData[]){
                 SubAreaData[] subAreaDatas = (SubAreaData[]) db_data;
-                mListener.onSubAreas(getPosition(), subAreaDatas[getPosition()].getSubareaID(),subAreaDatas[getPosition()].getSubareaName());
+                mListener.onSubAreas(getPosition(), subAreaDatas[getPosition()].getSubarea_id(),subAreaDatas[getPosition()].getSubarea_name());
             }else if(db_data instanceof OrderData[]){
                 mListener.onOrders(getPosition());
             }

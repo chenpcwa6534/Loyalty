@@ -10,10 +10,12 @@ public class RequestManager {
 
     public static VerControlRequest setVerControlRequest(String Appver, String OSver, String deviceToken, String deviceModel){
         VerControlRequest verControlRequest = new VerControlRequest();
-        verControlRequest.setAppVer(Appver);
-        verControlRequest.setOSVer(OSver);
-        verControlRequest.setDeviceToken(deviceToken);
-        verControlRequest.setDeviceMode(deviceModel);
+        verControlRequest.setApp_ver(Appver);
+        verControlRequest.setOs_ver(OSver);
+        verControlRequest.setDevice_token(deviceToken);
+        verControlRequest.setDevice_model(deviceModel);
+        verControlRequest.setDevice_type(1);
+        verControlRequest.setChenkno("");
         return  verControlRequest;
     }
 

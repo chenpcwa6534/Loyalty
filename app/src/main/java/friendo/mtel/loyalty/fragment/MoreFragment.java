@@ -137,7 +137,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
 
     private void numberStatus(){
         Drawable icon;
-        String number = DataCache.cacheVersionControlData.getProtitleData().getNumber();
+        String number = DataCache.cacheVersionControlData.getProtitle().getNumber();
         if(DataCache.cacheVersionControlData != null && !number.equals("")){
             mStatusPhoneNumber.setText(number);
             mStatuPhone.setText(getResources().getString(R.string.more_serverstatus_alreadyopen));
@@ -152,7 +152,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
 
     private void pushStatus(){
         Drawable icon;
-        if(DataCache.cacheVersionControlData != null && DataCache.cacheVersionControlData.getProtitleData().isPushService()){
+        if(DataCache.cacheVersionControlData != null && DataCache.cacheVersionControlData.getProtitle().isPushService()){
             mPush.setText(getResources().getString(R.string.more_serverstatus_alreadyopen));
             icon = getResources().getDrawable(R.mipmap.ic_common_green_ok);
         }else{

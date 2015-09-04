@@ -1,6 +1,7 @@
 package friendo.mtel.loyalty.fragment;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
     private TextView mSkip;
     private TextView mNumber;
     private EditText mVerificaion;
+    private ProgressDialog mDialogProgress;
 
     private GetPagesResponse mGetPagesResponse;
 
@@ -49,6 +51,7 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_liginverification,container,false);
         findView(v);
+        initDialogProgress();
         initView();
         return v;
     }
@@ -57,7 +60,7 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
         LoginVerificationFragment fragment = new LoginVerificationFragment();
         fragment.mGetPagesResponse = getPagesResponse;
         Bundle bundle = new Bundle();
-        bundle.putString(key,phoneNumber);
+        bundle.putString(key, phoneNumber);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -65,7 +68,8 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
     @Override
     public void onResume() {
         super.onResume();
-        ReceiverManager.registerSMSReceiver(getActivity(),getReceverResponse);
+        ReceiverManager.registerSMSReceiver(getActivity(), getReceverResponse);
+        mDialogProgress.show();
     }
 
     @Override
@@ -102,6 +106,11 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
         mSkip = (TextView) v.findViewById(R.id.skip);
         mNumber = (TextView) v.findViewById(R.id.phonenumber);
         mVerificaion = (EditText) v.findViewById(R.id.verifvation);
+    }
+
+    private void initDialogProgress(){
+        mDialogProgress.setMessage(getResources().getString(R.string.app_system_waitMSG));
+        mDialogProgress.setCancelable(false);
     }
 
     private void initView(){

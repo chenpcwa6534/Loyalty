@@ -4,33 +4,25 @@ package friendo.mtel.loyalty.component;
  * Created by MTel on 2015/8/17.
  */
 public class CatsData {
-    private int catID;
-    private String catName;
+    private int cat_id;
+    private String cat_name;
     private boolean catVaild;
-    private SubCatsData[] subcats;
+    private SubCatsData[] subcat;
 
-    public int getCatID() {
-        return catID;
+    public int getCat_id() {
+        return cat_id;
     }
 
-    public void setCatID(int catID) {
-        this.catID = catID;
+    public void setCat_id(int cat_id) {
+        this.cat_id = cat_id;
     }
 
-    public String getCatName() {
-        return catName;
+    public String getCat_name() {
+        return cat_name;
     }
 
-    public void setCatName(String catName) {
-        this.catName = catName;
-    }
-
-    public SubCatsData[] getSubcats() {
-        return subcats;
-    }
-
-    public void setSubcats(SubCatsData[] subcats) {
-        this.subcats = subcats;
+    public void setCat_name(String cat_name) {
+        this.cat_name = cat_name;
     }
 
     public boolean isCatVaild() {
@@ -39,5 +31,13 @@ public class CatsData {
 
     public void setCatVaild(boolean catVaild) {
         this.catVaild = catVaild;
+    }
+
+    public SubCatsData[] getSubcat() {
+        return subcat;
+    }
+
+    public void setSubcat(SubCatsData[] subcat) {
+        this.subcat = subcat;
     }
 }

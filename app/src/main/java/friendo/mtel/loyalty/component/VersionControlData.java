@@ -4,40 +4,49 @@ package friendo.mtel.loyalty.component;
  * Created by MTel on 2015/8/14.
  */
 public class VersionControlData {
-    private String verUpdateTime;
-    private boolean updateStatus;
-    private boolean serviceupdate;
+    private String ver_updatetime;
+    private boolean update_status;
+    private boolean service_update;
+    private String servicerule_url;
     private ProtitleData protitle;
 
-    public String getVerUpdateTime() {
-        return verUpdateTime;
+    public String getVer_updatetime() {
+        return ver_updatetime;
     }
 
-    public void setVerUpdateTime(String verUpdateTime) {
-        this.verUpdateTime = verUpdateTime;
+    public void setVer_updatetime(String ver_updatetime) {
+        this.ver_updatetime = ver_updatetime;
     }
 
-    public boolean isUpdateStatus() {
-        return updateStatus;
+    public boolean isUpdate_status() {
+        return update_status;
     }
 
-    public void setUpdateStatus(boolean updateStatus) {
-        this.updateStatus = updateStatus;
+    public void setUpdate_status(boolean update_status) {
+        this.update_status = update_status;
     }
 
-    public boolean isServiceupdate() {
-        return serviceupdate;
+    public boolean isService_update() {
+        return service_update;
     }
 
-    public void setServiceupdate(boolean serviceupdate) {
-        this.serviceupdate = serviceupdate;
+    public void setService_update(boolean service_update) {
+        this.service_update = service_update;
     }
 
-    public ProtitleData getProtitleData() {
+    public String getServicerule_url() {
+        return servicerule_url;
+    }
+
+    public void setServicerule_url(String servicerule_url) {
+        this.servicerule_url = servicerule_url;
+    }
+
+    public ProtitleData getProtitle() {
         return protitle;
     }
 
-    public void setProtitleData(ProtitleData protitleData) {
-        this.protitle = protitleData;
+    public void setProtitle(ProtitleData protitle) {
+        this.protitle = protitle;
     }
 }

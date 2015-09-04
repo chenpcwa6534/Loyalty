@@ -3,6 +3,8 @@ package friendo.mtel.loyalty.data;
 import android.content.Context;
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+
 import friendo.mtel.loyalty.Request.RequestManager;
 import friendo.mtel.loyalty.Request.VerControlRequest;
 import friendo.mtel.loyalty.common.DeviceInformation;
@@ -21,6 +23,7 @@ import friendo.mtel.loyalty.component.MemberCouponsData;
 import friendo.mtel.loyalty.component.MemberPointData;
 import friendo.mtel.loyalty.httpapi.CallAPIResponse;
 import friendo.mtel.loyalty.httpapi.HTTPApi;
+import friendo.mtel.loyalty.preferences.LoyaltyPreference;
 
 /**
  * Created by MTel on 2015/7/17.
@@ -44,7 +47,7 @@ public class DataManager {
         return  datamanager;
     }
 
-    public void qryVersionControl(String verUpdateTime, final GetDataResponse getDataResponse){
+    public void qryVersionControl(String verUpdateTime, final GetDataResponse getDataResponse) throws JSONException{
         CallAPIResponse callAPIResponse = new CallAPIResponse() {
             @Override
             public void onStart() {
@@ -56,6 +59,7 @@ public class DataManager {
             @Override
             public void onSuccess(Object response) {
                 DataCache.cacheVersionControlData = (VersionControlData) response;
+                LoyaltyPreference.setAPIRequestTime(mContext, LoyaltyPreference.API.VersionControl,DataCache.cacheVersionControlData.getVer_updatetime());
                 if(getDataResponse != null){
                     getDataResponse.onSuccess(response);
                 }
@@ -84,8 +88,8 @@ public class DataManager {
         };
         Gson gson = new Gson();
         VerControlRequest verControlRequest = RequestManager.setVerControlRequest(DeviceInformation.getAppVersion(), DeviceInformation.getOSVersion(), DeviceInformation.getDeviceToken(mContext), DeviceInformation.getDeviceModel());
-        String body = gson.toJson(verControlRequest);
-        (new HTTPApi()).qryVersionControl(mContext, Env.getMemberID(mContext), verUpdateTime, body, callAPIResponse);
+        String userFilter = gson.toJson(verControlRequest);
+        (new HTTPApi()).qryVersionControl(mContext, Env.getMemberID(mContext), verUpdateTime, userFilter, callAPIResponse);
     }
 
 
@@ -142,7 +146,7 @@ public class DataManager {
      * @param getDataResponse
      * @return
      */
-    public FilterData qryFilter(String verUpdateTime, boolean isNeedAPI, final GetDataResponse getDataResponse){
+    public FilterData qryFilter(String verUpdateTime, boolean isNeedAPI, final GetDataResponse getDataResponse) throws JSONException{
         FilterData filterData = new FilterData();
         if(DataCache.cacheFilterData != null ){
             filterData = DataCache.cacheFilterData;

@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">LoyaltyCard</string>
+    <string name="facebook_app_id">11111111</string>
 
     <string name="action_settings">設定</string>
+
+    <string name="app_system_fail">系統異常，請洽客服人員</string>
+    <string name="app_system_ok">確認</string>
+    <string name="app_system_waitMSG">等待驗證簡訊中</string>
 
     <string name="applicationName">熟客卡</string>
     <string name="store">集點店家</string>

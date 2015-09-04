@@ -5,31 +5,31 @@ package friendo.mtel.loyalty.component;
  */
 public class SubAreaData {
 
-    private String subareaID;
-    private String subareaName;
-    private boolean subareaVaild;
+    private String subarea_id;
+    private String subarea_name;
+    private boolean subcityVaild;
 
-    public String getSubareaID() {
-        return subareaID;
+    public String getSubarea_id() {
+        return subarea_id;
     }
 
-    public void setSubareaID(String subareaID) {
-        this.subareaID = subareaID;
+    public void setSubarea_id(String subarea_id) {
+        this.subarea_id = subarea_id;
     }
 
-    public String getSubareaName() {
-        return subareaName;
+    public String getSubarea_name() {
+        return subarea_name;
     }
 
-    public void setSubareaName(String subareaName) {
-        this.subareaName = subareaName;
+    public void setSubarea_name(String subarea_name) {
+        this.subarea_name = subarea_name;
     }
 
-    public boolean isSubareaVaild() {
-        return subareaVaild;
+    public boolean isSubcityVaild() {
+        return subcityVaild;
     }
 
-    public void setSubareaVaild(boolean subareaVaild) {
-        this.subareaVaild = subareaVaild;
+    public void setSubcityVaild(boolean subcityVaild) {
+        this.subcityVaild = subcityVaild;
     }
 }

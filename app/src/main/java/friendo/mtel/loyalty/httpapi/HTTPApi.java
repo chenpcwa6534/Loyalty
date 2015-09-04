@@ -42,59 +42,64 @@ public class HTTPApi {
      * 版本相關
      * @param context
      * @param verUpdateTime
-     * @param body
+     * @param userFilter
      * @param callAPIResponse
      */
-    public void qryVersionControl(Context context, String memberID , String verUpdateTime, String body ,final CallAPIResponse callAPIResponse){
-        String apiName = "";
+    public void qryVersionControl(Context context, String memberID , String verUpdateTime, String userFilter ,final CallAPIResponse callAPIResponse) throws JSONException{
+        String apiName = "members/" + memberID + "/VersionControl/";
         final JSONObject jsonObject = new JSONObject();
+        jsonObject.put("verUpdateTime",verUpdateTime);
 
-//        VolleyAsyncHttpClient.getInstance(context).post(Env.serviceURL + apiName, jsonObject,new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
-//
-//            @Override
-//            public void onStart() {
-//                Log.i(TAG,"qryFilter onStart");
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                Log.i(TAG,"qryFilter onFinish");
-//            }
-//
-//            @Override
-//            public void onFailure(String msg) {
-//                Log.i(TAG,"qryFilter onFailure msg:" +msg);
-//            }
-//
-//            @Override
-//            public void onSuccess(JSONObject response) {
-//                Log.i(TAG, "qryFilter onSuccess=" + response);
-//                try {
-//                    String data = response.getString("data");
-//                    Gson gson = new Gson();
-//
-//                    if(callAPIResponse != null) callAPIResponse.onSuccess(filterData);
-//
-//                }catch (Exception e) {
-//                    Log.e(TAG, e.getMessage());
-//                }
-//            }
-//        });
+        VolleyAsyncHttpClient.getInstance(context).post(VolleyAsyncHttpClient.MATHOD_POST, Env.serviceURL + apiName, jsonObject, userFilter, new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
 
-        Log.d(TAG,"Version Control Json : "+ TestDataJson.getVersionControlResponseData().toString());
-        if(getResult(TestDataJson.getVersionControlResponseData())){
-            String data = getData(TestDataJson.getVersionControlResponseData());
-            Log.d(TAG,"VersionControl api data:" + data);
-            Gson gson = new Gson();
-            VersionControlData versionControlData = gson.fromJson(data, VersionControlData.class);
-            if(callAPIResponse != null){
-                callAPIResponse.onSuccess(versionControlData);
+            @Override
+            public void onStart() {
+                Log.i(TAG,"qryVersionControl onStart");
             }
-        }else{
-            if(callAPIResponse != null){
-                callAPIResponse.onFailure(getError(context,TestDataJson.getResponseError()));
+
+            @Override
+            public void onFinish() {
+                Log.i(TAG,"qryVersionControl onFinish");
             }
-        }
+
+            @Override
+            public void onFailure(String msg) {
+                Log.i(TAG,"qryVersionControl onFailure msg:" +msg);
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+                Log.i(TAG, "qryVersionControl onSuccess=" + response);
+                try {
+                    if(getResult(response)){
+                        String data = getData(response);
+                        Gson gson = new Gson();
+                        VersionControlData versionControlData = gson.fromJson(data,VersionControlData.class);
+                        if(callAPIResponse != null) callAPIResponse.onSuccess(versionControlData);
+                    }else{
+                        String errorMsg = getError(response);
+                        if(callAPIResponse != null) callAPIResponse.onFailure(errorMsg);
+                    }
+                }catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
+        });
+
+//        Log.d(TAG,"Version Control Json : "+ TestDataJson.getVersionControlResponseData().toString());
+//        if(getResult(TestDataJson.getVersionControlResponseData())){
+//            String data = getData(TestDataJson.getVersionControlResponseData());
+//            Log.d(TAG,"VersionControl api data:" + data);
+//            Gson gson = new Gson();
+//            VersionControlData versionControlData = gson.fromJson(data, VersionControlData.class);
+//            if(callAPIResponse != null){
+//                callAPIResponse.onSuccess(versionControlData);
+//            }
+//        }else{
+//            if(callAPIResponse != null){
+//                callAPIResponse.onFailure(getError(context,TestDataJson.getResponseError()));
+//            }
+//        }
     }
 
 
@@ -163,55 +168,60 @@ public class HTTPApi {
      * @param updateTime
      * @param callAPIResponse
      */
-    public void qryFilter(Context context, String updateTime ,final CallAPIResponse callAPIResponse){
-        String apiName = "";
+    public void qryFilter(Context context, String updateTime ,final CallAPIResponse callAPIResponse) throws JSONException{
+        String apiName = "stamps/ui/filter";
         final JSONObject jsonObject = new JSONObject();
+        jsonObject.put("updateTime",updateTime);
 
-//        VolleyAsyncHttpClient.getInstance(context).post(Env.serviceURL + apiName, jsonObject,new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
-//
-//            @Override
-//            public void onStart() {
-//                Log.i(TAG,"qryFilter onStart");
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                Log.i(TAG,"qryFilter onFinish");
-//            }
-//
-//            @Override
-//            public void onFailure(String msg) {
-//                Log.i(TAG,"qryFilter onFailure msg:" +msg);
-//            }
-//
-//            @Override
-//            public void onSuccess(JSONObject response) {
-//                Log.i(TAG, "qryFilter onSuccess=" + response);
-//                try {
-//                    String data = response.getString("data");
-//                    Gson gson = new Gson();
-//
-//                    if(callAPIResponse != null) callAPIResponse.onSuccess(filterData);
-//
-//                }catch (Exception e) {
-//                    Log.e(TAG, e.getMessage());
-//                }
-//            }
-//        });
-        Log.d(TAG,"Fliter Json : "+ TestDataJson.getFilter().toString());
-        if(getResult(TestDataJson.getFilter())){
-            String data = getData(TestDataJson.getFilter());
-            Log.d(TAG,"Fliter api data:" + data);
-            Gson gson = new Gson();
-            FilterData filterData = gson.fromJson(data, FilterData.class);
-            if(callAPIResponse != null){
-                callAPIResponse.onSuccess(filterData);
+        VolleyAsyncHttpClient.getInstance(context).post(Env.serviceURL + apiName, jsonObject,new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
+
+            @Override
+            public void onStart() {
+                Log.i(TAG,"qryFilter onStart");
             }
-        }else{
-            if(callAPIResponse != null){
-                callAPIResponse.onFailure(getError(context,TestDataJson.getResponseError()));
+
+            @Override
+            public void onFinish() {
+                Log.i(TAG,"qryFilter onFinish");
             }
-        }
+
+            @Override
+            public void onFailure(String msg) {
+                Log.i(TAG,"qryFilter onFailure msg:" +msg);
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+                Log.i(TAG, "qryFilter onSuccess=" + response);
+                try {
+                    if(getResult(response)){
+                        String data = getData(response);
+                        Gson gson = new Gson();
+                        FilterData filterData = gson.fromJson(data,FilterData.class);
+                        if(callAPIResponse != null) callAPIResponse.onSuccess(filterData);
+                    }else{
+                        String errorMsg = getError(response);
+                        if(callAPIResponse != null) callAPIResponse.onSuccess(errorMsg);
+                    }
+                }catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
+        });
+//        Log.d(TAG,"Fliter Json : "+ TestDataJson.getFilter().toString());
+//        if(getResult(TestDataJson.getFilter())){
+//            String data = getData(TestDataJson.getFilter());
+//            Log.d(TAG,"Fliter api data:" + data);
+//            Gson gson = new Gson();
+//            FilterData filterData = gson.fromJson(data, FilterData.class);
+//            if(callAPIResponse != null){
+//                callAPIResponse.onSuccess(filterData);
+//            }
+//        }else{
+//            if(callAPIResponse != null){
+//                callAPIResponse.onFailure(getError(context,TestDataJson.getResponseError()));
+//            }
+//        }
     }
 
 
@@ -1020,6 +1030,16 @@ public class HTTPApi {
             Log.e(TAG,"result have wrong ,JSON to boolean is fail , data is [" + response.toString()+"]");
         }
         return result;
+    }
+
+    private String getError(JSONObject response){
+        String errorMsg = "";
+        try {
+            errorMsg = response.getString("errorMsg");
+        }catch (Exception e){
+            Log.e(TAG,"ErrorCode have wrong ,JSON to String is fail , data is [" + response.toString()+"]");
+        }
+        return errorMsg;
     }
 
 

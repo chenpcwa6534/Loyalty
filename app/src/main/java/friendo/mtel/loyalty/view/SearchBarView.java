@@ -125,8 +125,8 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
     }
 
     private void initValue(){
-        mCats.setText(db_filter.getCats()[0].getCatName());
-        mCitys.setText(db_filter.getCitys()[0].getCityName());
+        mCats.setText(db_filter.getCats()[0].getCat_name());
+        mCitys.setText(db_filter.getCats()[0].getCat_name());
 
         if(OrderTypeAttr == 0){
             mOrders.setText(db_filter.getOrder().getPoint()[0].getOrderName());
@@ -161,8 +161,8 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
     private SearchMainAdapter.ViewHolder.ClickListener onClickListener = new SearchMainAdapter.ViewHolder.ClickListener() {
         @Override
         public void onCitys(int position) {
-            int CityID = db_filter.getCitys()[position].getCityID();
-            String CityName = db_filter.getCitys()[position].getCityName();
+            int CityID = db_filter.getCats()[position].getCat_id();
+            String CityName = db_filter.getArea()[position].getCity_name();
             setCityText(CityName);
             DataCache.cacheFrontPageInParams.getUserfilter().setCity_id(CityID);
             if(CityID == 0){
@@ -170,7 +170,7 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
                 reSearch();
                 return;
             }
-            initSubList(db_filter.getCitys()[position].getSubareas());
+            initSubList(db_filter.getArea()[position].getSubarea());
         }
 
         @Override
@@ -183,8 +183,8 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
 
         @Override
         public void onCats(int position) {
-            int CatID = db_filter.getCats()[position].getCatID();
-            String CatName = db_filter.getCats()[position].getCatName();
+            int CatID = db_filter.getCats()[position].getCat_id();
+            String CatName = db_filter.getCats()[position].getCat_name();
             setCatsText(CatName);
             DataCache.cacheFrontPageInParams.getUserfilter().setCat_id(CatID);
             if(CatID == 0){
@@ -192,7 +192,7 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
                 reSearch();
                 return;
             }
-            initSubList(db_filter.getCats()[position].getSubcats());
+            initSubList(db_filter.getCats()[position].getSubcat());
         }
 
         @Override
@@ -250,7 +250,7 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
                 mMainListView.setAdapter(cityAdapter);
                 break;
             case R.id.txt_Citys:
-                SearchMainAdapter catAdapter = new SearchMainAdapter(getContext(),db_filter.getCitys(),onClickListener);
+                SearchMainAdapter catAdapter = new SearchMainAdapter(getContext(),db_filter.getArea(),onClickListener);
                 mMainListView.setAdapter(catAdapter);
                 break;
             case R.id.txt_Orders:

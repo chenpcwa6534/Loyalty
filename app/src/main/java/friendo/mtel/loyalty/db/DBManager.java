@@ -4,11 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.nfc.Tag;
 import android.util.Log;
 
 import friendo.mtel.loyalty.component.CatsData;
-import friendo.mtel.loyalty.component.CitysData;
+import friendo.mtel.loyalty.component.AreaData;
 import friendo.mtel.loyalty.component.FilterData;
 import friendo.mtel.loyalty.component.OrderData;
 import friendo.mtel.loyalty.component.OrdersData;
@@ -138,7 +137,7 @@ public class DBManager extends SQLHelper {
      * @param data
      */
     public void setFilter(FilterData data){
-        setFilterCity(data.getCitys());
+        setFilterCity(data.getArea());
         setFilterCat(data.getCats());
         setFilterOder(data.getOrder());
     }
@@ -150,14 +149,14 @@ public class DBManager extends SQLHelper {
      *     SCi = subAreadata index
      * @param data
      */
-    private void setFilterCity(CitysData[] data){
+    private void setFilterCity(AreaData[] data){
         //city
         for(int Ci=0; Ci<data.length; Ci++){
-            String where = COL_cityid +" = " + data[Ci].getCityID();
+            String where = COL_cityid +" = " + data[Ci].getCity_id();
             boolean isExist = get(TAB_Filter_city,where);
             ContentValues cv = new ContentValues();
-            cv.put(COL_cityid, data[Ci].getCityID());
-            cv.put(COL_cityname, data[Ci].getCityName());
+            cv.put(COL_cityid, data[Ci].getCity_id());
+            cv.put(COL_cityname, data[Ci].getCity_name());
             if(isExist){
                 if(data[Ci].isCityVaild() == true){
                     /** if data is exist and valid is true then data is update */
@@ -174,16 +173,16 @@ public class DBManager extends SQLHelper {
             }
 
             //subarea data
-            SubAreaData[] subAreaDatas = data[Ci].getSubareas();
+            SubAreaData[] subAreaDatas = data[Ci].getSubarea();
             for(int SCi=0; SCi<subAreaDatas.length; SCi++){
-                where = COL_subcityid + " = " + subAreaDatas[SCi].getSubareaID();
+                where = COL_subcityid + " = " + subAreaDatas[SCi].getSubarea_id();
                 isExist = get(TAB_Filter_subcity,where);
                 ContentValues Subcv = new ContentValues();
-                Subcv.put(COL_cityid,data[Ci].getCityID());
-                Subcv.put(COL_subcityid,subAreaDatas[SCi].getSubareaID());
-                Subcv.put(COL_subcityname,subAreaDatas[SCi].getSubareaName());
+                Subcv.put(COL_cityid,data[Ci].getCity_id());
+                Subcv.put(COL_subcityid,subAreaDatas[SCi].getSubarea_id());
+                Subcv.put(COL_subcityname,subAreaDatas[SCi].getSubarea_name());
                 if(isExist){
-                    if(subAreaDatas[SCi].isSubareaVaild() == true){
+                    if(subAreaDatas[SCi].isSubcityVaild() == true){
                         /** if data is exist and valid is true then data is update */
                         update(TAB_Filter_subcity,cv,where);
                     }else{
@@ -191,7 +190,7 @@ public class DBManager extends SQLHelper {
                         delete(TAB_Filter_subcity,where);
                     }
                 }else {
-                    if(subAreaDatas[SCi].isSubareaVaild() == true){
+                    if(subAreaDatas[SCi].isSubcityVaild() == true){
                         /** if data is exist and valid is true then data is insert */
                         add(TAB_Filter_subcity,cv,where);
                     }
@@ -210,11 +209,11 @@ public class DBManager extends SQLHelper {
     private void setFilterCat(CatsData[] data){
         //cat
         for(int CAi=0; CAi<data.length; CAi++){
-            String where = COL_catid +" = " + data[CAi].getCatID();
+            String where = COL_catid +" = " + data[CAi].getCat_id();
             boolean isExist = get(TAB_Filter_cat,where);
             ContentValues cv = new ContentValues();
-            cv.put(COL_catid, data[CAi].getCatID());
-            cv.put(COL_catname, data[CAi].getCatName());
+            cv.put(COL_catid, data[CAi].getCat_id());
+            cv.put(COL_catname, data[CAi].getCat_name());
             if(isExist){
                 if(data[CAi].isCatVaild() == true){
                     /** if data is exist and valid is true then data is update */
@@ -231,14 +230,14 @@ public class DBManager extends SQLHelper {
             }
 
             //subarea data
-            SubCatsData[] subCatsDatas = data[CAi].getSubcats();
+            SubCatsData[] subCatsDatas = data[CAi].getSubcat();
             for(int SCAi=0; SCAi<subCatsDatas.length; SCAi++){
-                where = COL_subcatid + " = " + subCatsDatas[SCAi].getSubcatID();
+                where = COL_subcatid + " = " + subCatsDatas[SCAi].getSubcat_id();
                 isExist = get(TAB_Filter_subcat,where);
                 ContentValues Subcv = new ContentValues();
-                Subcv.put(COL_catid,data[CAi].getCatID());
-                Subcv.put(COL_subcatid,subCatsDatas[SCAi].getSubcatID());
-                Subcv.put(COL_subcatname,subCatsDatas[SCAi].getSubcatName());
+                Subcv.put(COL_catid,data[CAi].getCat_id());
+                Subcv.put(COL_subcatid,subCatsDatas[SCAi].getSubcat_id());
+                Subcv.put(COL_subcatname,subCatsDatas[SCAi].getSubcat_name());
                 if(isExist){
                     if(subCatsDatas[SCAi].isSubcatVaild() == true){
                         /** if data is exist and valid is true then data is update */

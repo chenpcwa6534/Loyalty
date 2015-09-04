@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 
 import friendo.mtel.loyalty.component.CatsData;
-import friendo.mtel.loyalty.component.CitysData;
+import friendo.mtel.loyalty.component.AreaData;
 import friendo.mtel.loyalty.component.ErrorMessageData;
 import friendo.mtel.loyalty.component.FilterData;
 import friendo.mtel.loyalty.component.OrderData;
@@ -116,108 +116,108 @@ public class TestDataJson {
         return getJsonObject(gson.toJson(errorMessageResult));
     }
 
-    public static JSONObject getFilter(){
-        SubAreaData[] subAreaDataTaipai = new SubAreaData[3];
-        subAreaDataTaipai[0]  = new SubAreaData();
-        subAreaDataTaipai[0].setSubareaID("1");
-        subAreaDataTaipai[0].setSubareaName("大安區");
-        subAreaDataTaipai[1]  = new SubAreaData();
-        subAreaDataTaipai[1].setSubareaID("2");
-        subAreaDataTaipai[1].setSubareaName("士林區");
-        subAreaDataTaipai[2]  = new SubAreaData();
-        subAreaDataTaipai[2].setSubareaID("3");
-        subAreaDataTaipai[2].setSubareaName("大同區");
-
-        SubAreaData[] subAreaDataNewTaipai = new SubAreaData[2];
-        subAreaDataNewTaipai[0] = new SubAreaData();
-        subAreaDataNewTaipai[0].setSubareaID("1");
-        subAreaDataNewTaipai[0].setSubareaName("三峽區");
-        subAreaDataNewTaipai[1] = new SubAreaData();
-        subAreaDataNewTaipai[1].setSubareaID("2");
-        subAreaDataNewTaipai[1].setSubareaName("三重區");
-
-        CitysData[] citysDatas = new CitysData[3];
-        citysDatas[0] = new CitysData();
-        citysDatas[0].setCityID(0);
-        citysDatas[0].setCityName("附近店家");
-        citysDatas[1] = new CitysData();
-        citysDatas[1].setCityID(1);
-        citysDatas[1].setCityName("台北市");
-        citysDatas[1].setSubareas(subAreaDataTaipai);
-        citysDatas[2] = new CitysData();
-        citysDatas[2].setCityID(2);
-        citysDatas[2].setCityName("新北市");
-        citysDatas[2].setSubareas(subAreaDataNewTaipai);
-
-
-        SubCatsData[] subCatsDatas_re = new SubCatsData[3];
-        subCatsDatas_re[0] = new SubCatsData();
-        subCatsDatas_re[0].setSubcatID(0);
-        subCatsDatas_re[0].setSubcatName("全部");
-        subCatsDatas_re[1] = new SubCatsData();
-        subCatsDatas_re[1].setSubcatID(1);
-        subCatsDatas_re[1].setSubcatName("西式");
-        subCatsDatas_re[2] = new SubCatsData();
-        subCatsDatas_re[2].setSubcatID(2);
-        subCatsDatas_re[2].setSubcatName("中式");
-
-        SubCatsData[] subCatsDatas_Lo = new SubCatsData[2];
-        subCatsDatas_Lo[0] = new SubCatsData();
-        subCatsDatas_Lo[0].setSubcatID(0);
-        subCatsDatas_Lo[0].setSubcatName("全部");
-        subCatsDatas_Lo[1] = new SubCatsData();
-        subCatsDatas_Lo[1].setSubcatID(1);
-        subCatsDatas_Lo[1].setSubcatName("王品");
-
-        CatsData[] catsDatas = new CatsData[3];
-        catsDatas[0] = new CatsData();
-        catsDatas[0].setCatID(0);
-        catsDatas[0].setCatName("全部");
-        catsDatas[1] = new CatsData();
-        catsDatas[1].setCatID(1);
-        catsDatas[1].setCatName("餐飲");
-        catsDatas[1].setSubcats(subCatsDatas_re);
-        catsDatas[2] = new CatsData();
-        catsDatas[2].setCatID(2);
-        catsDatas[2].setCatName("品牌");
-        catsDatas[2].setSubcats(subCatsDatas_Lo);
-
-        OrderData[] orderDatasPoint = new OrderData[3];
-        orderDatasPoint[0] = new OrderData();
-        orderDatasPoint[0].setOrderID(1);
-        orderDatasPoint[0].setOrderName("依距離");
-        orderDatasPoint[1] = new OrderData();
-        orderDatasPoint[1].setOrderID(2);
-        orderDatasPoint[1].setOrderName("依優惠");
-        orderDatasPoint[2] = new OrderData();
-        orderDatasPoint[2].setOrderID(3);
-        orderDatasPoint[2].setOrderName("依更新");
-
-        OrderData[] orderDataLimit = new OrderData[2];
-        orderDataLimit[0] = new OrderData();
-        orderDataLimit[0].setOrderID(1);
-        orderDataLimit[0].setOrderName("依距離");
-        orderDataLimit[1] = new OrderData();
-        orderDataLimit[1].setOrderID(2);
-        orderDataLimit[1].setOrderName("依優惠");
-
-        OrdersData ordersDatas = new OrdersData();
-        ordersDatas.setPoint(orderDatasPoint);
-        ordersDatas.setLimit(orderDataLimit);
-
-        FilterData filterData = new FilterData();
-        filterData.setUpdateTime("2015/08/08 15:32:25");
-        filterData.setCitys(citysDatas);
-        filterData.setCats(catsDatas);
-        filterData.setOrder(ordersDatas);
-
-        FilterResult filterResult = new FilterResult();
-        filterResult.setErrorCode(200);
-        filterResult.setResult(true);
-        filterResult.setData(filterData);
-
-        return getJsonObject(gson.toJson(filterResult));
-    }
+//    public static JSONObject getFilter(){
+//        SubAreaData[] subAreaDataTaipai = new SubAreaData[3];
+//        subAreaDataTaipai[0]  = new SubAreaData();
+//        subAreaDataTaipai[0].setSubareaID("1");
+//        subAreaDataTaipai[0].setSubareaName("大安區");
+//        subAreaDataTaipai[1]  = new SubAreaData();
+//        subAreaDataTaipai[1].setSubareaID("2");
+//        subAreaDataTaipai[1].setSubareaName("士林區");
+//        subAreaDataTaipai[2]  = new SubAreaData();
+//        subAreaDataTaipai[2].setSubareaID("3");
+//        subAreaDataTaipai[2].setSubareaName("大同區");
+//
+//        SubAreaData[] subAreaDataNewTaipai = new SubAreaData[2];
+//        subAreaDataNewTaipai[0] = new SubAreaData();
+//        subAreaDataNewTaipai[0].setSubareaID("1");
+//        subAreaDataNewTaipai[0].setSubareaName("三峽區");
+//        subAreaDataNewTaipai[1] = new SubAreaData();
+//        subAreaDataNewTaipai[1].setSubareaID("2");
+//        subAreaDataNewTaipai[1].setSubareaName("三重區");
+//
+//        AreaData[] areaDatas = new AreaData[3];
+//        areaDatas[0] = new AreaData();
+//        areaDatas[0].setCityID(0);
+//        areaDatas[0].setCityName("附近店家");
+//        areaDatas[1] = new AreaData();
+//        areaDatas[1].setCityID(1);
+//        areaDatas[1].setCityName("台北市");
+//        areaDatas[1].setSubareas(subAreaDataTaipai);
+//        areaDatas[2] = new AreaData();
+//        areaDatas[2].setCityID(2);
+//        areaDatas[2].setCityName("新北市");
+//        areaDatas[2].setSubareas(subAreaDataNewTaipai);
+//
+//
+//        SubCatsData[] subCatsDatas_re = new SubCatsData[3];
+//        subCatsDatas_re[0] = new SubCatsData();
+//        subCatsDatas_re[0].setSubcatID(0);
+//        subCatsDatas_re[0].setSubcatName("全部");
+//        subCatsDatas_re[1] = new SubCatsData();
+//        subCatsDatas_re[1].setSubcatID(1);
+//        subCatsDatas_re[1].setSubcatName("西式");
+//        subCatsDatas_re[2] = new SubCatsData();
+//        subCatsDatas_re[2].setSubcatID(2);
+//        subCatsDatas_re[2].setSubcatName("中式");
+//
+//        SubCatsData[] subCatsDatas_Lo = new SubCatsData[2];
+//        subCatsDatas_Lo[0] = new SubCatsData();
+//        subCatsDatas_Lo[0].setSubcatID(0);
+//        subCatsDatas_Lo[0].setSubcatName("全部");
+//        subCatsDatas_Lo[1] = new SubCatsData();
+//        subCatsDatas_Lo[1].setSubcatID(1);
+//        subCatsDatas_Lo[1].setSubcatName("王品");
+//
+//        CatsData[] catsDatas = new CatsData[3];
+//        catsDatas[0] = new CatsData();
+//        catsDatas[0].setCatID(0);
+//        catsDatas[0].setCatName("全部");
+//        catsDatas[1] = new CatsData();
+//        catsDatas[1].setCatID(1);
+//        catsDatas[1].setCatName("餐飲");
+//        catsDatas[1].setSubcats(subCatsDatas_re);
+//        catsDatas[2] = new CatsData();
+//        catsDatas[2].setCatID(2);
+//        catsDatas[2].setCatName("品牌");
+//        catsDatas[2].setSubcats(subCatsDatas_Lo);
+//
+//        OrderData[] orderDatasPoint = new OrderData[3];
+//        orderDatasPoint[0] = new OrderData();
+//        orderDatasPoint[0].setOrderID(1);
+//        orderDatasPoint[0].setOrderName("依距離");
+//        orderDatasPoint[1] = new OrderData();
+//        orderDatasPoint[1].setOrderID(2);
+//        orderDatasPoint[1].setOrderName("依優惠");
+//        orderDatasPoint[2] = new OrderData();
+//        orderDatasPoint[2].setOrderID(3);
+//        orderDatasPoint[2].setOrderName("依更新");
+//
+//        OrderData[] orderDataLimit = new OrderData[2];
+//        orderDataLimit[0] = new OrderData();
+//        orderDataLimit[0].setOrderID(1);
+//        orderDataLimit[0].setOrderName("依距離");
+//        orderDataLimit[1] = new OrderData();
+//        orderDataLimit[1].setOrderID(2);
+//        orderDataLimit[1].setOrderName("依優惠");
+//
+//        OrdersData ordersDatas = new OrdersData();
+//        ordersDatas.setPoint(orderDatasPoint);
+//        ordersDatas.setLimit(orderDataLimit);
+//
+//        FilterData filterData = new FilterData();
+//        filterData.setUpdateTime("2015/08/08 15:32:25");
+//        filterData.setCitys(areaDatas);
+//        filterData.setCats(catsDatas);
+//        filterData.setOrder(ordersDatas);
+//
+//        FilterResult filterResult = new FilterResult();
+//        filterResult.setErrorCode(200);
+//        filterResult.setResult(true);
+//        filterResult.setData(filterData);
+//
+//        return getJsonObject(gson.toJson(filterResult));
+//    }
 
     public static JSONObject getResponseError(){
         return getJsonObject(ResponseError);

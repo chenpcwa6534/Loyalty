@@ -39,7 +39,7 @@ public class DeviceInformation {
     public static String getOSVersion(){
         try{
             if(OSVersion.equals("")){
-                OSVersion = Build.MANUFACTURER + " " + Build.MODEL;
+                OSVersion = String.valueOf(Build.VERSION.SDK_INT);
             }
         }catch (Exception e){
             Log.e(TAG,"get android SDK version is wrong, debug is DeviceInformation.class 34 line, Exception :" + e);
@@ -50,7 +50,7 @@ public class DeviceInformation {
     public static String getDeviceModel(){
         try{
             if(DeviceModel.equals("")){
-                DeviceModel = String.valueOf(Build.VERSION.SDK_INT);
+                DeviceModel = Build.MANUFACTURER + " " + Build.MODEL;
             }
         }catch (Exception e){
             Log.e(TAG,"get device model is wrong, debug is DeviceInformation.class 45 line, Exception :" + e);

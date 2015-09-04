@@ -2,11 +2,28 @@ package friendo.mtel.loyalty.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+
+import org.json.JSONObject;
+
+import java.util.Arrays;
+
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.data.GetPagesResponse;
+import friendo.mtel.loyalty.facebook.FacebookManager;
 import friendo.mtel.loyalty.fragment.LoginNumberFragment;
 import friendo.mtel.loyalty.fragment.LoginVerificationFragment;
 import friendo.mtel.loyalty.view.MessageDialog;
@@ -21,11 +38,14 @@ public class LoginActivity extends CommonActionBarActivity implements View.OnCli
     private Button mAppStart;
     private String[] mResMsg;
 
-
+    CallbackManager callbackManager;
+    private AccessToken accessToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FacebookSdk.sdkInitialize(getApplicationContext());
         super.onCreate(savedInstanceState);
+        callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_login);
         findView();
         initView();
@@ -86,6 +106,8 @@ public class LoginActivity extends CommonActionBarActivity implements View.OnCli
         msgDialog.show();
     }
 
+
+
     private GetPagesResponse getPagesResponse = new GetPagesResponse() {
 
         @Override
@@ -110,6 +132,8 @@ public class LoginActivity extends CommonActionBarActivity implements View.OnCli
         public void onClick(int position, String btnStr) {
             switch (position){
                 case 0:
+                    //FacebookManager.newInstance(LoginActivity.this).login();
+                    //LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "user_friends"));
                     break;
                 case 1:
                     intentActivity();

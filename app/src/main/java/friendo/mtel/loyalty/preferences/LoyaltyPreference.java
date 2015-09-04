@@ -14,6 +14,8 @@ public class LoyaltyPreference extends BasePreferences {
         void onSharedPreferenceChange(String key, Object value);
     }
 
+
+
     public static final String DEVICE_TOKEN = "DEVICETOKEN";
     private static final String DEFAULT_DEVICE_TOKEN = "";
     private static String PAR_DEVICE_TOKEN = DEFAULT_DEVICE_TOKEN;
@@ -44,7 +46,7 @@ public class LoyaltyPreference extends BasePreferences {
     }
 
     public static final String PERSON_MEMBERID = "MEMBERID";
-    private static final String DEFAULT_PERSON_MEMBERID = "";
+    private static final String DEFAULT_PERSON_MEMBERID = "00000000-0000-0000-0000-000000000000";
     private static String PAR_PERSON_MEMBER = DEFAULT_PERSON_MEMBERID;
     public static void setMemberID(Context context,String memberID){
         try{
@@ -156,5 +158,39 @@ public class LoyaltyPreference extends BasePreferences {
             Log.e(TAG,"Exception:"+e);
         }
         return DEFAULT_PERSON_PHOTO;
+    }
+
+
+    public enum API{
+        VersionControl,Filter
+    }
+
+    public static final String API_REQUESTTIME = "";
+    private static final String DEFAULT_API_REQUESTTIME = "";
+    private static String PAR_API_REQUESTTIME = DEFAULT_API_REQUESTTIME;
+    public static void setAPIRequestTime(Context context, API ApiName, String UpdateTime){
+        try{
+            if(editor == null) load(context);
+            editor.putString(ApiName.toString(), UpdateTime);
+            PAR_API_REQUESTTIME = UpdateTime;
+            save();
+
+        }catch (Exception e){
+            Log.e(TAG,"set Api updateTime fail (LoyaltyPreference.class line 177) Exception:"+e);
+        }
+    }
+
+    public static String getAPIRequestTime(Context context, API ApiName){
+        try{
+            if(settings == null) load(context);
+            if(settings != null) {
+                String UpdateTime = settings.getString(ApiName.toString(), DEFAULT_API_REQUESTTIME);
+                PAR_API_REQUESTTIME = UpdateTime;
+                return UpdateTime;
+            }
+        }catch (Exception e){
+            Log.e(TAG,"get Api updateTime fail (LoyaltyPreference.class line 190) Exception:"+e);
+        }
+        return DEFAULT_API_REQUESTTIME;
     }
 }

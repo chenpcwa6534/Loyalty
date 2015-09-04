@@ -5,24 +5,16 @@ package friendo.mtel.loyalty.component;
  */
 public class FilterData {
     private String updateTime;
-    private CitysData[] citys;
+    private AreaData[] area;
     private CatsData[] cats;
     private OrdersData order;
 
-    public String getUpdateTime() {
-        return updateTime;
+    public AreaData[] getArea() {
+        return area;
     }
 
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public CitysData[] getCitys() {
-        return citys;
-    }
-
-    public void setCitys(CitysData[] citys) {
-        this.citys = citys;
+    public void setArea(AreaData[] area) {
+        this.area = area;
     }
 
     public CatsData[] getCats() {
@@ -39,5 +31,13 @@ public class FilterData {
 
     public void setOrder(OrdersData order) {
         this.order = order;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 }
