@@ -6,38 +6,38 @@ import java.io.Serializable;
  * Created by MTel on 2015/8/20.
  */
 public class FirmListData implements Serializable{
-    private int firmID;
-    private String firmName;
+    private int firm_id;
+    private String firm_name;
     private String picture;
-    private String picturePath;
+    private String picturepath;
     private String pointDesc;
-    private String firstDesc;
-    private String number;
+    private String description;
+    private String firm_tel;
     private int distance;
     private String latitude;
     private String longitude;
-    private String address;
-    private int catID;
+    //private String address;
+    private int cat_id;
     private String thumbnail;
-    private String thumbnailPath;
+    private String thumbnailpath;
     private boolean partner;
-    private String partnerMessage;
-    private String partnerUrl;
+    private String partner_message;
+    private String partener_url;
 
-    public int getFirmID() {
-        return firmID;
+    public int getFirm_id() {
+        return firm_id;
     }
 
-    public void setFirmID(int firmID) {
-        this.firmID = firmID;
+    public void setFirm_id(int firm_id) {
+        this.firm_id = firm_id;
     }
 
-    public String getFirmName() {
-        return firmName;
+    public String getFirm_name() {
+        return firm_name;
     }
 
-    public void setFirmName(String firmName) {
-        this.firmName = firmName;
+    public void setFirm_name(String firm_name) {
+        this.firm_name = firm_name;
     }
 
     public String getPicture() {
@@ -48,12 +48,12 @@ public class FirmListData implements Serializable{
         this.picture = picture;
     }
 
-    public String getPicturePath() {
-        return picturePath;
+    public String getPicturepath() {
+        return picturepath;
     }
 
-    public void setPicturePath(String picturePath) {
-        this.picturePath = picturePath;
+    public void setPicturepath(String picturepath) {
+        this.picturepath = picturepath;
     }
 
     public String getPointDesc() {
@@ -64,20 +64,12 @@ public class FirmListData implements Serializable{
         this.pointDesc = pointDesc;
     }
 
-    public String getFirstDesc() {
-        return firstDesc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setFirstDesc(String firstDesc) {
-        this.firstDesc = firstDesc;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getDistance() {
@@ -86,6 +78,14 @@ public class FirmListData implements Serializable{
 
     public void setDistance(int distance) {
         this.distance = distance;
+    }
+
+    public String getFirm_tel() {
+        return firm_tel;
+    }
+
+    public void setFirm_tel(String firm_tel) {
+        this.firm_tel = firm_tel;
     }
 
     public String getLatitude() {
@@ -104,20 +104,12 @@ public class FirmListData implements Serializable{
         this.longitude = longitude;
     }
 
-    public String getAddress() {
-        return address;
+    public int getCat_id() {
+        return cat_id;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public int getCatID() {
-        return catID;
-    }
-
-    public void setCatID(int catID) {
-        this.catID = catID;
+    public void setCat_id(int cat_id) {
+        this.cat_id = cat_id;
     }
 
     public String getThumbnail() {
@@ -128,12 +120,12 @@ public class FirmListData implements Serializable{
         this.thumbnail = thumbnail;
     }
 
-    public String getThumbnailPath() {
-        return thumbnailPath;
+    public String getThumbnailpath() {
+        return thumbnailpath;
     }
 
-    public void setThumbnailPath(String thumbnailPath) {
-        this.thumbnailPath = thumbnailPath;
+    public void setThumbnailpath(String thumbnailpath) {
+        this.thumbnailpath = thumbnailpath;
     }
 
     public boolean isPartner() {
@@ -144,19 +136,19 @@ public class FirmListData implements Serializable{
         this.partner = partner;
     }
 
-    public String getPartnerMessage() {
-        return partnerMessage;
+    public String getPartner_message() {
+        return partner_message;
     }
 
-    public void setPartnerMessage(String partnerMessage) {
-        this.partnerMessage = partnerMessage;
+    public void setPartner_message(String partner_message) {
+        this.partner_message = partner_message;
     }
 
-    public String getPartnerUrl() {
-        return partnerUrl;
+    public String getPartener_url() {
+        return partener_url;
     }
 
-    public void setPartnerUrl(String partnerUrl) {
-        this.partnerUrl = partnerUrl;
+    public void setPartener_url(String partener_url) {
+        this.partener_url = partener_url;
     }
 }

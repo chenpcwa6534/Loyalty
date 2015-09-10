@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="@mipmap/btn_common_white_kind_normal">
+        android:background="@mipmap/btn_common_orange_normal">
 
         <TextView
             android:id="@+id/txt_preferential"
@@ -37,7 +37,7 @@
             android:layout_weight="0.3"
             android:gravity="center"
             android:text="@string/subfront_preferential"
-            android:background="@mipmap/btn_common_white_kind_normal"/>
+            android:background="@mipmap/btn_common_orange_normal"/>
 
         <ImageView
             style="@style/line_Vertical_short"
@@ -51,7 +51,7 @@
             android:layout_weight="0.3"
             android:gravity="center"
             android:text="@string/subfront_pointcare"
-            android:background="@mipmap/btn_common_white_kind_normal"/>
+            android:background="@mipmap/btn_common_orange_normal"/>
 
         <ImageView
             style="@style/line_Vertical_short"
@@ -65,7 +65,7 @@
             android:layout_weight="0.3"
             android:gravity="center"
             android:text="@string/subfront_information"
-            android:background="@mipmap/btn_common_white_kind_normal"/>
+            android:background="@mipmap/btn_common_orange_normal"/>
 
     </LinearLayout>
 

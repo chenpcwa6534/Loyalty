@@ -44,7 +44,7 @@ public class SlidingLocateMap extends RelativeLayout {
     private void initMap(FirmListData[] data){
         mMap = (WebMapJSInterface) mView.findViewById(R.id.map);
         for(int i=0; i<data.length; i++){
-            mMap.addLocation(data[i].getLatitude(),data[i].getLongitude(),data[i].getCatID());
+            mMap.addLocation(data[i].getLatitude(),data[i].getLongitude(),data[i].getCat_id());
         }
         mMap.locateMap();
     }

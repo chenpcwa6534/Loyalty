@@ -5,6 +5,7 @@
     <string name="action_settings">設定</string>
 
     <string name="app_system_fail">系統異常，請洽客服人員</string>
+    <string name="app_system_servce_fail">資料錯誤</string>
     <string name="app_system_ok">確認</string>
     <string name="app_system_waitMSG">等待驗證簡訊中</string>
 
@@ -37,11 +38,10 @@
     <string name="substore_beaconcontrol">Beacon到店優惠通知</string>
     <string name="substore_blog">部落格評價</string>
     <string name="substore_title">餐廳介紹</string>
-    <string name="substore_distanceUtil">\n公尺</string>
     <string name="substore_pointtitle">集點注意事項</string>
     <string name="subpreferential_qty">剩%1$d張</string>
     <string name="subpreferential_day">剩%1$d天</string>
-    <string name="subpreferential_dis">目前距離： %1$d 公尺</string>
+    <string name="subpreferential_dis">目前距離：</string>
 
     <string name="more_infromation_login">尚未登入</string>
     <string name="more_information_sex">性別：</string>
@@ -105,6 +105,9 @@
         <item>星期六</item>
     </string-array>
 
+    <!-- unit -->
+    <string name="meter">公尺</string>
+    <string name="kilometer">公里</string>
 
     <!--Requset Error code-->
     <string name="code_301">系統錯誤</string>

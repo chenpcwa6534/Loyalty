@@ -95,6 +95,7 @@ public class MainActivity extends CommonActionBarActivity {
     private void initTabView(){
         //集點店家
         FrontPageFragment frontPageFragment = new FrontPageFragment();
+        //Fragment frontPageFragment = new Fragment();
         //限量優惠卷
         PreferentialFragment preferentialpage = new PreferentialFragment();
         //我的口袋

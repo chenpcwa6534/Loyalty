@@ -16,14 +16,14 @@
 
        <RelativeLayout
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_weight=".5">
+           android:layout_height="0dp"
+           android:layout_weight=".3">
 
            <ImageView
                android:id="@+id/img_StorePicture"
                android:layout_width="match_parent"
                android:layout_height="match_parent"
-               android:scaleType="fitCenter"
+               android:scaleType="fitXY"
                android:src="@mipmap/test_address"/>
 
            <ImageView
@@ -39,8 +39,8 @@
 
        <RelativeLayout
            android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:layout_weight=".3">
+           android:layout_height="0dp"
+           android:layout_weight=".7">
 
            <android.support.v4.view.ViewPager
                android:id="@+id/pager"
@@ -52,12 +52,10 @@
                android:id="@+id/tabs"
                android:layout_width="match_parent"
                android:layout_height="70dip"
-               android:background="@mipmap/btn_common_white_kind_normal"/>
+               android:background="@mipmap/btn_common_orange_normal"/>
 
        </RelativeLayout>
 
    </LinearLayout>
-
-
 
 </LinearLayout>

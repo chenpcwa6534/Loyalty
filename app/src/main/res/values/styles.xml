@@ -40,7 +40,7 @@
     <style name="font_messageqty">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@mipmap/ic_statusbar_pink_number</item>
+        <item name="android:background">@mipmap/ic_tabbar_number</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">10sp</item>
         <item name="android:gravity">center</item>
@@ -83,7 +83,7 @@
     </style>
 
     <style name="pocket_qty">
-        <item name="android:textColor">@color/str_level</item>
+        <item name="android:textColor">@color/font_level</item>
         <item name="android:textSize">25sp</item>
     </style>
 
@@ -127,7 +127,7 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:background">@mipmap/btn_common_red_category_normal</item>
-        <item name="android:drawableRight">@mipmap/ic_common_red_category_normal</item>
+        <item name="android:drawableRight">@mipmap/ic_common_white_category_normal</item>
     </style>
 
 

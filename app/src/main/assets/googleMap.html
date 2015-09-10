@@ -19,7 +19,8 @@ var lat = new Array();
 var lng = new Array();
 var icon = new Array();
 var position;
-var maker = new Array('icon/ic_location_a.png',
+var maker = new Array('icon/ic_common_orange_pin.png',
+                      'icon/ic_location_a.png',
                       'icon/ic_location_b.png',
                       'icon/ic_location_c.png',
                       'icon/ic_location_d.png',
@@ -45,7 +46,7 @@ if(window.android){
 }
 var mapOptions = {
     panControl: false, //要不要出現可以上下左右移動的面板，如圖1
-    zoomControl: true, //要不要出現可以放大縮小的面板，如圖3
+    zoomControl: false, //要不要出現可以放大縮小的面板，如圖3
     mapTypeControl: false, //切換地圖檢視類型的面板，如圖4
     scaleControl: false, //比例尺資訊，如圖5
     streetViewControl: false,  //顯示街景服務的面板，如圖2

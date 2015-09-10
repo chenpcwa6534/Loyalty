@@ -2,6 +2,7 @@ package friendo.mtel.loyalty.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.component.FirmListData;
 import friendo.mtel.loyalty.data.GetListResponse;
 import friendo.mtel.loyalty.utility.ColorTable;
+import friendo.mtel.loyalty.utility.Utilitys;
 
 /**
  * Created by MTel on 2015/8/26.
@@ -41,14 +43,14 @@ public class FirmsMapAdapter extends RecyclerView.Adapter<FirmsMapAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(FirmsMapAdapter.ViewHolder holder, int position) {
-        holder.mName.setText(db_firmListDatas[position].getFirmName());
-        holder.mName.setTextColor(ColorTable.getInstance(mContext).getTextColor(db_firmListDatas[position].getCatID()));
+        Log.d(TAG, "firmsMap position:" + position + " picture:" + db_firmListDatas[position].getPicture());
+        holder.mName.setText(db_firmListDatas[position].getFirm_name());
+        holder.mName.setTextColor(ColorTable.getInstance(mContext).getTextColor(db_firmListDatas[position].getCat_id(), ColorTable.colorType.colorB));
 //        holder.mAddress.setText(db_firmListDatas[position].getAddress());
-//        holder.mNumber.setText(db_firmListDatas[position].getNumber());
+        holder.mNumber.setText(db_firmListDatas[position].getFirm_tel());
         holder.mAddress.setText("新竹市勝利路112號");
-        holder.mNumber.setText("0223456789");
-        holder.mDistance.setText(String.format(mContext.getResources().getString(R.string.subpreferential_dis), db_firmListDatas[position].getDistance()));
-
+        holder.mDistance.setText(mContext.getResources().getString(R.string.subpreferential_dis) + Utilitys.distanceConversion(mContext,db_firmListDatas[position].getDistance()));
+        String picture = db_firmListDatas[position].getPicture();
         PicassoUtility.load(mContext,holder.mPicture,db_firmListDatas[position].getPicture());
     }
 

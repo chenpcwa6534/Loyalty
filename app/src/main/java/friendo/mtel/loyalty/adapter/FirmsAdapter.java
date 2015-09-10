@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -41,21 +42,22 @@ public class FirmsAdapter extends RecyclerView.Adapter<FirmsAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_store, parent, false);
-        ViewHolder viewHolder = new ViewHolder(mContext,itemLayout,mListener);
+        ViewHolder viewHolder = new ViewHolder(itemLayout,mListener);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         FirmListData data = db_firmListData[position];
-        holder.mStoreName.setText(data.getFirmName());
-        holder.mDistance.setText(data.getDistance() + mContext.getResources().getString(R.string.substore_distanceUtil));
+        holder.mTitleView.setBackgroundColor(ColorTable.getInstance(mContext).getTextColor(data.getCat_id(), ColorTable.colorType.colorA));
+        holder.mStoreName.setText(data.getFirm_name());
+        holder.mDistance.setText(Utilitys.distanceConversion(mContext, data.getDistance()));
+        holder.mLabelView.setBackground(ColorTable.getInstance(mContext).getBackgroudDrawable(data.getCat_id()));
         PicassoUtility.load(mContext, holder.mPhoto, data.getPicture());
         holder.mPointContent.setText(data.getPointDesc());
-        holder.mExperiences.setText(data.getFirstDesc());
-        holder.mTitleView.setBackground(ColorTable.getInstance(mContext).getBackgroudDrawable(data.getCatID()));
-        holder.mExperiencesTitle.setTextColor(ColorTable.getInstance(mContext).getTextColor(data.getCatID()));
-        holder.mPointTitle.setTextColor(ColorTable.getInstance(mContext).getTextColor(data.getCatID()));
+        holder.mExperiences.setText(data.getDescription());
+        holder.mExperiencesTitle.setTextColor(ColorTable.getInstance(mContext).getTextColor(data.getCat_id(), ColorTable.colorType.colorB));
+        holder.mPointTitle.setTextColor(ColorTable.getInstance(mContext).getTextColor(data.getCat_id(),ColorTable.colorType.colorB));
     }
 
     @Override
@@ -65,32 +67,38 @@ public class FirmsAdapter extends RecyclerView.Adapter<FirmsAdapter.ViewHolder>{
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private View mItemView;
+        //private View mItemView;
         private RelativeLayout mTitleView;
-        private TextView mDistance;
+        private LinearLayout mLabelView;
+        private TextView mStoreName;
         private ImageView mPhoto;
+        private TextView mDistance;
+
         private TextView mPointTitle;
         private TextView mExperiencesTitle;
         private TextView mPointContent;
         private TextView mExperiences;
-        private TextView mStoreName;
+
 
         private GetListResponse mListener;
 
-        public ViewHolder(Context context,View itemView, GetListResponse listener) {
+        public ViewHolder(View itemView, GetListResponse listener) {
             super(itemView);
             this.mListener = listener;
-            mItemView = (View) itemView.findViewById(R.id.ly_itemView);
+            //mItemView = (View) itemView.findViewById(R.id.ly_itemView);
             mTitleView = (RelativeLayout) itemView.findViewById(R.id.TitleView);
-            mDistance = (TextView) itemView.findViewById(R.id.txt_distance);
+            mStoreName = (TextView) itemView.findViewById(R.id.txt_storeName);
             mPhoto = (ImageView) itemView.findViewById(R.id.img_photo);
+            mDistance = (TextView) itemView.findViewById(R.id.txt_distance);
+            mLabelView = (LinearLayout) itemView.findViewById(R.id.labelView);
+
             mPointContent = (TextView) itemView.findViewById(R.id.txt_pointContent);
             mExperiences = (TextView) itemView.findViewById(R.id.txt_experiencecontent);
-            mStoreName = (TextView) itemView.findViewById(R.id.txt_storeName);
+
             mPointTitle = (TextView) itemView.findViewById(R.id.txt_pointtitle);
             mExperiencesTitle = (TextView) itemView.findViewById(R.id.txt_experienceTitle);
 
-            mItemView.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         @Override

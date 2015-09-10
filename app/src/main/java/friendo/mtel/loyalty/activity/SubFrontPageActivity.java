@@ -112,15 +112,15 @@ public class SubFrontPageActivity extends CommonActionBarActivity implements Vie
     }
 
     private void initView(){
-        mToolsbarTitle.setText(db_firmData.getFirmName());
+        mToolsbarTitle.setText(db_firmData.getFirm_name());
         PicassoUtility.load(this,mStorePicture,db_firmData.getPicture());
     }
 
     private void initPagerView(){
         TabPageAdapter tabPageAdapter = new TabPageAdapter(getSupportFragmentManager(),pages);
         tabPageAdapter.setTabTitle(UtilityInitial.frontTabTitle(this));
-        tabPageAdapter.setTextColor(getResources().getColor(R.color.white), getResources().getColor(R.color.str_orange));
-        tabPageAdapter.setBackground(R.mipmap.btn_common_white_kind_pressed);
+        tabPageAdapter.setTextColor(getResources().getColor(R.color.white), getResources().getColor(R.color.font_orange));
+        tabPageAdapter.setBackground(R.mipmap.btn_common_white_pressed);
 
         mPage.setOffscreenPageLimit(pages.size());
         mPage.setAdapter(tabPageAdapter);
@@ -131,9 +131,9 @@ public class SubFrontPageActivity extends CommonActionBarActivity implements Vie
 
     private void initTabView(){
         //店家優惠卷
-        StorePreferentialFragmemt storePreferentialFragmemt = StorePreferentialFragmemt.newInstance(db_firmData.getFirmID());
+        StorePreferentialFragmemt storePreferentialFragmemt = StorePreferentialFragmemt.newInstance(db_firmData.getFirm_id());
         //店家集點
-        PointFragment pointFragment = PointFragment.newInstance(db_firmData.getFirmID());
+        PointFragment pointFragment = PointFragment.newInstance(db_firmData.getFirm_id());
         //關於店家
         StoreInfoFragment storeInfoFragment = StoreInfoFragment.newInstance(db_firmData);
 

@@ -2,79 +2,82 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:padding="10dp"
     android:id="@+id/ly_itemView">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@mipmap/bg_common_white">
-
-        <ImageView
-            android:id="@+id/img_photo"
-            android:layout_width="318dp"
-            android:layout_height="150dp"
-            android:layout_below="@+id/TitleView"
-            android:layout_marginTop="-23dp"
-            android:layout_centerHorizontal="true"
-            android:scaleType="fitXY"
-            android:src="@mipmap/test_preferential1"/>
-
+        android:background="@mipmap/bg_home_white">
 
         <RelativeLayout
             android:id="@+id/TitleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@mipmap/bg_common_h">
+            android:gravity="center_vertical"
+            android:background="@color/Shoe_ColorA">
 
             <TextView
                 android:id="@+id/txt_storeName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginLeft="29dp"
-                android:layout_marginRight="100dp"
                 android:textSize="18sp"
                 android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:background="@mipmap/bg_home_title"
                 android:text="(Store Name)"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/img_photo"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_below="@+id/TitleView"
+            android:scaleType="fitXY"
+            android:src="@mipmap/test_preferential1"/>
+
+        <LinearLayout
+            android:id="@+id/labelView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp">
 
             <TextView
                 android:id="@+id/txt_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="48dp"
-                android:text="300\n公尺"/>
+                android:layout_marginTop="5dp"
+                android:text="(dis)"/>
 
-        </RelativeLayout>
-
-
+        </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/pointView"
+            android:layout_below="@+id/img_photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/img_photo"
-            android:layout_marginLeft="21dp"
-            android:layout_marginRight="21dp"
-            android:layout_marginBottom="29dp"
-            android:background="@color/white">
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:id="@+id/txt_pointtitle"
                 style="@style/font_storeType_h"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignBottom="@+id/txt_pointContent"
+                android:layout_alignTop="@+id/txt_pointContent"
                 android:text="@string/store_item_pointTitle"/>
-
 
             <ImageView
                 android:id="@+id/img_line"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_toRightOf="@+id/txt_experienceTitle"
                 android:src="@mipmap/common_gary_small_line"/>
 
@@ -83,6 +86,7 @@
                 android:id="@+id/txt_pointContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/img_line"
                 android:text="消費滿300元即可即一點章,集滿12點贈300元套餐一份"/>
 
@@ -91,8 +95,12 @@
                 android:id="@+id/txt_experienceTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
                 android:layout_below="@+id/txt_pointContent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignBottom="@+id/txt_experiencecontent"
+                android:layout_alignTop="@+id/txt_experiencecontent"
                 android:text="@string/store_item_experienceTitle"/>
 
             <TextView
@@ -101,15 +109,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_pointContent"
+                android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/img_line"
-                android:text="首次來店憑卷日式定食買一送一"/>
-
+                android:text="首次來店憑卷日式定食買一送一首次來店憑卷日式定食買一送一"/>
 
         </RelativeLayout>
 
     </RelativeLayout>
-
-
-
-
 </RelativeLayout>

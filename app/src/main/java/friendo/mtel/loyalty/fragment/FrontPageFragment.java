@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import android.widget.ViewSwitcher;
 
 import com.astuetz.page.sliding.PageSlidingPagerView;
 import com.google.gson.Gson;
+
+import org.json.JSONException;
 
 import friendo.mtel.loyalty.HttpsParams.ParamsManager;
 import friendo.mtel.loyalty.R;
@@ -79,10 +82,9 @@ public class FrontPageFragment extends CommonFragment {
         super.onResume();
         DataManager.getInstance(getActivity()).qryAdvertising(getDataResponse);
         FrontPageInParams frontPageInParams = ParamsManager.getfrontPageInParams(getActivity());
-        DataCache.cacheFrontPageInParams = frontPageInParams;
         Gson gson = new Gson();
         String userFilter = gson.toJson(frontPageInParams);
-        DataManager.getInstance(getActivity()).qryFirmList(pageIndex, userFilter, getDataResponse);
+        dataConnection(userFilter);
     }
 
     @Override
@@ -93,6 +95,15 @@ public class FrontPageFragment extends CommonFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    private void dataConnection(String userFilter){
+        try{
+            Log.d(TAG,"qryFirmList request data = "+userFilter);
+            DataManager.getInstance(getActivity()).qryFirmList(pageIndex, userFilter, getDataResponse);
+        }catch (JSONException e){
+            Log.e(TAG,"firm list JSON to data fail ,Exception :" +e);
+        }
     }
 
     private void findView(View v){
@@ -128,21 +139,24 @@ public class FrontPageFragment extends CommonFragment {
     }
 
     private void initFirms_List(){
+        mListView = (RecyclerView) mView.findViewById(R.id.listView);
         if(db_FirmListData.length != 0){
-            mListView = (RecyclerView) mView.findViewById(R.id.listView);
+            mListView.setVisibility(View.VISIBLE);
             firmsAdapter = new FirmsAdapter(getActivity(),db_FirmListData,getListResponse);
             mListView.setAdapter(firmsAdapter);
             mListView.setItemAnimator(new DefaultItemAnimator());
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             mListView.setLayoutManager(linearLayoutManager);
+        }else{
+            mListView.setVisibility(View.GONE);
         }
     }
 
     private void initMap(){
         mMap = (WebMapJSInterface) mView.findViewById(R.id.map);
         for(int i=0; i<db_FirmListData.length; i++){
-            mMap.addLocation(db_FirmListData[i].getLatitude(),db_FirmListData[i].getLongitude(),db_FirmListData[i].getCatID());
+            mMap.addLocation(db_FirmListData[i].getLatitude(),db_FirmListData[i].getLongitude(),db_FirmListData[i].getCat_id());
         }
         mMap.locateMap();
     }
@@ -150,6 +164,7 @@ public class FrontPageFragment extends CommonFragment {
     private void initFirms_Map(){
         if(db_FirmListData.length != 0){
             mListViewMap = (RecyclerView) mView.findViewById(R.id.listViewMap);
+            mListViewMap.setVisibility(View.VISIBLE);
             firmsMapAdapter = new FirmsMapAdapter(getActivity(),db_FirmListData,getListResponse);
             mListViewMap.setAdapter(firmsMapAdapter);
             mListViewMap.setItemAnimator(new DefaultItemAnimator());
@@ -182,6 +197,7 @@ public class FrontPageFragment extends CommonFragment {
         @Override
         public void onFirmSearch(String userFilter) {
             String data = userFilter;
+            dataConnection(data);
         }
 
         @Override
@@ -216,15 +232,19 @@ public class FrontPageFragment extends CommonFragment {
                 FirmListData[] firmListData = (FirmListData[]) obj;
                 db_FirmListData = firmListData;
                 initMap();
-                ModeControl(MODE);
                 initFirms_List();
                 initFirms_Map();
+                //ModeControl(MODE);
             }
         }
 
         @Override
         public void onFailure(Object obj) {
-
+            FirmListData[] firmListData = new FirmListData[0];
+            db_FirmListData = firmListData;
+            initMap();
+            initFirms_List();
+            initFirms_Map();
         }
 
         @Override

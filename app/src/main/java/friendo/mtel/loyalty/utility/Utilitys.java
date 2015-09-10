@@ -46,12 +46,13 @@ public class Utilitys {
     }
 
     public static boolean isLogin(Context context){
-        String memerID = LoyaltyPreference.getMemberID(context);
-        if(memerID.equals("")){
-            return false;
-        }else{
-            return true;
-        }
+//        String memerID = LoyaltyPreference.getMemberID(context);
+//        if(memerID.equals("")){
+//            return false;
+//        }else{
+//            return true;
+//        }
+        return true;
     }
 
     public static Location locationServiceInital(Context context){
@@ -74,9 +75,23 @@ public class Utilitys {
     }
 
 
-    public static int getTodayWeekDay(){
+    public static boolean getTodayWeekDay(int day){
         Calendar calendar = Calendar.getInstance();
-        return calendar.get(Calendar.DAY_OF_WEEK);
+        int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
+        if(currentDay == day){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public static String distanceConversion(Context context, int dis){
+        int Kilometer = dis/1000;
+        if(Kilometer == 0){
+            return dis + "\n" + context.getResources().getString(R.string.meter);
+        }else{
+            return Kilometer + "\n" + context.getResources().getString(R.string.kilometer);
+        }
     }
 
 }

@@ -4,30 +4,32 @@ package friendo.mtel.loyalty.component;
  * Created by MTel on 2015/8/21.
  */
 public class FirmInfoData {
-    private int beaconID;
-    private String description;
+    private int beacon_id;
+    private boolean beacon_status;
     private String address;
-    private String number;
-    private String[] businessWeek;
+    private String firm_tel;
+    private String[] business_week;
     private String traffic;
     private String carpark;
     private String[] webUrl;
+    private String[] fbUrl;
     private String blogConnnent;
 
-    public int getBeaconID() {
-        return beaconID;
+
+    public int getBeacon_id() {
+        return beacon_id;
     }
 
-    public void setBeaconID(int beaconID) {
-        this.beaconID = beaconID;
+    public void setBeacon_id(int beacon_id) {
+        this.beacon_id = beacon_id;
     }
 
-    public String getDescription() {
-        return description;
+    public boolean isBeacon_status() {
+        return beacon_status;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBeacon_status(boolean beacon_status) {
+        this.beacon_status = beacon_status;
     }
 
     public String getAddress() {
@@ -38,28 +40,28 @@ public class FirmInfoData {
         this.address = address;
     }
 
-    public String getNumber() {
-        return number;
+    public String getFirm_tel() {
+        return firm_tel;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setFirm_tel(String firm_tel) {
+        this.firm_tel = firm_tel;
     }
 
-    public String[] getBusinessWeek() {
-        return businessWeek;
+    public String[] getBusiness_week() {
+        return business_week;
     }
 
-    public void setBusinessWeek(String[] businessWeek) {
-        this.businessWeek = businessWeek;
-    }
-
-    public String getTraffic() {
-        return traffic;
+    public void setBusiness_week(String[] business_week) {
+        this.business_week = business_week;
     }
 
     public void setTraffic(String traffic) {
         this.traffic = traffic;
+    }
+
+    public String getTraffic() {
+        return traffic;
     }
 
     public String getCarpark() {
@@ -76,6 +78,14 @@ public class FirmInfoData {
 
     public void setWebUrl(String[] webUrl) {
         this.webUrl = webUrl;
+    }
+
+    public String[] getFbUrl() {
+        return fbUrl;
+    }
+
+    public void setFbUrl(String[] fbUrl) {
+        this.fbUrl = fbUrl;
     }
 
     public String getBlogConnnent() {

@@ -14,7 +14,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import friendo.mtel.loyalty.R;
-import friendo.mtel.loyalty.activity.SubFrontPageActivity;
 import friendo.mtel.loyalty.activity.SubPreferentialActivity;
 import friendo.mtel.loyalty.adapter.PocketExchangeAdapter;
 import friendo.mtel.loyalty.adapter.PocketPointAdapter;
@@ -127,6 +126,7 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
 
     private void initPointView(MemberPointData[] data){
         mPages_myPoint = (RecyclerView) mView.findViewById(R.id.myPoint);
+        mPages_myPoint.setVisibility(View.VISIBLE);
         PocketPointAdapter pointAdapter = new PocketPointAdapter(getActivity(),data,null);
         mPages_myPoint.setAdapter(pointAdapter);
         mPages_myPoint.setItemAnimator(new DefaultItemAnimator());
@@ -179,7 +179,7 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
     }
 
     private void setPressed(TextView textView){
-        textView.setTextColor(getResources().getColor(R.color.str_level));
+        textView.setTextColor(getResources().getColor(R.color.font_level));
         textView.setBackground(getResources().getDrawable(R.mipmap.btn_common_white_pressed));
     }
 

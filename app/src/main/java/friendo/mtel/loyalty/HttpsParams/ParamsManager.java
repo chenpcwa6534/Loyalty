@@ -3,6 +3,7 @@ package friendo.mtel.loyalty.HttpsParams;
 import android.content.Context;
 import android.location.Location;
 
+import friendo.mtel.loyalty.data.DataCache;
 import friendo.mtel.loyalty.utility.Utilitys;
 
 /**
@@ -11,14 +12,20 @@ import friendo.mtel.loyalty.utility.Utilitys;
 public class ParamsManager {
 
     public static FrontPageInParams getfrontPageInParams(Context context){
-        FrontPageInParams frontPageInParams ;
-        Location location = Utilitys.getLocation(context);
-        if(Utilitys.isGPS(context) && location != null){
-            frontPageInParams = ParamsManager.getfrontPageInParams(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), "", 0, 0, 1, "", 0);
+        if(DataCache.cacheFrontPageInParams != null){
+            return DataCache.cacheFrontPageInParams;
         }else{
-            frontPageInParams = ParamsManager.getfrontPageInParams("", "", "", 0, 0, 2, "", 0);
+            FrontPageInParams frontPageInParams ;
+            Location location = Utilitys.getLocation(context);
+            if(Utilitys.isGPS(context) && location != null){
+                frontPageInParams = ParamsManager.getfrontPageInParams(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), "", 0, 0, 1, "", 0);
+            }else{
+                frontPageInParams = ParamsManager.getfrontPageInParams("", "", "", 0, 0, 2, "", 0);
+            }
+            DataCache.cacheFrontPageInParams = frontPageInParams;
+            return frontPageInParams;
         }
-        return frontPageInParams;
+
     }
 
     public static FrontPageInParams getfrontPageInParams(String latitude, String longitude, String search,int catID, int cityID, int orderID, String subareaID, int subcatID){

@@ -192,7 +192,7 @@ public class VolleyAsyncHttpClient {
         public Map<String, String> getHeaders() throws AuthFailureError {
             HashMap<String, String> headers = new HashMap<String, String>();
             headers.put(Env.ApiKEY, Env.ApiValue);
-            headers.put("Content_Type","applocation/JSON");
+            //headers.put("Content_Type","applocation/JSON");
             return headers;
         }
 

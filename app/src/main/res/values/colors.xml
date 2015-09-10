@@ -26,6 +26,8 @@
     <color name="font_hint">#999999</color>
     <color name="font_dialogTitle">#fa5a4a</color>
     <color name="font_dialogContent">#555555</color>
+    <color name="font_orange">#f28741</color>
+    <color name="font_level">#FA5A4A</color>
 
 
     <color name="bg_full_style_login">#e8e8e8</color>
@@ -97,7 +99,7 @@
     <color name="str_grayDeep">#727272</color>
     <color name="hearder_gray">#666666</color>
     <color name="str_grayDoubleDeep">#555555</color>
-    <color name="str_orange">#f28741</color>
-    <color name="str_level">#FA5A4A</color>
+
+
     <color name="str_orangeDeep">#fa5a48</color>
 </resources>

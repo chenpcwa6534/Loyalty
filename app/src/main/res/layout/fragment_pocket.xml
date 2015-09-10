@@ -7,8 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/bg_common_gary">
+        android:layout_height="wrap_content">
 
 
         <LinearLayout
@@ -16,7 +15,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:background="@mipmap/bg_common_gary"
+            android:background="@mipmap/bg_pocket_gary"
             android:id="@+id/linearLayout">
 
             <TextView
@@ -29,7 +28,7 @@
                 android:id="@+id/txt_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/str_level"
+                android:textColor="@color/font_level"
                 android:textSize="40sp"
                 android:text="25"/>
 
@@ -37,7 +36,7 @@
                 android:id="@+id/txt_unit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/str_level"
+                android:textColor="@color/font_level"
                 android:text="@string/pocket_leveUnit"/>
 
         </LinearLayout>
@@ -196,7 +195,8 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/ly_mytabsArea"
             android:layout_marginTop="-10dp"
-            android:scrollbars="vertical">
+            android:scrollbars="vertical"
+            android:visibility="gone">
 
         </android.support.v7.widget.RecyclerView>
 
@@ -206,7 +206,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/ly_mytabsArea"
             android:layout_marginTop="-12dp"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:scrollbars="vertical">
 
         </android.support.v7.widget.RecyclerView>
@@ -217,7 +217,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/ly_mytabsArea"
             android:layout_marginTop="-10dp"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:scrollbars="vertical">
 
         </android.support.v7.widget.RecyclerView>

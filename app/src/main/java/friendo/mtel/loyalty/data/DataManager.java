@@ -342,7 +342,7 @@ public class DataManager {
      * @param userFilter        search  params
      * @param getDataResponse
      */
-    public void qryFirmList(int page, String userFilter, final GetDataResponse getDataResponse){
+    public void qryFirmList(int page, String userFilter, final GetDataResponse getDataResponse) throws JSONException{
 
         CallAPIResponse callAPIResponse = new CallAPIResponse() {
             @Override
@@ -381,7 +381,7 @@ public class DataManager {
                 }
             }
         };
-        (new HTTPApi()).qryFirmList(mContext, Env.getMemberID(mContext), page, userFilter, callAPIResponse);
+        (new HTTPApi()).qryFirmList(mContext, page, userFilter, callAPIResponse);
     }
 
 

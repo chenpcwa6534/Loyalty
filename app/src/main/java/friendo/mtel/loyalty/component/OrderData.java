@@ -4,24 +4,24 @@ package friendo.mtel.loyalty.component;
  * Created by MTel on 2015/8/17.
  */
 public class OrderData {
-    private int orderID;
-    private String orderName;
+    private int order_id;
+    private String order_name;
     private boolean orderVaild;
 
-    public int getOrderID() {
-        return orderID;
+    public int getOrder_id() {
+        return order_id;
     }
 
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
     }
 
-    public String getOrderName() {
-        return orderName;
+    public String getOrder_name() {
+        return order_name;
     }
 
-    public void setOrderName(String orderName) {
-        this.orderName = orderName;
+    public void setOrder_name(String order_name) {
+        this.order_name = order_name;
     }
 
     public boolean isOrderVaild() {

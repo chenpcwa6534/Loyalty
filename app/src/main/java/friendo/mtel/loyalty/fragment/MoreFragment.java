@@ -137,15 +137,17 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
 
     private void numberStatus(){
         Drawable icon;
-        String number = DataCache.cacheVersionControlData.getProtitle().getNumber();
-        if(DataCache.cacheVersionControlData != null && !number.equals("")){
-            mStatusPhoneNumber.setText(number);
-            mStatuPhone.setText(getResources().getString(R.string.more_serverstatus_alreadyopen));
-            icon = getResources().getDrawable(R.mipmap.ic_common_green_ok);
-        }else{
-            mStatuPhone.setText(getResources().getString(R.string.more_serverstatus_notopen));
-            icon = getResources().getDrawable(R.mipmap.ic_common_red_warning);
-        }
+//        String number = DataCache.cacheVersionControlData.getProtitle().getNumber();
+//        if(DataCache.cacheVersionControlData != null && !number.equals("")){
+//            mStatusPhoneNumber.setText(number);
+//            mStatuPhone.setText(getResources().getString(R.string.more_serverstatus_alreadyopen));
+//            icon = getResources().getDrawable(R.mipmap.ic_common_green_ok);
+//        }else{
+//            mStatuPhone.setText(getResources().getString(R.string.more_serverstatus_notopen));
+//            icon = getResources().getDrawable(R.mipmap.ic_common_red_warning);
+//        }
+        mStatuPhone.setText(getResources().getString(R.string.more_serverstatus_notopen));
+        icon = getResources().getDrawable(R.mipmap.ic_common_red_warning);
         icon.setBounds(0, 0, icon.getMinimumWidth(), icon.getMinimumHeight());
         mStatuPhone.setCompoundDrawables(icon, null, null, null);
     }

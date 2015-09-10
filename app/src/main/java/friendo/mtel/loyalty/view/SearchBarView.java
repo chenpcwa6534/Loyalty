@@ -2,6 +2,7 @@ package friendo.mtel.loyalty.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,6 +37,7 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
     private View SubView;
     private boolean isOpen_SubView = false;
     private View CurrentEvent;
+    public static TextView mCurrentTextView;
     private int DURATIONTIME =300;
 
     private RecyclerView mMainListView;
@@ -126,13 +128,14 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
 
     private void initValue(){
         mCats.setText(db_filter.getCats()[0].getCat_name());
-        mCitys.setText(db_filter.getCats()[0].getCat_name());
+        mCitys.setText(db_filter.getArea()[0].getCity_name());
+        mOrders.setText(db_filter.getOrder()[0].getOrder_name());
 
-        if(OrderTypeAttr == 0){
-            mOrders.setText(db_filter.getOrder().getPoint()[0].getOrderName());
-        }else{
-            mOrders.setText(db_filter.getOrder().getLimit()[0].getOrderName());
-        }
+//        if(OrderTypeAttr == 0){
+//            mOrders.setText(db_filter.getOrder().getPoint()[0].getOrderName());
+//        }else{
+//            mOrders.setText(db_filter.getOrder().getLimit()[0].getOrderName());
+//        }
     }
 
     private void setCatsText(String str){
@@ -161,16 +164,17 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
     private SearchMainAdapter.ViewHolder.ClickListener onClickListener = new SearchMainAdapter.ViewHolder.ClickListener() {
         @Override
         public void onCitys(int position) {
-            int CityID = db_filter.getCats()[position].getCat_id();
+            int CityID = db_filter.getArea()[position].getCity_id();
             String CityName = db_filter.getArea()[position].getCity_name();
             setCityText(CityName);
             DataCache.cacheFrontPageInParams.getUserfilter().setCity_id(CityID);
-            if(CityID == 0){
+            if(CityID == 0  || db_filter.getArea()[position].getSubarea().length == 0){
                 HiddenAction();
                 reSearch();
                 return;
+            }else {
+                initSubList(db_filter.getArea()[position].getSubarea());
             }
-            initSubList(db_filter.getArea()[position].getSubarea());
         }
 
         @Override
@@ -187,12 +191,13 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
             String CatName = db_filter.getCats()[position].getCat_name();
             setCatsText(CatName);
             DataCache.cacheFrontPageInParams.getUserfilter().setCat_id(CatID);
-            if(CatID == 0){
+            if(CatID == 0 || db_filter.getCats()[position].getSubcat().length == 0){
                 HiddenAction();
                 reSearch();
                 return;
+            }else {
+                initSubList(db_filter.getCats()[position].getSubcat());
             }
-            initSubList(db_filter.getCats()[position].getSubcat());
         }
 
         @Override
@@ -206,12 +211,14 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
         @Override
         public void onOrders(int position) {
             String OrderName;
-            if(OrderTypeAttr == 0){
-                OrderName = db_filter.getOrder().getPoint()[position].getOrderName();
-            }else{
-                OrderName = db_filter.getOrder().getLimit()[position].getOrderName();
-            }
-            setOrderText(OrderName);
+//            if(OrderTypeAttr == 0){
+//                OrderName = db_filter.getOrder().getPoint()[position].getOrderName();
+//            }else{
+//                OrderName = db_filter.getOrder().getLimit()[position].getOrderName();
+//            }
+            int orderID = db_filter.getOrder()[position].getOrder_id();
+            String orderName = db_filter.getOrder()[position].getOrder_name();
+            setOrderText(orderName);
             HiddenAction();
             reSearch();
         }
@@ -248,26 +255,30 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
             case R.id.txt_Cats:
                 SearchMainAdapter cityAdapter = new SearchMainAdapter(getContext(),db_filter.getCats(),onClickListener);
                 mMainListView.setAdapter(cityAdapter);
+                openControl(v);
                 break;
             case R.id.txt_Citys:
                 SearchMainAdapter catAdapter = new SearchMainAdapter(getContext(),db_filter.getArea(),onClickListener);
                 mMainListView.setAdapter(catAdapter);
+                openControl(v);
                 break;
             case R.id.txt_Orders:
-                SearchMainAdapter orderAdapter;
-                if(OrderTypeAttr == 0){
-                    orderAdapter = new SearchMainAdapter(getContext(),db_filter.getOrder().getPoint(),onClickListener);
-                }else{
-                    orderAdapter = new SearchMainAdapter(getContext(),db_filter.getOrder().getLimit(),onClickListener);
-                }
+                SearchMainAdapter orderAdapter = new SearchMainAdapter(getContext(),db_filter.getOrder(),onClickListener);
+//                if(OrderTypeAttr == 0){
+//                    orderAdapter = new SearchMainAdapter(getContext(),db_filter.getOrder().getPoint(),onClickListener);
+//                }else{
+//                    orderAdapter = new SearchMainAdapter(getContext(),db_filter.getOrder().getLimit(),onClickListener);
+//                }
+
                 mMainListView.setAdapter(orderAdapter);
                 mSubListView.setVisibility(View.INVISIBLE);
+                openControl(v);
                 break;
             case R.id.btn_mode:
                 modeOnClickEvent();
                 break;
         }
-        openControl(v);
+
         mMainListView.setItemAnimator(new DefaultItemAnimator());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -279,12 +290,28 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
         if(isOpen_SubView){
             HiddenAction();
             if(NowEvent != CurrentEvent){
-                ShowAction();
+                ShowAction(NowEvent);
             }
         }else{
-            ShowAction();
+            ShowAction(NowEvent);
         }
         CurrentEvent = NowEvent;
+    }
+
+    private void setBtnPress(TextView btn){
+        if(btn != null){
+            btn.setTextColor(mContext.getResources().getColor(R.color.str_Text_Pressed));
+            btn.setBackgroundResource(R.mipmap.bg_common_gary_small);
+            btn.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.ic_common_red_category_normal, 0);
+        }
+    }
+
+    private void setBtnUnPress(TextView btn){
+        if(btn != null){
+            btn.setTextColor(mContext.getResources().getColor(R.color.white));
+            btn.setBackgroundResource(R.mipmap.btn_common_red_category_normal);
+            btn.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.ic_common_white_category_normal, 0);
+        }
     }
 
     private void HiddenAction(){
@@ -293,14 +320,16 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
         SubView.startAnimation(hidden);
         SubView.setVisibility(View.GONE);
         mSubListView.setVisibility(View.INVISIBLE);
+        setBtnUnPress((TextView) CurrentEvent);
         isOpen_SubView = false;
     }
 
-    private void ShowAction(){
+    private void ShowAction(View v){
         TranslateAnimation show = new TranslateAnimation(Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,-1.0f,Animation.RELATIVE_TO_SELF,0.0f);
         show.setDuration(DURATIONTIME);
         SubView.startAnimation(show);
         SubView.setVisibility(View.VISIBLE);
+        setBtnPress((TextView) v);
         isOpen_SubView = true;
     }
 }

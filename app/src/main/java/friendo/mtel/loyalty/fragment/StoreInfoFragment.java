@@ -129,7 +129,7 @@ public class StoreInfoFragment extends CommonFragment implements ImageButton.OnC
 
     private void initData(){
         db_firmData = (FirmListData) getArguments().getSerializable("value");
-        DataManager.getInstance(getActivity()).qryFirmInfo(db_firmData.getFirmID(),getDataResponse);
+        DataManager.getInstance(getActivity()).qryFirmInfo(db_firmData.getFirm_id(),getDataResponse);
     }
 
     private void initView(FirmInfoData data){
@@ -138,26 +138,24 @@ public class StoreInfoFragment extends CommonFragment implements ImageButton.OnC
         mBlog.setOnClickListener(this);
         mAddress.setOnClickListener(this);
 
-        mIntroductio.setText(data.getDescription());
-        mAddress.setText(data.getAddress());
-        mTel.setText(data.getNumber());
-        setBusinessTime(data.getBusinessWeek());
-        mBus.setText(data.getTraffic());
-        mPark.setText(data.getCarpark());
-        setWebLink(data.getWebUrl());
-
         mMap.addLocation(db_firmData.getLatitude(), db_firmData.getLongitude());
         mMap.locateMap();
 
+        mIntroductio.setText("");
+        mAddress.setText(data.getAddress());
+        mTel.setText(data.getFirm_tel());
+        setBusinessTime(data.getBusiness_week());
+        mBus.setText(data.getTraffic());
+        mPark.setText(data.getCarpark());
+        setWebLink(data.getWebUrl());
     }
 
     private void setBusinessTime(String[] businessTime){
-        int today = Utilitys.getTodayWeekDay();
 
         for(int i=0; i<businessTime.length; i++){
             TextView businessList = new TextView(getActivity());
             businessList.setText(businessTime[i]);
-            if(i+1 == today){
+            if(Utilitys.getTodayWeekDay(i)){
                 businessList.setTextColor(getActivity().getResources().getColor(R.color.red));
             }else{
                 businessList.setTextColor(getActivity().getResources().getColor(R.color.str_infor));

@@ -92,8 +92,7 @@
                     android:id="@+id/txt_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@mipmap/ic_common_brown_address"
-                    android:text="(Store Address)"/>
+                    android:drawableLeft="@mipmap/ic_common_brown_address"/>
 
                 <TextView
                     style="@style/font_substoreitem"
@@ -101,8 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@mipmap/ic_common_brown_phone"
-                    android:autoLink="phone"
-                    android:text="(Store Tel)"/>
+                    android:autoLink="phone"/>
 
                 <!--<TextView-->
                     <!--style="@style/font_substoreitem"-->
@@ -139,16 +137,14 @@
                     android:id="@+id/txt_bus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@mipmap/ic_common_brown_bus"
-                    android:text="(Bus)"/>
+                    android:drawableLeft="@mipmap/ic_common_brown_bus"/>
 
                 <TextView
                     style="@style/font_substoreitem"
                     android:id="@+id/txt_park"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@mipmap/ic_common_brown_park"
-                    android:text="(Park)"/>
+                    android:drawableLeft="@mipmap/ic_common_brown_park"/>
 
                 <TextView
                     style="@style/font_substoreitem"
@@ -156,8 +152,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@mipmap/ic_common_brown_web"
-                    android:autoLink="web"
-                    android:text="(web)"/>
+                    android:autoLink="web"/>
 
                 <!--<TextView-->
                     <!--style="@style/font_substoreitem"-->

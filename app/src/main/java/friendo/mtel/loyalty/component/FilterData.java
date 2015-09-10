@@ -7,7 +7,7 @@ public class FilterData {
     private String updateTime;
     private AreaData[] area;
     private CatsData[] cats;
-    private OrdersData order;
+    private OrderData[] order;
 
     public AreaData[] getArea() {
         return area;
@@ -25,11 +25,11 @@ public class FilterData {
         this.cats = cats;
     }
 
-    public OrdersData getOrder() {
+    public OrderData[] getOrder() {
         return order;
     }
 
-    public void setOrder(OrdersData order) {
+    public void setOrder(OrderData[] order) {
         this.order = order;
     }
 

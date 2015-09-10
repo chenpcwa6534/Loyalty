@@ -1,13 +1,22 @@
 package friendo.mtel.loyalty.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Shader;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.facebook.FacebookSdk;
+
+import java.util.Random;
 
 import friendo.mtel.loyalty.GCM.GetGCMResponse;
 import friendo.mtel.loyalty.GCM.RegisterTask;
@@ -18,9 +27,11 @@ import friendo.mtel.loyalty.component.FilterData;
 import friendo.mtel.loyalty.component.VersionControlData;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
+import friendo.mtel.loyalty.db.DBManager;
 import friendo.mtel.loyalty.preferences.LoyaltyPreference;
 import friendo.mtel.loyalty.utility.Utilitys;
 import friendo.mtel.loyalty.view.MessageDialog;
+import friendo.mtel.loyalty.view.ProgressWheel;
 
 /**
  * Created by MTel on 2015/8/13.
@@ -35,6 +46,7 @@ public class InitializationActivity extends Activity {
     private int inspectioncount = 2;
     private int inspection_success = 0;
     private int inspection_fail = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +64,7 @@ public class InitializationActivity extends Activity {
             //DataManager.getInstance(this).qryErrorMessage("", getDataResponse);
             String Filter_UpdateTime = LoyaltyPreference.getAPIRequestTime(this, LoyaltyPreference.API.Filter);
             DataManager.getInstance(this).qryFilter(Filter_UpdateTime, true, getDataResponse);
+
         }catch (Exception e){
             Log.e(TAG,"DataManager call api fail (InitializationActivity.class line 51) Exception:"+e.getMessage());
         }
@@ -88,12 +101,13 @@ public class InitializationActivity extends Activity {
 
     private void inspection(){
         if(inspectioncount == inspection_fail+inspection_success && inspection_fail != 0 ){
-            MessageDialog messageDialog = new MessageDialog(this);
-            messageDialog.setLogo(MessageDialog.LogoType.Question);
-            messageDialog.setTitle(getResources().getString(R.string.app_system_fail));
-            messageDialog.setButton(getResources().getString(R.string.app_system_ok));
-            messageDialog.setCallback(dialogCallback);
-            messageDialog.show();
+//            MessageDialog messageDialog = new MessageDialog(this);
+//            messageDialog.setLogo(MessageDialog.LogoType.Question);
+//            messageDialog.setTitle(getResources().getString(R.string.app_system_fail));
+//            messageDialog.setButton(getResources().getString(R.string.app_system_ok));
+//            messageDialog.setCallback(dialogCallback);
+//            messageDialog.show();
+            initView();
         }else if(inspectioncount == inspection_success){
             initView();
         }
@@ -115,6 +129,7 @@ public class InitializationActivity extends Activity {
                 //save data
                 inspection_success += 1;
             }else if(obj instanceof FilterData){
+                FilterData filterData = (FilterData) obj;
                 inspection_success += 1;
             }
 
@@ -167,4 +182,5 @@ public class InitializationActivity extends Activity {
             finish();
         }
     };
+
 }
