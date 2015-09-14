@@ -14,18 +14,11 @@ public class Env {
     public static String ApiKEY = "Authorization";
     public static String ApiValue = "X2ZyaWVuZG9fbWVtYmVyX2NhcmRf";
 
-    /** Device Information **/
-    private static String MemberID = "";
+
 
     public static String getMemberID(Context context){
         //return "62a714dd-987d-46ec-80f3-a14072a21ed1";
-        if(MemberID.equals("")){
-            MemberID = LoyaltyPreference.getMemberID(context);
-        }
+        String MemberID = LoyaltyPreference.getMemberID(context);
         return MemberID;
     }
-
-
-
-
 }

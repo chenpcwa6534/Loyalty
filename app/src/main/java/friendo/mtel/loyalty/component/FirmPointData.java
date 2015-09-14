@@ -6,10 +6,10 @@ package friendo.mtel.loyalty.component;
 public class FirmPointData {
     private String description;
     private String notics;
-    private int currentPoint;
-    private int maxPoint;
-    private String maturityDay;
-    private RedeemData[] redeem;
+    private int current_point;
+    private int max_point;
+    private String maturityday;
+    private RedeemData[] redeems;
 
     public String getDescription() {
         return description;
@@ -27,35 +27,35 @@ public class FirmPointData {
         this.notics = notics;
     }
 
-    public int getCurrentPoint() {
-        return currentPoint;
+    public int getCurrent_point() {
+        return current_point;
     }
 
-    public void setCurrentPoint(int currentPoint) {
-        this.currentPoint = currentPoint;
+    public void setCurrent_point(int current_point) {
+        this.current_point = current_point;
     }
 
-    public int getMaxPoint() {
-        return maxPoint;
+    public int getMax_point() {
+        return max_point;
     }
 
-    public void setMaxPoint(int maxPoint) {
-        this.maxPoint = maxPoint;
+    public void setMax_point(int max_point) {
+        this.max_point = max_point;
     }
 
-    public String getMaturityDay() {
-        return maturityDay;
+    public String getMaturityday() {
+        return maturityday;
     }
 
-    public void setMaturityDay(String maturityDay) {
-        this.maturityDay = maturityDay;
+    public void setMaturityday(String maturityday) {
+        this.maturityday = maturityday;
     }
 
-    public RedeemData[] getRedeem() {
-        return redeem;
+    public RedeemData[] getRedeems() {
+        return redeems;
     }
 
-    public void setRedeem(RedeemData[] redeem) {
-        this.redeem = redeem;
+    public void setRedeems(RedeemData[] redeems) {
+        this.redeems = redeems;
     }
 }

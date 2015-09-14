@@ -294,46 +294,51 @@ public class DataManager {
      *
      * @param getDataResponse
      */
-    public void qryAdvertising(final GetDataResponse getDataResponse){
+    public void qryAdvertising(boolean isNeedAPI, final GetDataResponse getDataResponse){
+        if(DataCache.cacheAdsInfoData == null){
+            isNeedAPI = true;
+        }
 
-        CallAPIResponse callAPIResponse = new CallAPIResponse() {
-            @Override
-            public void onStart() {
-                if(getDataResponse != null){
-                    getDataResponse.onStart();
+        if(isNeedAPI){
+            CallAPIResponse callAPIResponse = new CallAPIResponse() {
+                @Override
+                public void onStart() {
+                    if(getDataResponse != null){
+                        getDataResponse.onStart();
+                    }
                 }
-            }
 
-            @Override
-            public void onSuccess(Object response) {
-                DataCache.cacheAdsInfoData = (AdvertisingData) response;
-                if(getDataResponse != null){
-                    getDataResponse.onSuccess(response);
+                @Override
+                public void onSuccess(Object response) {
+                    DataCache.cacheAdsInfoData = (AdvertisingData) response;
+                    if(getDataResponse != null){
+                        getDataResponse.onSuccess(response);
+                    }
                 }
-            }
 
-            @Override
-            public void onSuccess(Object[] response) {
-                if(getDataResponse != null){
-                    getDataResponse.onSuccess(response);
+                @Override
+                public void onSuccess(Object[] response) {
+                    if(getDataResponse != null){
+                        getDataResponse.onSuccess(response);
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Object response) {
-                if(getDataResponse != null){
-                    getDataResponse.onFailure(response);
+                @Override
+                public void onFailure(Object response) {
+                    if(getDataResponse != null){
+                        getDataResponse.onFailure(response);
+                    }
                 }
-            }
 
-            @Override
-            public void onFinish() {
-                if(getDataResponse != null){
-                    getDataResponse.onFinish();
+                @Override
+                public void onFinish() {
+                    if(getDataResponse != null){
+                        getDataResponse.onFinish();
+                    }
                 }
-            }
-        };
-        (new HTTPApi()).qryAdvertising(mContext, callAPIResponse);
+            };
+            (new HTTPApi()).qryAdvertising(mContext, callAPIResponse);
+        }
     }
 
     /**
@@ -342,46 +347,52 @@ public class DataManager {
      * @param userFilter        search  params
      * @param getDataResponse
      */
-    public void qryFirmList(int page, String userFilter, final GetDataResponse getDataResponse) throws JSONException{
+    public void qryFirmList(int page, String userFilter,boolean isNeedAPI, final GetDataResponse getDataResponse) throws JSONException{
 
-        CallAPIResponse callAPIResponse = new CallAPIResponse() {
-            @Override
-            public void onStart() {
-                if(getDataResponse != null){
-                    getDataResponse.onStart();
-                }
-            }
+        if(DataCache.cacheFirmListData == null){
+            isNeedAPI = true;
+        }
 
-            @Override
-            public void onSuccess(Object response) {
-                if(getDataResponse != null){
-                    getDataResponse.onSuccess(response);
+        if(isNeedAPI){
+            CallAPIResponse callAPIResponse = new CallAPIResponse() {
+                @Override
+                public void onStart() {
+                    if(getDataResponse != null){
+                        getDataResponse.onStart();
+                    }
                 }
-            }
 
-            @Override
-            public void onSuccess(Object[] response) {
-                DataCache.cacheFirmListData = (FirmListData[]) response;
-                if(getDataResponse != null){
-                    getDataResponse.onSuccess(response);
+                @Override
+                public void onSuccess(Object response) {
+                    if(getDataResponse != null){
+                        getDataResponse.onSuccess(response);
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Object response) {
-                if(getDataResponse != null){
-                    getDataResponse.onFailure(response);
+                @Override
+                public void onSuccess(Object[] response) {
+                    DataCache.cacheFirmListData = (FirmListData[]) response;
+                    if(getDataResponse != null){
+                        getDataResponse.onSuccess(response);
+                    }
                 }
-            }
 
-            @Override
-            public void onFinish() {
-                if(getDataResponse != null){
-                    getDataResponse.onFinish();
+                @Override
+                public void onFailure(Object response) {
+                    if(getDataResponse != null){
+                        getDataResponse.onFailure(response);
+                    }
                 }
-            }
-        };
-        (new HTTPApi()).qryFirmList(mContext, page, userFilter, callAPIResponse);
+
+                @Override
+                public void onFinish() {
+                    if(getDataResponse != null){
+                        getDataResponse.onFinish();
+                    }
+                }
+            };
+            (new HTTPApi()).qryFirmList(mContext, page, userFilter, callAPIResponse);
+        }
     }
 
 
@@ -534,45 +545,49 @@ public class DataManager {
      * @param getDataResponse
      */
     public void qryFirmPoint(int firmID, final GetDataResponse getDataResponse){
+        boolean isNeedAPI = true;
+        if(DataCache.cacheFirmPointData != null) isNeedAPI = false;
 
-        CallAPIResponse callAPIResponse = new CallAPIResponse() {
-            @Override
-            public void onStart() {
-                if(getDataResponse != null){
-                    getDataResponse.onStart();
+        if(isNeedAPI){
+            CallAPIResponse callAPIResponse = new CallAPIResponse() {
+                @Override
+                public void onStart() {
+                    if(getDataResponse != null){
+                        getDataResponse.onStart();
+                    }
                 }
-            }
 
-            @Override
-            public void onSuccess(Object response) {
-                DataCache.cacheFirmPointData = (FirmPointData) response;
-                if(getDataResponse != null){
-                    getDataResponse.onSuccess(response);
+                @Override
+                public void onSuccess(Object response) {
+                    DataCache.cacheFirmPointData = (FirmPointData) response;
+                    if(getDataResponse != null){
+                        getDataResponse.onSuccess(response);
+                    }
                 }
-            }
 
-            @Override
-            public void onSuccess(Object[] response) {
-                if(getDataResponse != null){
-                    getDataResponse.onSuccess(response);
+                @Override
+                public void onSuccess(Object[] response) {
+                    if(getDataResponse != null){
+                        getDataResponse.onSuccess(response);
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Object response) {
-                if(getDataResponse != null){
-                    getDataResponse.onFailure(response);
+                @Override
+                public void onFailure(Object response) {
+                    if(getDataResponse != null){
+                        getDataResponse.onFailure(response);
+                    }
                 }
-            }
 
-            @Override
-            public void onFinish() {
-                if(getDataResponse != null){
-                    getDataResponse.onFinish();
+                @Override
+                public void onFinish() {
+                    if(getDataResponse != null){
+                        getDataResponse.onFinish();
+                    }
                 }
-            }
-        };
-        (new HTTPApi()).qryFirmPoint(mContext, Env.getMemberID(mContext), firmID, callAPIResponse);
+            };
+            (new HTTPApi()).qryFirmPoint(mContext, Env.getMemberID(mContext), firmID, callAPIResponse);
+        }
     }
 
 

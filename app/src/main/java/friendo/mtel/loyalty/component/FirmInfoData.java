@@ -32,6 +32,7 @@ public class FirmInfoData {
         this.beacon_status = beacon_status;
     }
 
+
     public String getAddress() {
         return address;
     }

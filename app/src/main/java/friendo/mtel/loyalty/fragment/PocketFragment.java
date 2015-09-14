@@ -25,6 +25,7 @@ import friendo.mtel.loyalty.component.MemberCouponsData;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
 import friendo.mtel.loyalty.data.GetListResponse;
+import friendo.mtel.loyalty.view.ProgressWheel;
 
 /**
  * Created by MTel on 2015/6/24.
@@ -41,6 +42,7 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
     private TextView mPoint;
     private TextView mPreferential;
     private TextView mExchange;
+    private ProgressWheel mProgressWheel;
 
     private String[] toppings;
     private ArrayList<Fragment> pages;
@@ -54,6 +56,8 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
     private int currentposition;
 
     private int page = 1;
+
+    int levelProgress = 32;
 
     public PocketFragment() {
         super();
@@ -100,6 +104,7 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
         mPointQTY = (TextView) v.findViewById(R.id.txt_pointQTY);
         mFrequencyQTY = (TextView) v.findViewById(R.id.txt_frequencyQTY);
         mMoneyQTY = (TextView) v.findViewById(R.id.txt_moneyQTY);
+        mProgressWheel = (ProgressWheel) v.findViewById(R.id.progressBarTwo);
 
         mPoint = (TextView) v.findViewById(R.id.txt_myPoint);
         mPreferential = (TextView) v.findViewById(R.id.txt_myPreferential);
@@ -117,11 +122,12 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initInformation(MemberInfoData data){
-            mLevel.setText(""+data.getLV());
-            mStoreQTY.setText(""+data.getStore());
+            mLevel.setText("" + data.getLV());
+            mStoreQTY.setText("" + data.getStore());
             mPointQTY.setText("" + data.getPoint());
             mFrequencyQTY.setText("" + data.getCount());
             mMoneyQTY.setText("$" + data.getMoney());
+            mProgressWheel.incrementProgress(PercentageToCircle(data.getProgress()));
     }
 
     private void initPointView(MemberPointData[] data){
@@ -147,6 +153,10 @@ public class PocketFragment extends Fragment implements View.OnClickListener{
         mPages_myExchange.setAdapter(exchangeAdapter);
         mPages_myExchange.setItemAnimator(new DefaultItemAnimator());
         mPages_myExchange.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    private int PercentageToCircle(int per){
+        return 360/100*per;
     }
 
     @Override

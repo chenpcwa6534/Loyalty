@@ -51,13 +51,13 @@ public class PointFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_point,container,false);
         findView(mView);
-        initData();
         return mView;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        initData();
     }
 
     @Override

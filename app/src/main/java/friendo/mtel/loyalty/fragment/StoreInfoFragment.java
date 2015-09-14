@@ -7,13 +7,10 @@ import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
-import android.webkit.JavascriptInterface;
 
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.component.FirmInfoData;
@@ -45,15 +42,12 @@ public class StoreInfoFragment extends CommonFragment implements ImageButton.OnC
 
     private FirmListData db_firmData;
 
-
-    private double Location_LAT = 0;
-    private double Location_LNG = 0;
+//
+//    private double Location_LAT = 0;
+//    private double Location_LNG = 0;
 
     int beaconIcon_Close = R.mipmap.btn_common_gary_close;
     int beaconIcon_Open = R.mipmap.btn_common_orange_open;
-    //test
-    boolean  beaconstatus = false;
-
 
     public static StoreInfoFragment newInstance(FirmListData firmData){
         StoreInfoFragment storeInfoFragment = new StoreInfoFragment();
@@ -133,7 +127,7 @@ public class StoreInfoFragment extends CommonFragment implements ImageButton.OnC
     }
 
     private void initView(FirmInfoData data){
-        mBeaconControl.setBackgroundResource(beaconstatus ? beaconIcon_Open : beaconIcon_Close);
+        mBeaconControl.setBackgroundResource(data.isBeacon_status() ? beaconIcon_Open : beaconIcon_Close);
         mBeaconControl.setOnClickListener(this);
         mBlog.setOnClickListener(this);
         mAddress.setOnClickListener(this);
@@ -165,6 +159,11 @@ public class StoreInfoFragment extends CommonFragment implements ImageButton.OnC
         }
     }
 
+    /**
+     * if link index is 0 then is store web main
+     * else is link
+     * @param link
+     */
     private void setWebLink(String[] link){
         for(int i=0; i<link.length; i++){
             if(i == 0){
@@ -188,12 +187,12 @@ public class StoreInfoFragment extends CommonFragment implements ImageButton.OnC
 
 
     private void BeaconControl(){
-        if(beaconstatus){
+        if(db_frimInfo.isBeacon_status()){
             mBeaconControl.setBackgroundResource(beaconIcon_Close);
-            beaconstatus = false;
+            db_frimInfo.setBeacon_status(false);
         }else{
             mBeaconControl.setBackgroundResource(beaconIcon_Open);
-            beaconstatus = true;
+            db_frimInfo.setBeacon_status(true);
         }
     }
 

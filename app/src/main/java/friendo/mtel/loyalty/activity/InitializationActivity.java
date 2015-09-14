@@ -1,22 +1,11 @@
 package friendo.mtel.loyalty.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
-import android.graphics.Shader;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
-
-import com.facebook.FacebookSdk;
-
-import java.util.Random;
 
 import friendo.mtel.loyalty.GCM.GetGCMResponse;
 import friendo.mtel.loyalty.GCM.RegisterTask;
@@ -27,11 +16,9 @@ import friendo.mtel.loyalty.component.FilterData;
 import friendo.mtel.loyalty.component.VersionControlData;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
-import friendo.mtel.loyalty.db.DBManager;
 import friendo.mtel.loyalty.preferences.LoyaltyPreference;
 import friendo.mtel.loyalty.utility.Utilitys;
 import friendo.mtel.loyalty.view.MessageDialog;
-import friendo.mtel.loyalty.view.ProgressWheel;
 
 /**
  * Created by MTel on 2015/8/13.
@@ -43,6 +30,11 @@ public class InitializationActivity extends Activity {
     private ProgressBar mProgressBar;
     private TextView mLoadMessage;
 
+    /**
+     * inspectioncount 代表初始化 總共有幾個程序
+     * inspection_success 代表初始化成功幾個程序
+     * inspection_fail 代表初始化失敗幾個程序 (當初始化失敗超過一個不進入app)
+     */
     private int inspectioncount = 2;
     private int inspection_success = 0;
     private int inspection_fail = 0;
@@ -51,6 +43,7 @@ public class InitializationActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initalzation);
+        findView();
     }
 
     @Override
@@ -85,6 +78,10 @@ public class InitializationActivity extends Activity {
         mLoadMessage = (TextView) findViewById(R.id.txt_loadmessage);
     }
 
+    /**
+     * if data loading finis
+     * registered intent main else unregistered intent welcome
+     */
     private void initView(){
         if(!Utilitys.isLogin(this)){
             intentPage(WelcomeActivity.class);
@@ -99,20 +96,28 @@ public class InitializationActivity extends Activity {
         startActivity(intent);
     }
 
+
+    /**
+     * if all initialzation is success then intent next page
+     * if have one fail then show error message dialog
+     */
     private void inspection(){
+        Log.d(TAG,"Api call result --> Success = "+inspection_success+" fail = "+inspection_fail);
         if(inspectioncount == inspection_fail+inspection_success && inspection_fail != 0 ){
-//            MessageDialog messageDialog = new MessageDialog(this);
-//            messageDialog.setLogo(MessageDialog.LogoType.Question);
-//            messageDialog.setTitle(getResources().getString(R.string.app_system_fail));
-//            messageDialog.setButton(getResources().getString(R.string.app_system_ok));
-//            messageDialog.setCallback(dialogCallback);
-//            messageDialog.show();
-            initView();
+            MessageDialog messageDialog = new MessageDialog(this);
+            messageDialog.setLogo(MessageDialog.LogoType.Question);
+            messageDialog.setTitle(getResources().getString(R.string.app_system_fail));
+            messageDialog.setButton(getResources().getString(R.string.app_system_ok));
+            messageDialog.setCallback(dialogCallback);
+            messageDialog.show();
         }else if(inspectioncount == inspection_success){
             initView();
         }
     }
 
+    /**
+     * api callback
+     */
     private GetDataResponse getDataResponse = new GetDataResponse() {
         @Override
         public void onStart() {
@@ -125,12 +130,15 @@ public class InitializationActivity extends Activity {
                 VersionControlData versionControlData = (VersionControlData) obj;
                 LoyaltyPreference.setPersonInformation(InitializationActivity.this,versionControlData.getProtitle().getName(),versionControlData.getProtitle().getBirthday(),versionControlData.getProtitle().getGender(),versionControlData.getProtitle().getPicture());
                 inspection_success +=1;
+                Log.d(TAG,"Version success");
             }else if(obj instanceof ErrorMessageResult){
                 //save data
                 inspection_success += 1;
+                Log.d(TAG,"ErrorMessage success");
             }else if(obj instanceof FilterData){
                 FilterData filterData = (FilterData) obj;
                 inspection_success += 1;
+                Log.d(TAG,"Filter success");
             }
 
             inspection();
@@ -140,6 +148,7 @@ public class InitializationActivity extends Activity {
         public void onSuccess(Object[] obj) {
             if(obj instanceof ErrorMessageData[]){
                 inspection_success += 1;
+                Log.d(TAG,"ErrorMessage success");
             }
             inspection();
         }
@@ -152,22 +161,24 @@ public class InitializationActivity extends Activity {
 
         @Override
         public void onFinish() {
-            inspection();
+
         }
     };
 
+
+    /**
+     * GCM register callback
+     */
     private GetGCMResponse getGCMResponse = new GetGCMResponse() {
         @Override
         public void onSuccess(String type, String token) {
-            LoyaltyPreference.setDeviceToken(InitializationActivity.this,token);
-            inspection_success += 1;
-            inspection();
+            LoyaltyPreference.setDeviceToken(InitializationActivity.this, token);
+            Log.d(TAG, "GCM Register success");
         }
 
         @Override
         public void onFail(String type) {
-            inspection_fail += 1;
-            inspection();
+            Log.d(TAG, "GCM Register fail");
         }
 
         @Override
@@ -176,6 +187,9 @@ public class InitializationActivity extends Activity {
         }
     };
 
+    /**
+     * message dialog callback
+     */
     private MessageDialog.DialogCallback dialogCallback = new MessageDialog.DialogCallback() {
         @Override
         public void onClick(int position, String btnStr) {

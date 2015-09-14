@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.component.FirmListData;
+import friendo.mtel.loyalty.data.DataCache;
 import friendo.mtel.loyalty.fragment.StoreInfoFragment;
 import friendo.mtel.loyalty.adapter.TabPageAdapter;
 import friendo.mtel.loyalty.fragment.PointFragment;
@@ -51,9 +53,7 @@ public class SubFrontPageActivity extends CommonActionBarActivity implements Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subfrontpage);
-        if(initData()){
-            db_firmData = (FirmListData) savedInstanceState.getSerializable("value");
-        }
+        initData(savedInstanceState);
         findView();
         initView();
         initTabView();
@@ -81,13 +81,17 @@ public class SubFrontPageActivity extends CommonActionBarActivity implements Vie
         outState.putSerializable("value", db_firmData);
     }
 
-    private Boolean initData(){
+    /**
+     * 檢查Extras 資料是否遺失 ，遺失則從系統中取回
+     * @return
+     */
+    private void initData(Bundle savedInstanceState){
        if(getIntent().getExtras() != null){
            db_firmData = (FirmListData) getIntent().getExtras().getSerializable("value");
-           return false;
        }else{
-           return true;
+           db_firmData = (FirmListData) savedInstanceState.getSerializable("value");
        }
+        Log.d(TAG,"firmData = " + db_firmData.toString());
     }
 
     private void findView(){
@@ -147,6 +151,8 @@ public class SubFrontPageActivity extends CommonActionBarActivity implements Vie
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.img_back:
+                DataCache.cacheFirmInfoData.isBeacon_status();
+                //call api
                 finish();
                 break;
             case R.id.img_partner:

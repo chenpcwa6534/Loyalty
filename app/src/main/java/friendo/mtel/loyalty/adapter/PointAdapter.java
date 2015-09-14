@@ -34,22 +34,22 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_point, parent, false);
-        ViewHolder viewHolder = new ViewHolder(mContext,itemLayout, db_memberPointData.getRedeem(),mListener);
+        ViewHolder viewHolder = new ViewHolder(mContext,itemLayout, db_memberPointData.getRedeems(),mListener);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if(position < db_memberPointData.getCurrentPoint()){
+        if(position < db_memberPointData.getCurrent_point()){
             holder.mStamp.setVisibility(View.VISIBLE);
         }else{
             holder.mStamp.setVisibility(View.INVISIBLE);
         }
-        if(db_memberPointData.getRedeem() != null  || db_memberPointData.getRedeem().length != 0){
-            for(int i=0; i<db_memberPointData.getRedeem().length; i++){
-                if(position+1 == db_memberPointData.getRedeem()[i].getPoint()){
+        if(db_memberPointData.getRedeems() != null  || db_memberPointData.getRedeems().length != 0){
+            for(int i=0; i<db_memberPointData.getRedeems().length; i++){
+                if(position+1 == db_memberPointData.getRedeems()[i].getPoint()){
                     holder.mBackground.setVisibility(View.VISIBLE);
-                    PicassoUtility.load(mContext,holder.mBackground,db_memberPointData.getRedeem()[i].getAdpicture());
+                    PicassoUtility.load(mContext,holder.mBackground,db_memberPointData.getRedeems()[i].getAd_picture());
                 }else{
                     holder.mBackground.setVisibility(View.GONE);
                 }
@@ -60,7 +60,7 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder>{
 
     @Override
     public int getItemCount() {
-        return db_memberPointData.getMaxPoint();
+        return db_memberPointData.getMax_point();
     }
 
 
@@ -95,9 +95,9 @@ public class PointAdapter extends RecyclerView.Adapter<PointAdapter.ViewHolder>{
                 case R.id.point:
                     for(int i=0; i<mRedeem.length; i++){
                         if(getPosition()+1 == mRedeem[i].getPoint()){
-                            int[] couponsID = new int[mRedeem[i].getConvertlist().length];
-                            for(int ii= 0; ii<mRedeem[i].getConvertlist().length; i++){
-                                couponsID[ii] = mRedeem[i].getConvertlist()[ii].getCouponID();
+                            int[] couponsID = new int[mRedeem[i].getConvert_list().length];
+                            for(int ii= 0; ii<mRedeem[i].getConvert_list().length; i++){
+                                couponsID[ii] = mRedeem[i].getConvert_list()[ii].getCoupon_id();
                             }
                             mListener.onClick(couponsID);
                         }

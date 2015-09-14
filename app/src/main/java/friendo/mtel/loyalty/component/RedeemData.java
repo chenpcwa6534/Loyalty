@@ -5,9 +5,9 @@ package friendo.mtel.loyalty.component;
  */
 public class RedeemData {
     private int point;
-    private String Adpicture;
-    private String AdpicturePath;
-    private ConvertData[] convertlist;
+    private String ad_picture;
+    private String ad_picture_path;
+    private ConvertData[] convert_list;
 
     public int getPoint() {
         return point;
@@ -17,27 +17,27 @@ public class RedeemData {
         this.point = point;
     }
 
-    public String getAdpicture() {
-        return Adpicture;
+    public String getAd_picture() {
+        return ad_picture;
     }
 
-    public void setAdpicture(String adpicture) {
-        Adpicture = adpicture;
+    public void setAd_picture(String ad_picture) {
+        this.ad_picture = ad_picture;
     }
 
-    public String getAdpicturePath() {
-        return AdpicturePath;
+    public String getAd_picture_path() {
+        return ad_picture_path;
     }
 
-    public void setAdpicturePath(String adpicturePath) {
-        AdpicturePath = adpicturePath;
+    public void setAd_picture_path(String ad_picture_path) {
+        this.ad_picture_path = ad_picture_path;
     }
 
-    public ConvertData[] getConvertlist() {
-        return convertlist;
+    public ConvertData[] getConvert_list() {
+        return convert_list;
     }
 
-    public void setConvertlist(ConvertData[] convertlist) {
-        this.convertlist = convertlist;
+    public void setConvert_list(ConvertData[] convert_list) {
+        this.convert_list = convert_list;
     }
 }

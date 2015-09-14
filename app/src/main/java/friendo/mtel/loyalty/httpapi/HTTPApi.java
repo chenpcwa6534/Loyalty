@@ -2,6 +2,7 @@ package friendo.mtel.loyalty.httpapi;
 
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -13,6 +14,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 import friendo.mtel.loyalty.R;
+import friendo.mtel.loyalty.Request.MemberRequest;
 import friendo.mtel.loyalty.Request.RegRequest;
 import friendo.mtel.loyalty.TestDataJson.TestDataJson;
 import friendo.mtel.loyalty.common.Env;
@@ -57,16 +59,25 @@ public class HTTPApi {
             @Override
             public void onStart() {
                 Log.i(TAG,"qryVersionControl onStart");
+                if(callAPIResponse != null){
+                    callAPIResponse.onStart();
+                }
             }
 
             @Override
             public void onFinish() {
                 Log.i(TAG,"qryVersionControl onFinish");
+                if(callAPIResponse != null){
+                    callAPIResponse.onFinish();
+                }
             }
 
             @Override
             public void onFailure(String msg) {
                 Log.i(TAG,"qryVersionControl onFailure msg:" +msg);
+                if(callAPIResponse != null){
+                    callAPIResponse.onFailure(msg);
+                }
             }
 
             @Override
@@ -87,21 +98,6 @@ public class HTTPApi {
                 }
             }
         });
-
-//        Log.d(TAG,"Version Control Json : "+ TestDataJson.getVersionControlResponseData().toString());
-//        if(getResult(TestDataJson.getVersionControlResponseData())){
-//            String data = getData(TestDataJson.getVersionControlResponseData());
-//            Log.d(TAG,"VersionControl api data:" + data);
-//            Gson gson = new Gson();
-//            VersionControlData versionControlData = gson.fromJson(data, VersionControlData.class);
-//            if(callAPIResponse != null){
-//                callAPIResponse.onSuccess(versionControlData);
-//            }
-//        }else{
-//            if(callAPIResponse != null){
-//                callAPIResponse.onFailure(getError(context,TestDataJson.getResponseError()));
-//            }
-//        }
     }
 
 
@@ -171,25 +167,33 @@ public class HTTPApi {
      * @param callAPIResponse
      */
     public void qryFilter(Context context, String updateTime ,final CallAPIResponse callAPIResponse) throws JSONException{
-        String apiName = "stamps/ui/filter";
+        String apiName = "stamps/ui/filter?updateTime="+updateTime;
         final JSONObject jsonObject = new JSONObject();
-        jsonObject.put("updateTime",updateTime);
 
         VolleyAsyncHttpClient.getInstance(context).post(Env.serviceURL + apiName, jsonObject,new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
 
             @Override
             public void onStart() {
                 Log.i(TAG,"qryFilter onStart");
+                if(callAPIResponse != null){
+                    callAPIResponse.onStart();
+                }
             }
 
             @Override
             public void onFinish() {
                 Log.i(TAG,"qryFilter onFinish");
+                if(callAPIResponse != null){
+                    callAPIResponse.onFinish();
+                }
             }
 
             @Override
             public void onFailure(String msg) {
                 Log.i(TAG,"qryFilter onFailure msg:" +msg);
+                if(callAPIResponse != null){
+                    callAPIResponse.onFailure(msg);
+                }
             }
 
             @Override
@@ -210,20 +214,6 @@ public class HTTPApi {
                 }
             }
         });
-//        Log.d(TAG,"Fliter Json : "+ TestDataJson.getFilter().toString());
-//        if(getResult(TestDataJson.getFilter())){
-//            String data = getData(TestDataJson.getFilter());
-//            Log.d(TAG,"Fliter api data:" + data);
-//            Gson gson = new Gson();
-//            FilterData filterData = gson.fromJson(data, FilterData.class);
-//            if(callAPIResponse != null){
-//                callAPIResponse.onSuccess(filterData);
-//            }
-//        }else{
-//            if(callAPIResponse != null){
-//                callAPIResponse.onFailure(getError(context,TestDataJson.getResponseError()));
-//            }
-//        }
     }
 
 
@@ -242,16 +232,25 @@ public class HTTPApi {
             @Override
             public void onStart() {
                 Log.i(TAG,"qryAskOTP onStart");
+                if(callAPIResponse != null){
+                    callAPIResponse.onStart();
+                }
             }
 
             @Override
             public void onFinish() {
                 Log.i(TAG,"qryAskOTP onFinish");
+                if(callAPIResponse != null){
+                    callAPIResponse.onFinish();
+                }
             }
 
             @Override
             public void onFailure(String msg) {
                 Log.i(TAG,"qryAskOTP onFailure msg:" +msg);
+                if(callAPIResponse != null){
+                    callAPIResponse.onFailure(msg);
+                }
             }
 
             @Override
@@ -285,16 +284,25 @@ public class HTTPApi {
             @Override
             public void onStart() {
                 Log.i(TAG, "qryVerificationOTP onStart");
+                if(callAPIResponse != null){
+                    callAPIResponse.onStart();
+                }
             }
 
             @Override
             public void onFinish() {
                 Log.i(TAG, "qryVerificationOTP onFinish");
+                if(callAPIResponse != null){
+                    callAPIResponse.onFinish();
+                }
             }
 
             @Override
             public void onFailure(String msg) {
                 Log.i(TAG, "qryVerificationOTP onFailure msg:" + msg);
+                if(callAPIResponse != null){
+                    callAPIResponse.onFailure(msg);
+                }
             }
 
             @Override
@@ -388,16 +396,25 @@ public class HTTPApi {
             @Override
             public void onStart() {
                 Log.i(TAG,"qryFirmList onStart");
+                if(callAPIResponse != null){
+                    callAPIResponse.onStart();
+                }
             }
 
             @Override
             public void onFinish() {
                 Log.i(TAG,"qryFirmList onFinish");
+                if(callAPIResponse != null){
+                    callAPIResponse.onFinish();
+                }
             }
 
             @Override
             public void onFailure(String msg) {
                 Log.i(TAG,"qryFirmList onFailure msg:" +msg);
+                if(callAPIResponse != null){
+                    callAPIResponse.onFailure(msg);
+                }
             }
 
             @Override
@@ -607,53 +624,51 @@ public class HTTPApi {
      * @param callAPIResponse
      */
     public void qryFirmPoint(Context context, String memberID, int firmID, final CallAPIResponse callAPIResponse){
-        String apiName = "";
+        String apiName = "stamps/ui/firms/" + firmID + "/PointCard";
         final JSONObject jsonObject = new JSONObject();
 
-//        VolleyAsyncHttpClient.getInstance(context).post(Env.serviceURL + apiName, jsonObject,new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
-//
-//            @Override
-//            public void onStart() {
-//                Log.i(TAG,"qryFilter onStart");
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                Log.i(TAG,"qryFilter onFinish");
-//            }
-//
-//            @Override
-//            public void onFailure(String msg) {
-//                Log.i(TAG,"qryFilter onFailure msg:" +msg);
-//            }
-//
-//            @Override
-//            public void onSuccess(JSONObject response) {
-//                Log.i(TAG, "qryFilter onSuccess=" + response);
-//                try {
-//                    String data = response.getString("data");
-//                    Gson gson = new Gson();
-//
-//                    if(callAPIResponse != null) callAPIResponse.onSuccess(filterData);
-//
-//                }catch (Exception e) {
-//                    Log.e(TAG, e.getMessage());
-//                }
-//            }
-//        });
-        Log.d(TAG,"Firm point Json : "+ TestDataJson.getFirmPoint().toString());
-        if(getResult(TestDataJson.getFirmPoint())){
-            String data = getData(TestDataJson.getFirmPoint());
-            Gson gson = new Gson();
-            FirmPointData firmPointData = gson.fromJson(data, FirmPointData.class);
-            if(callAPIResponse != null){
-                callAPIResponse.onSuccess(firmPointData);
+        VolleyAsyncHttpClient.getInstance(context).post(VolleyAsyncHttpClient.MATHOD_POST,Env.serviceURL + apiName, jsonObject, memberIDToJson(memberID),new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
+
+            @Override
+            public void onStart() {
+                Log.i(TAG,"qryFirmPoint onStart");
+                if(callAPIResponse != null){
+                    callAPIResponse.onStart();
+                }
             }
-        }else{
-            if(callAPIResponse != null){
-                callAPIResponse.onFailure(getError(context,TestDataJson.getResponseError()));
+
+            @Override
+            public void onFinish() {
+                Log.i(TAG,"qryFirmPoint onFinish");
+                if(callAPIResponse != null){
+                    callAPIResponse.onFinish();
+                }
             }
-        }
+
+            @Override
+            public void onFailure(String msg) {
+                Log.i(TAG,"qryFirmPoint onFailure msg:" +msg);
+                if(callAPIResponse != null){
+                    callAPIResponse.onFailure(msg);
+                }
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+                Log.i(TAG, "qryFirmPoint onSuccess=" + response);
+                try {
+                    if(getResult(response)){
+                        String data = getData(response);
+                        Gson gson = new Gson();
+
+                        FirmPointData firmPointData = gson.fromJson(data, FirmPointData.class);
+                        if(callAPIResponse != null) callAPIResponse.onSuccess(firmPointData);
+                    }
+                }catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
+        });
     }
 
 
@@ -672,16 +687,25 @@ public class HTTPApi {
             @Override
             public void onStart() {
                 Log.i(TAG,"qryFirmInfo onStart");
+                if(callAPIResponse != null){
+                    callAPIResponse.onStart();
+                }
             }
 
             @Override
             public void onFinish() {
                 Log.i(TAG,"qryFirmInfo onFinish");
+                if(callAPIResponse != null){
+                    callAPIResponse.onFinish();
+                }
             }
 
             @Override
             public void onFailure(String msg) {
                 Log.i(TAG,"qryFirmInfo onFailure msg:" +msg);
+                if(callAPIResponse != null){
+                    callAPIResponse.onFailure(msg);
+                }
             }
 
             @Override
@@ -839,16 +863,25 @@ public class HTTPApi {
             @Override
             public void onStart() {
                 Log.i(TAG,"qryMemberPoint onStart");
+                if(callAPIResponse != null){
+                    callAPIResponse.onStart();
+                }
             }
 
             @Override
             public void onFinish() {
                 Log.i(TAG,"qryMemberPoint onFinish");
+                if(callAPIResponse != null){
+                    callAPIResponse.onFinish();
+                }
             }
 
             @Override
             public void onFailure(String msg) {
                 Log.i(TAG,"qryMemberPoint onFailure msg:" +msg);
+                if(callAPIResponse != null){
+                    callAPIResponse.onFailure(msg);
+                }
             }
 
             @Override
@@ -1050,5 +1083,12 @@ public class HTTPApi {
             Log.e(TAG,"data array have wrong ,JSON to String is fail , data is [" + response.toString()+"]");
         }
         return data;
+    }
+
+    private String memberIDToJson(String memberID){
+        Gson gson = new Gson();
+        MemberRequest memberRequest = new MemberRequest();
+        memberRequest.setMember_id(memberID);
+        return gson.toJson(memberRequest);
     }
 }

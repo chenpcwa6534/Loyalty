@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.component.CatsData;
 import friendo.mtel.loyalty.component.AreaData;
@@ -108,8 +106,8 @@ public class SearchMainAdapter extends RecyclerView.Adapter<SearchMainAdapter.Vi
 
         private void eventDisplay(TextView txt){
             txt.setBackgroundResource(R.drawable.bg_listitem);
-            if(SearchBarView.mCurrentTextView != null) SearchBarView.mCurrentTextView.setBackgroundResource(R.mipmap.bg_common_gary_small);
-            SearchBarView.mCurrentTextView = txt;
+            if(SearchBarView.mPreviousOnClickTextView != null) SearchBarView.mPreviousOnClickTextView.setBackgroundResource(R.mipmap.bg_common_gary_small);
+            SearchBarView.mPreviousOnClickTextView = txt;
         }
 
         public interface ClickListener {

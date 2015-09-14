@@ -29,7 +29,6 @@ import friendo.mtel.loyalty.adapter.FirmsMapAdapter;
 import friendo.mtel.loyalty.component.AdsInfoData;
 import friendo.mtel.loyalty.component.AdvertisingData;
 import friendo.mtel.loyalty.component.FirmListData;
-import friendo.mtel.loyalty.data.DataCache;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
 import friendo.mtel.loyalty.data.GetListResponse;
@@ -44,7 +43,6 @@ public class FrontPageFragment extends CommonFragment {
     private String TAG = FrontPageFragment.class.getSimpleName();
 
     private View mView;
-
     private RecyclerView mListView;
     private RecyclerView mListViewMap;
     private PageSlidingPagerView mAdverising;
@@ -52,11 +50,11 @@ public class FrontPageFragment extends CommonFragment {
     private FirmsAdapter firmsAdapter;
     private FirmsMapAdapter firmsMapAdapter;
     private WebMapJSInterface mMap;
+    private String[] url;
 
     private Animation slide_in_left, slide_out_right;
     private ViewSwitcher viewSwitcher;
-    private String[] url;
-    private int pageIndex = 1 ;
+    private int pages = 1 ;
 
     private FirmListData[] db_FirmListData;
 
@@ -80,11 +78,11 @@ public class FrontPageFragment extends CommonFragment {
     @Override
     public void onResume() {
         super.onResume();
-        DataManager.getInstance(getActivity()).qryAdvertising(getDataResponse);
+        DataManager.getInstance(getActivity()).qryAdvertising(false,getDataResponse);
         FrontPageInParams frontPageInParams = ParamsManager.getfrontPageInParams(getActivity());
         Gson gson = new Gson();
         String userFilter = gson.toJson(frontPageInParams);
-        dataConnection(userFilter);
+        dataConnection(false,userFilter);
     }
 
     @Override
@@ -97,10 +95,15 @@ public class FrontPageFragment extends CommonFragment {
         super.onDestroy();
     }
 
-    private void dataConnection(String userFilter){
+    /**
+     * call list api
+     * @param isNeedAPI    isNeedAPI == true is anyway call api data, false is if cache not data then call data
+     * @param userFilter
+     */
+    private void dataConnection(boolean isNeedAPI, String userFilter){
         try{
             Log.d(TAG,"qryFirmList request data = "+userFilter);
-            DataManager.getInstance(getActivity()).qryFirmList(pageIndex, userFilter, getDataResponse);
+            DataManager.getInstance(getActivity()).qryFirmList(pages, userFilter, isNeedAPI, getDataResponse);
         }catch (JSONException e){
             Log.e(TAG,"firm list JSON to data fail ,Exception :" +e);
         }
@@ -119,6 +122,10 @@ public class FrontPageFragment extends CommonFragment {
 
     }
 
+    /**
+     * map or list mode change
+     * @param mode
+     */
     private void ModeControl(int mode){
         if(mode == MODE_LIST){
             viewSwitcher.showNext();
@@ -175,6 +182,9 @@ public class FrontPageFragment extends CommonFragment {
         }
     }
 
+    /**
+     * list onclick
+     */
     private GetListResponse getListResponse = new GetListResponse() {
         @Override
         public void onFirmResponse(int position) {
@@ -192,12 +202,14 @@ public class FrontPageFragment extends CommonFragment {
         }
     };
 
-
+    /**
+     * Search bar select end callback
+     */
     private GetSearchResponse getSearchResponse = new GetSearchResponse() {
         @Override
         public void onFirmSearch(String userFilter) {
             String data = userFilter;
-            dataConnection(data);
+            dataConnection(true,data);
         }
 
         @Override
@@ -212,6 +224,9 @@ public class FrontPageFragment extends CommonFragment {
         }
     };
 
+    /**
+     * api callback
+     */
     private GetDataResponse getDataResponse = new GetDataResponse() {
         @Override
         public void onStart() {
@@ -234,7 +249,6 @@ public class FrontPageFragment extends CommonFragment {
                 initMap();
                 initFirms_List();
                 initFirms_Map();
-                //ModeControl(MODE);
             }
         }
 
@@ -258,6 +272,9 @@ public class FrontPageFragment extends CommonFragment {
         super.intentGoogleSearch(str);
     }
 
+    /**
+     * Scroll list change map maker point
+     */
     private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

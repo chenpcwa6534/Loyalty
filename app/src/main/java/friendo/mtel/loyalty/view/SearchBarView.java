@@ -2,7 +2,6 @@ package friendo.mtel.loyalty.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,9 +21,11 @@ import com.google.gson.Gson;
 import friendo.mtel.loyalty.HttpsParams.FrontPageInParams;
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.adapter.SearchMainAdapter;
+import friendo.mtel.loyalty.common.DeviceInformation;
 import friendo.mtel.loyalty.component.FilterData;
 import friendo.mtel.loyalty.data.DataCache;
 import friendo.mtel.loyalty.data.GetSearchResponse;
+import friendo.mtel.loyalty.utility.Utilitys;
 
 /**
  * Created by MTel on 2015/8/18.
@@ -34,11 +35,10 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
 
     private Context mContext;
     private FilterData db_filter;
-    private View SubView;
-    private boolean isOpen_SubView = false;
-    private View CurrentEvent;
-    public static TextView mCurrentTextView;
-    private int DURATIONTIME =300;
+    private View SubView;       //下拉區塊
+    private View PreviousOnClickSelect;  //紀錄上次按下的搜尋條件類別(分類，地區，排序)
+    public static TextView mPreviousOnClickTextView;
+
 
     private RecyclerView mMainListView;
     private RecyclerView mSubListView;
@@ -50,14 +50,11 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
 
     private GetSearchResponse mListener;
 
-    private int OrderTypeAttr; //default = 0,  0 is firmlist, 1 is limitlist
-    private boolean SearchKeyOpen;
-    private boolean Mode;      // mode 切換功能扭 default is true
-
-
-//    public interface ClickListener{
-//        void onSearch(String userFilter);
-//    }
+    private int Attr_OrderType; //default = 0,  0 is firmlist, 1 is limitlist
+    private boolean Attr_SearchKeyOpen;  //手 key 欄位是否顯示
+    private boolean Attr_Mode;      // mode 切換功能扭 default is true
+    private int DURATIONTIME =300;  //動畫時間
+    private boolean isOpen_SubView = false; //確認下拉選單是否已被打開
 
     public SearchBarView(Context context) {
         super(context);
@@ -78,13 +75,14 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
 
     private void getAttr(Context context , AttributeSet attrs){
         TypedArray typedArray = context.obtainStyledAttributes(attrs,R.styleable.SearchBarAttr);
-        OrderTypeAttr = typedArray.getInt(R.styleable.SearchBarAttr_OrderType,0);
-        SearchKeyOpen = typedArray.getBoolean(R.styleable.SearchBarAttr_SearchKey, true);
-        Mode = typedArray.getBoolean(R.styleable.SearchBarAttr_Mode,true);
+        Attr_OrderType = typedArray.getInt(R.styleable.SearchBarAttr_OrderType,0);
+        Attr_SearchKeyOpen = typedArray.getBoolean(R.styleable.SearchBarAttr_SearchKey, true);
+        Attr_Mode = typedArray.getBoolean(R.styleable.SearchBarAttr_Mode,true);
     }
 
     private void initView(){
         db_filter = DataCache.cacheFilterData;
+        if(db_filter == null) db_filter = new FilterData();
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View mView = layoutInflater.inflate(R.layout.custom_searchbar, null);
 
@@ -111,13 +109,13 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
         mOrders.setTag(0);
         addView(mView);
 
-        if(SearchKeyOpen){
+        if(Attr_SearchKeyOpen){
             mSearchKey.setVisibility(View.VISIBLE);
         }else{
             mSearchKey.setVisibility(View.GONE);
         }
 
-        if(Mode){
+        if(Attr_Mode){
             mMode.setVisibility(View.VISIBLE);
         }else{
             mMode.setVisibility(View.GONE);
@@ -126,16 +124,20 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
         initValue();
     }
 
+    /**
+     * SearchBar initialzation
+     * if gps is open show data index = 0, 附近店家 跟 依距離排序
+     * if gps is close show data index = 1, 台北市 跟 依優惠排序
+     */
     private void initValue(){
         mCats.setText(db_filter.getCats()[0].getCat_name());
-        mCitys.setText(db_filter.getArea()[0].getCity_name());
-        mOrders.setText(db_filter.getOrder()[0].getOrder_name());
-
-//        if(OrderTypeAttr == 0){
-//            mOrders.setText(db_filter.getOrder().getPoint()[0].getOrderName());
-//        }else{
-//            mOrders.setText(db_filter.getOrder().getLimit()[0].getOrderName());
-//        }
+        if(Utilitys.isGPS(mContext)){
+            mCitys.setText(db_filter.getArea()[0].getCity_name());
+            mOrders.setText(db_filter.getOrder()[0].getOrder_name());
+        }else{
+            mCitys.setText(db_filter.getArea()[1].getCity_name());
+            mOrders.setText(db_filter.getOrder()[1].getOrder_name());
+        }
     }
 
     private void setCatsText(String str){
@@ -152,10 +154,10 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
 
     private void reSearch(){
         Gson gson = new Gson();
-        if(OrderTypeAttr == 0){
+        if(Attr_OrderType == 0){
             String userFilter = gson.toJson(DataCache.cacheFrontPageInParams);
             mListener.onFirmSearch(userFilter);
-        }else if(OrderTypeAttr == 1){
+        }else if(Attr_OrderType == 1){
             String userFilter = gson.toJson(DataCache.cacheFrontPageInParamsLimit);
             mListener.onLimitSearch(userFilter);
         }
@@ -211,11 +213,6 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
         @Override
         public void onOrders(int position) {
             String OrderName;
-//            if(OrderTypeAttr == 0){
-//                OrderName = db_filter.getOrder().getPoint()[position].getOrderName();
-//            }else{
-//                OrderName = db_filter.getOrder().getLimit()[position].getOrderName();
-//            }
             int orderID = db_filter.getOrder()[position].getOrder_id();
             String orderName = db_filter.getOrder()[position].getOrder_name();
             setOrderText(orderName);
@@ -264,11 +261,6 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
                 break;
             case R.id.txt_Orders:
                 SearchMainAdapter orderAdapter = new SearchMainAdapter(getContext(),db_filter.getOrder(),onClickListener);
-//                if(OrderTypeAttr == 0){
-//                    orderAdapter = new SearchMainAdapter(getContext(),db_filter.getOrder().getPoint(),onClickListener);
-//                }else{
-//                    orderAdapter = new SearchMainAdapter(getContext(),db_filter.getOrder().getLimit(),onClickListener);
-//                }
 
                 mMainListView.setAdapter(orderAdapter);
                 mSubListView.setVisibility(View.INVISIBLE);
@@ -286,18 +278,26 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
         mMainListView.setVisibility(View.VISIBLE);
     }
 
-    private void openControl(View NowEvent){
+    /**
+     * 下拉區塊顯示控制
+     * @param NowOnClickSelect
+     */
+    private void openControl(View NowOnClickSelect){
         if(isOpen_SubView){
             HiddenAction();
-            if(NowEvent != CurrentEvent){
-                ShowAction(NowEvent);
+            if(NowOnClickSelect != PreviousOnClickSelect){
+                ShowAction(NowOnClickSelect);
             }
         }else{
-            ShowAction(NowEvent);
+            ShowAction(NowOnClickSelect);
         }
-        CurrentEvent = NowEvent;
+        PreviousOnClickSelect = NowOnClickSelect;
     }
 
+    /**
+     * list push on style
+     * @param btn
+     */
     private void setBtnPress(TextView btn){
         if(btn != null){
             btn.setTextColor(mContext.getResources().getColor(R.color.str_Text_Pressed));
@@ -306,6 +306,10 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
         }
     }
 
+    /**
+     * list push off style
+     * @param btn
+     */
     private void setBtnUnPress(TextView btn){
         if(btn != null){
             btn.setTextColor(mContext.getResources().getColor(R.color.white));
@@ -314,16 +318,24 @@ public class SearchBarView extends RelativeLayout implements View.OnClickListene
         }
     }
 
+    /**
+     * invisible 動畫設定
+     */
     private void HiddenAction(){
         TranslateAnimation hidden = new TranslateAnimation(Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,-1.0f);
         hidden.setDuration(DURATIONTIME);
         SubView.startAnimation(hidden);
         SubView.setVisibility(View.GONE);
         mSubListView.setVisibility(View.INVISIBLE);
-        setBtnUnPress((TextView) CurrentEvent);
+        setBtnUnPress((TextView) PreviousOnClickSelect);
         isOpen_SubView = false;
     }
 
+
+    /**
+     * visible 動畫設定
+     * @param v
+     */
     private void ShowAction(View v){
         TranslateAnimation show = new TranslateAnimation(Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,-1.0f,Animation.RELATIVE_TO_SELF,0.0f);
         show.setDuration(DURATIONTIME);
