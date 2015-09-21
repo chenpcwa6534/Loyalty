@@ -46,7 +46,7 @@ public class LoyaltyPreference extends BasePreferences {
     }
 
     public static final String PERSON_MEMBERID = "MEMBERID";
-    private static final String DEFAULT_PERSON_MEMBERID = "00000000-0000-0000-0000-000000000000";
+    public static final String DEFAULT_PERSON_MEMBERID = "00000000-0000-0000-0000-000000000000";
     private static String PAR_PERSON_MEMBER = DEFAULT_PERSON_MEMBERID;
     public static void setMemberID(Context context,String memberID){
         try{
@@ -162,7 +162,7 @@ public class LoyaltyPreference extends BasePreferences {
 
 
     public enum API{
-        VersionControl,Filter
+        VersionControl,Filter,Filter_Order
     }
 
     public static final String API_REQUESTTIME = "";

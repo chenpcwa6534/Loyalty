@@ -105,12 +105,21 @@
         <item>星期六</item>
     </string-array>
 
+    <!-- filter order hard code-->
+    <!-- index 0 is version , if version have update
+         then all update -->
+    <string-array name="filter_order">
+        <item>V1</item>
+        <item>依距離</item>
+        <item>依優惠更新</item>
+        <item>依近期熱門</item>
+    </string-array>
+
     <!-- unit -->
     <string name="meter">公尺</string>
     <string name="kilometer">公里</string>
+    <string name="dollar_tenthousand">萬</string>
 
-    <!--Requset Error code-->
-    <string name="code_301">系統錯誤</string>
 
     <!-- Tag Key-->
     <item type="id" name="tag_isPress">true</item>

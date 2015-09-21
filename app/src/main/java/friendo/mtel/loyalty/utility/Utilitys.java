@@ -46,13 +46,12 @@ public class Utilitys {
     }
 
     public static boolean isLogin(Context context){
-//        String memerID = LoyaltyPreference.getMemberID(context);
-//        if(memerID.equals("")){
-//            return false;
-//        }else{
-//            return true;
-//        }
-        return true;
+        String memerID = LoyaltyPreference.getMemberID(context);
+        if(memerID.equals(LoyaltyPreference.DEFAULT_PERSON_MEMBERID)){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public static Location locationServiceInital(Context context){
@@ -92,6 +91,12 @@ public class Utilitys {
         }else{
             return Kilometer + "\n" + context.getResources().getString(R.string.kilometer);
         }
+    }
+
+    public static String dollarConversion(Context context, int dollar){
+        float tenthousand = dollar/10000;
+        String doll = String.format("%.1f",tenthousand) + context.getResources().getString(R.string.dollar_tenthousand);
+        return doll;
     }
 
 }

@@ -29,7 +29,7 @@ public class HttpErrorMessage {
     public String errorMessage(int ErrorCode){
         switch (ErrorCode){
             default:
-                return httpErrorMessage.mContext.getResources().getString(R.string.code_301);
+                return httpErrorMessage.mContext.getResources().getString(R.string.app_system_fail);
         }
     }
 }

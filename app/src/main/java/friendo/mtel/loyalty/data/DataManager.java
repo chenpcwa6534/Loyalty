@@ -21,6 +21,7 @@ import friendo.mtel.loyalty.component.FilterData;
 import friendo.mtel.loyalty.component.FirmInfoData;
 import friendo.mtel.loyalty.component.MemberCouponsData;
 import friendo.mtel.loyalty.component.MemberPointData;
+import friendo.mtel.loyalty.db.DBManager;
 import friendo.mtel.loyalty.httpapi.CallAPIResponse;
 import friendo.mtel.loyalty.httpapi.HTTPApi;
 import friendo.mtel.loyalty.preferences.LoyaltyPreference;
@@ -142,19 +143,11 @@ public class DataManager {
     /**
      * search condition data
      * @param verUpdateTime
-     * @param isNeedAPI
      * @param getDataResponse
      * @return
      */
-    public FilterData qryFilter(String verUpdateTime, boolean isNeedAPI, final GetDataResponse getDataResponse) throws JSONException{
-        FilterData filterData = new FilterData();
-        if(DataCache.cacheFilterData != null ){
-            filterData = DataCache.cacheFilterData;
-        }else{
-            isNeedAPI = true;
-        }
+    public void qryFilter(String verUpdateTime, final GetDataResponse getDataResponse) throws JSONException{
 
-        if(isNeedAPI){
             CallAPIResponse callAPIResponse = new CallAPIResponse() {
                 @Override
                 public void onStart() {
@@ -165,7 +158,8 @@ public class DataManager {
 
                 @Override
                 public void onSuccess(Object response) {
-                    DataCache.cacheFilterData = (FilterData) response;
+                    DBManager.setFilterData((FilterData) response);
+                    DataCache.cacheFilterData = DBManager.getFilterData();
                     if(getDataResponse != null){
                         getDataResponse.onSuccess(response);
                     }
@@ -193,8 +187,6 @@ public class DataManager {
                 }
             };
             (new HTTPApi()).qryFilter(mContext, verUpdateTime, callAPIResponse);
-        }
-        return filterData;
     }
 
 

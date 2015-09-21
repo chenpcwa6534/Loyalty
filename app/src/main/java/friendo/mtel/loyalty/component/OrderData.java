@@ -6,7 +6,6 @@ package friendo.mtel.loyalty.component;
 public class OrderData {
     private int order_id;
     private String order_name;
-    private boolean orderVaild;
 
     public int getOrder_id() {
         return order_id;
@@ -22,13 +21,5 @@ public class OrderData {
 
     public void setOrder_name(String order_name) {
         this.order_name = order_name;
-    }
-
-    public boolean isOrderVaild() {
-        return orderVaild;
-    }
-
-    public void setOrderVaild(boolean orderVaild) {
-        this.orderVaild = orderVaild;
     }
 }

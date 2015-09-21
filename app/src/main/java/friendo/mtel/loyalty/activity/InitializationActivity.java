@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.astuetz.view.stratch.StratchView;
 
 import friendo.mtel.loyalty.GCM.GetGCMResponse;
 import friendo.mtel.loyalty.GCM.RegisterTask;
@@ -16,6 +19,7 @@ import friendo.mtel.loyalty.component.FilterData;
 import friendo.mtel.loyalty.component.VersionControlData;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
+import friendo.mtel.loyalty.db.DBManager;
 import friendo.mtel.loyalty.preferences.LoyaltyPreference;
 import friendo.mtel.loyalty.utility.Utilitys;
 import friendo.mtel.loyalty.view.MessageDialog;
@@ -50,16 +54,18 @@ public class InitializationActivity extends Activity {
     protected void onResume() {
         super.onResume();
         try{
+            /** Register GCM */
             new RegisterTask(this,getGCMResponse).execute();
+            /** Create database table */
+            DBManager.getDatabase(getApplicationContext());
+            /** download api data */
             String VerControl_UpdateTime = LoyaltyPreference.getAPIRequestTime(this, LoyaltyPreference.API.VersionControl);
             DataManager.getInstance(this).qryVersionControl(VerControl_UpdateTime, getDataResponse);
-            //error message 改為V2 使用
-            //DataManager.getInstance(this).qryErrorMessage("", getDataResponse);
             String Filter_UpdateTime = LoyaltyPreference.getAPIRequestTime(this, LoyaltyPreference.API.Filter);
-            DataManager.getInstance(this).qryFilter(Filter_UpdateTime, true, getDataResponse);
+            DataManager.getInstance(this).qryFilter(Filter_UpdateTime, getDataResponse);
 
         }catch (Exception e){
-            Log.e(TAG,"DataManager call api fail (InitializationActivity.class line 51) Exception:"+e.getMessage());
+            Log.e(TAG,"DataManager call api fail (InitializationActivity.class line 68) Exception:"+e.getMessage());
         }
     }
 
@@ -140,7 +146,6 @@ public class InitializationActivity extends Activity {
                 inspection_success += 1;
                 Log.d(TAG,"Filter success");
             }
-
             inspection();
         }
 
@@ -196,5 +201,4 @@ public class InitializationActivity extends Activity {
             finish();
         }
     };
-
 }
