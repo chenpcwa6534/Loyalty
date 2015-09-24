@@ -13,20 +13,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.json.JSONObject;
-
-import friendo.mtel.loyalty.GCM.Utility;
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.Receiver.GetReceverResponse;
 import friendo.mtel.loyalty.Receiver.ReceiverManager;
-import friendo.mtel.loyalty.Request.RequestManager;
-import friendo.mtel.loyalty.common.DeviceInformation;
 import friendo.mtel.loyalty.component.VerificationData;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
 import friendo.mtel.loyalty.data.GetPagesResponse;
+import friendo.mtel.loyalty.httpsparams.ParamsManager;
 import friendo.mtel.loyalty.preferences.LoyaltyPreference;
-import friendo.mtel.loyalty.utility.Utilitys;
 
 /**
  * Created by MTel on 2015/7/2.
@@ -37,7 +32,7 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
     private TextView mSkip;
     private TextView mNumber;
     private EditText mVerificaion;
-    private ProgressDialog mDialogProgress;
+
 
     private GetPagesResponse mGetPagesResponse;
 
@@ -50,9 +45,10 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_liginverification,container,false);
+        Log.d(TAG,"SMS onCreate");
         findView(v);
-        initDialogProgress();
         initView();
+        SMSReceiver();
         return v;
     }
 
@@ -68,8 +64,6 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
     @Override
     public void onResume() {
         super.onResume();
-        ReceiverManager.registerSMSReceiver(getActivity(), getReceverResponse);
-        mDialogProgress.show();
     }
 
     @Override
@@ -95,11 +89,15 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if(KeyEvent.KEYCODE_ENTER == keyCode) {
-            String token = LoyaltyPreference.getDeviceToken(getActivity());
-            String userfilter = RequestManager.setVerificationOTPRequese(mNumber.getText().toString(), mVerificaion.getText().toString(), token);
-            DataManager.getInstance(getActivity()).qryVerificationOTP(userfilter,getDataResponse);
+            verification();
         }
         return false;
+    }
+
+    private void verification(){
+        String token = LoyaltyPreference.getDeviceToken(getActivity());
+        String userfilter = ParamsManager.getVerificationOTPParams(mNumber.getText().toString(), mVerificaion.getText().toString(), token);
+        DataManager.getInstance(getActivity()).qryVerificationOTP(userfilter,getDataResponse);
     }
 
     private void findView(View v){
@@ -108,17 +106,16 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
         mVerificaion = (EditText) v.findViewById(R.id.verifvation);
     }
 
-    private void initDialogProgress(){
-        mDialogProgress.setMessage(getResources().getString(R.string.app_system_waitMSG));
-        mDialogProgress.setCancelable(false);
-    }
-
     private void initView(){
         mNumber.setText(getArguments().getString(key));
         mVerificaion.requestFocus();
         mVerificaion.setOnKeyListener(this);
         mSkip.setOnClickListener(this);
-        openKeyBroad();
+        //openKeyBroad();
+    }
+
+    private void SMSReceiver(){
+        ReceiverManager.registerSMSReceiver(getActivity(), getReceverResponse);
     }
 
     private void openKeyBroad(){
@@ -141,7 +138,7 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
                 LoyaltyPreference.setMemberID(getActivity(), memberID);
                 mGetPagesResponse.onVerification(verificationData.getMessage());
             }catch (Exception e){
-                Log.e(TAG,"VerifcationOTP parse fail (LoginVerificationFragment.class line 132) Exception :" + e.getMessage());
+                Log.e(TAG,"VerifcationOTP parse fail (LoginVerificationFragment.class) Exception :" + e.getMessage());
             }
         }
 
@@ -166,6 +163,7 @@ public class LoginVerificationFragment extends Fragment implements View.OnClickL
         public void onSMSRecever(String msg) {
             mVerificaion.setText(msg);
             mVerificaion.requestFocus();
+            verification();
         }
     };
 

@@ -40,12 +40,12 @@ public class Table_SubCity extends DBManager {
         cv.put(COLUMN_Name,subAreaData.getSubarea_name());
         cv.put(Table_City.COLUMN_ID, CityID);
 
-        String where = COLUMN_ID + " = " + subAreaData.getSubarea_id() + AND + Table_City.COLUMN_ID + " = "  + CityID;
+        String where = COLUMN_ID + " = " + "'" + subAreaData.getSubarea_id() + "'" + AND + Table_City.COLUMN_ID + " = "  + CityID;
         return database.update(TABLE_NAME, cv, where, null) > 0;
     }
 
     public static boolean delete(String subCityid, int Cityid){
-        String where = COLUMN_ID + " = " + subCityid + AND + Table_City.COLUMN_ID + " = "  + Cityid;
+        String where = COLUMN_ID + " = " + "'" + subCityid + "'" + AND + Table_City.COLUMN_ID + " = "  + Cityid;
         return database.delete(TABLE_NAME, where, null) > 0;
     }
 

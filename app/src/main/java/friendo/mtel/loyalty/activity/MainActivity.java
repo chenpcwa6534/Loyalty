@@ -64,7 +64,6 @@ public class MainActivity extends CommonActionBarActivity {
         initToolbar();
         initTabView();
         initPagerView();
-        DataCache.initFrontPageInParams(this); // 初始化搜尋條件
     }
 
     private void initToolbar(){

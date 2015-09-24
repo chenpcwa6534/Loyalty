@@ -1,83 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/first"
         android:layout_width="match_parent"
-        android:layout_height="130dp">
+        android:layout_height="200dp"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/img_photo"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/test_preferential1"/>
-
-                <TextView
-                    android:id="@+id/txt_QTY"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="30dp"
-                    android:text="剩5張"
-                    android:textColor="@color/ApparelStore_ColorA"
-                    android:background="@color/white"/>
-
-            </RelativeLayout>
-
-
-        <LinearLayout
-            android:id="@+id/itemView"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:background="@mipmap/bg_common_orange_small">
+            android:layout_weight=".5">
 
-            <RelativeLayout
+            <ImageView
+                android:id="@+id/img_first_photo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight=".5">
-
-            </RelativeLayout>
+                android:scaleType="fitXY"
+                android:src="@mipmap/test_stroe"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight=".5"
-                android:orientation="vertical">
+                android:background="@mipmap/bg_store_left_big">
 
-                <TextView
-                    style="@style/font_title_black"
-                    android:id="@+id/txt_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    style="@style/font_content_black"
-                    android:id="@+id/txt_content"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    style="@style/font_time_black"
-                    android:id="@+id/txt_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/orange"
+            android:layout_weight=".5">
 
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/bg_store_right_big"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/txt_first_couponname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/firmContent_border_left"
+                    android:layout_marginRight="@dimen/firmContent_border_right"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:text="首次優惠體驗"/>
+
+                <TextView
+                    android:id="@+id/txt_first_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/firmContent_border_left"
+                    android:layout_marginRight="@dimen/firmContent_border_right"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/graylight"
+                    android:textSize="12sp"
+                    android:text="開幕期間，憑卷來店就送綠茶一杯"/>
+
+                <TextView
+                    android:id="@+id/txt_first_expireday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/firmContent_border_left"
+                    android:layout_marginRight="@dimen/firmContent_border_right"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:text="倒數3天"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_store_circle"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:text="@string/store_tag"
+        android:visibility="gone"/>
+
+
+    <LinearLayout
+        android:id="@+id/general"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".5">
+
+            <ImageView
+                android:id="@+id/img_general_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@mipmap/test_stroe"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/bg_store_left_small">
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_weight=".5">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/bg_store_right_small"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/txt_general_couponname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/firmContent_border_left"
+                    android:layout_marginRight="@dimen/firmContent_border_right"
+                    android:textColor="@color/Cuisine_ColorB"
+                    android:textSize="18sp"
+                    android:text="首次優惠體驗"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/firmContent_border_left"
+                    android:layout_marginRight="@dimen/firmContent_border_right"
+                    android:textColor="@color/Cuisine_ColorB"
+                    android:text="---"/>
+
+                <TextView
+                    android:id="@+id/txt_general_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/firmContent_border_left"
+                    android:layout_marginRight="@dimen/firmContent_border_right"
+                    android:textColor="@color/Cuisine_ColorA"
+                    android:textSize="12sp"
+                    android:text="開幕期間，憑卷來店就送綠茶一杯"/>
+
+                <TextView
+                    android:id="@+id/txt_general_expireday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/firmContent_border_left"
+                    android:layout_marginRight="@dimen/firmContent_border_right"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/Cuisine_ColorB"
+                    android:textSize="14sp"
+                    android:text="倒數3天"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>

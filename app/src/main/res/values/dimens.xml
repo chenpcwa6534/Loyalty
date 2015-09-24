@@ -7,4 +7,7 @@
     <dimen name="store_itemtitle_margin">10dp</dimen>
 
     <dimen name="substore_drawablepadding">10dp</dimen>
+    
+    <dimen name="firmContent_border_left">20dp</dimen>
+    <dimen name="firmContent_border_right">30dp</dimen>
 </resources>

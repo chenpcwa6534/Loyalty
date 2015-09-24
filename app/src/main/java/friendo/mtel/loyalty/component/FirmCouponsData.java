@@ -4,19 +4,20 @@ package friendo.mtel.loyalty.component;
  * Created by MTel on 2015/8/20.
  */
 public class FirmCouponsData {
-    private int couponID;
+    private int coupons_id;
     private String title;
     private String description;
     private String picture;
-    private String picturePath;
-    private int expireDay;
+    private String picturepath;
+    private int expireday;
+    private boolean type;
 
-    public int getCouponID() {
-        return couponID;
+    public int getCoupons_id() {
+        return coupons_id;
     }
 
-    public void setCouponID(int couponID) {
-        this.couponID = couponID;
+    public void setCoupons_id(int coupons_id) {
+        this.coupons_id = coupons_id;
     }
 
     public String getTitle() {
@@ -43,19 +44,27 @@ public class FirmCouponsData {
         this.picture = picture;
     }
 
-    public String getPicturePath() {
-        return picturePath;
+    public String getPicturepath() {
+        return picturepath;
     }
 
-    public void setPicturePath(String picturePath) {
-        this.picturePath = picturePath;
+    public void setPicturepath(String picturepath) {
+        this.picturepath = picturepath;
     }
 
-    public int getExpireDay() {
-        return expireDay;
+    public int getExpireday() {
+        return expireday;
     }
 
-    public void setExpireDay(int expireDay) {
-        this.expireDay = expireDay;
+    public void setExpireday(int expireday) {
+        this.expireday = expireday;
+    }
+
+    public boolean isType() {
+        return type;
+    }
+
+    public void setType(boolean type) {
+        this.type = type;
     }
 }

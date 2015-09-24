@@ -23,6 +23,7 @@ public class WheelOfFortune extends RelativeLayout{
 
     private static final long ONE_WHEEL_TIME = 500;
     private static final int LABS_MAX = 10;
+    private static final int LABS_MIN = 5;
     private int mStartDegree = 0;
 
     private ImageView mBackground;
@@ -69,14 +70,13 @@ public class WheelOfFortune extends RelativeLayout{
     }
 
     private void startAnimation(int angle_data){
-        int labs = (int) (Math.random() * LABS_MAX);
+        int labs = (int) (Math.random() * LABS_MAX + LABS_MIN);
         int angles_start = (360 * labs) + (angle_data * index);
-        int angles_end = (360 * labs) + (angle_data * index + 1);
-        int angles = (int) (Math.random() * angles_end + angles_start);
+        int angles = (int) (Math.random() * angle_data + angles_start);
         RotateAnimation rotateAnimation = new RotateAnimation(mStartDegree, angles,
-                RotateAnimation.RELATIVE_TO_SELF, 0.0f
-                ,RotateAnimation.RELATIVE_TO_SELF, 0.0f);
-        long time = (angles / 360) *ONE_WHEEL_TIME;
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f
+                ,RotateAnimation.RELATIVE_TO_SELF,0.6f);
+        long time = (angles / 360) * ONE_WHEEL_TIME;
         rotateAnimation.setDuration(time);
         rotateAnimation.setFillAfter(true);
         rotateAnimation.setInterpolator(getContext(), android.R.anim.accelerate_decelerate_interpolator);
@@ -92,7 +92,9 @@ public class WheelOfFortune extends RelativeLayout{
 
         @Override
         public void onAnimationEnd(Animation animation) {
-            mListener.onWheelEnd();
+            if(mListener != null){
+                mListener.onWheelEnd();
+            }
         }
 
         @Override
@@ -110,6 +112,6 @@ public class WheelOfFortune extends RelativeLayout{
     };
 
     public void setCallback(WheelListener listener){
-        this.mListener = listener;
+            this.mListener = listener;
     }
 }

@@ -2,8 +2,10 @@ package friendo.mtel.loyalty.data;
 
 import android.content.Context;
 
-import friendo.mtel.loyalty.HttpsParams.FrontPageInParams;
-import friendo.mtel.loyalty.HttpsParams.ParamsManager;
+import com.google.gson.Gson;
+
+import friendo.mtel.loyalty.httpsparams.FrontPageInParams;
+import friendo.mtel.loyalty.httpsparams.ParamsManager;
 import friendo.mtel.loyalty.component.AdvertisingData;
 import friendo.mtel.loyalty.component.FirmCouponsData;
 import friendo.mtel.loyalty.component.FirmListData;
@@ -44,10 +46,4 @@ public class DataCache {
     public static FrontPageInParams cacheFrontPageInParams;
     public static FrontPageInParams cacheFrontPageInParamsLimit;
 
-
-
-    public static void initFrontPageInParams(Context context){
-        cacheFrontPageInParams = ParamsManager.getfrontPageInParams(context);
-        cacheFrontPageInParamsLimit = ParamsManager.getfrontPageInParams(context);
-    }
 }

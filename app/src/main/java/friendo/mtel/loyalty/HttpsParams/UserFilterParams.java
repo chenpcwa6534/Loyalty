@@ -1,4 +1,4 @@
-package friendo.mtel.loyalty.HttpsParams;
+package friendo.mtel.loyalty.httpsparams;
 
 /**
  * Created by MTel on 2015/8/2.

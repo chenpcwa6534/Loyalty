@@ -178,7 +178,7 @@ public class InitializationActivity extends Activity {
         @Override
         public void onSuccess(String type, String token) {
             LoyaltyPreference.setDeviceToken(InitializationActivity.this, token);
-            Log.d(TAG, "GCM Register success");
+            Log.d(TAG, "GCM Register success token is "+ token);
         }
 
         @Override

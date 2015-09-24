@@ -20,6 +20,9 @@ import friendo.mtel.loyalty.preferences.LoyaltyPreference;
  */
 public class Utilitys {
 
+    /** 一夜有多少筆資料 */
+    public static int ONE_PAGE_DATACOUNT = 100;
+
     public static boolean isBluetooth(){
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         return bluetoothAdapter.isEnabled();
@@ -77,7 +80,7 @@ public class Utilitys {
     public static boolean getTodayWeekDay(int day){
         Calendar calendar = Calendar.getInstance();
         int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
-        if(currentDay == day){
+        if(currentDay == day+1){
             return true;
         }else {
             return false;
@@ -85,11 +88,11 @@ public class Utilitys {
     }
 
     public static String distanceConversion(Context context, int dis){
-        int Kilometer = dis/1000;
+        double Kilometer = (double) dis / (double) 1000;
         if(Kilometer == 0){
             return dis + "\n" + context.getResources().getString(R.string.meter);
         }else{
-            return Kilometer + "\n" + context.getResources().getString(R.string.kilometer);
+            return String.format("%.1f",Kilometer) + "\n" + context.getResources().getString(R.string.kilometer);
         }
     }
 

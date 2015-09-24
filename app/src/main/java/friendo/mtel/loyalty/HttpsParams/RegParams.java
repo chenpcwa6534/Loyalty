@@ -1,9 +1,9 @@
-package friendo.mtel.loyalty.Request;
+package friendo.mtel.loyalty.httpsparams;
 
 /**
  * Created by MTel on 2015/8/14.
  */
-public class RegRequest {
+public class RegParams {
     
     private String cell_no;
     private String verf_code;

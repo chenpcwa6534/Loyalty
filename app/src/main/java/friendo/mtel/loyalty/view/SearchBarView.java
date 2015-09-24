@@ -18,10 +18,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-import friendo.mtel.loyalty.HttpsParams.FrontPageInParams;
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.adapter.SearchMainAdapter;
-import friendo.mtel.loyalty.common.DeviceInformation;
 import friendo.mtel.loyalty.component.FilterData;
 import friendo.mtel.loyalty.data.DataCache;
 import friendo.mtel.loyalty.data.GetSearchResponse;

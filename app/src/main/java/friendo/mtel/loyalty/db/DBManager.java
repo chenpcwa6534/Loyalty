@@ -121,7 +121,7 @@ public class DBManager {
         String oldVersion = LoyaltyPreference.getAPIRequestTime(mContext, LoyaltyPreference.API.Filter_Order);
         String nowVersion = OrderData[0];
         if(!oldVersion.equals(nowVersion)){
-            for(int i=1; i<OrderData.length-1; i++){
+            for(int i=1; i<OrderData.length; i++){
                 if(Table_Order.get(i)){
                     Table_Order.update(i,OrderData[i]);
                 }else{
@@ -142,7 +142,7 @@ public class DBManager {
 
     private static CatsData[] getCatsData(){
         int index_cat = 0;
-        int index_subcat = 0;
+
         /** Cats */
         Cursor result_Cat = database.query(Table_Cat.TABLE_NAME,null,null,null,null,null,null);
         CatsData[] catsDatas = new CatsData[result_Cat.getCount()];
@@ -152,6 +152,7 @@ public class DBManager {
             catsData.setCat_name(result_Cat.getString(2));
 
             /** SubCats */
+            int index_subcat = 0;
             String where = Table_Cat.COLUMN_ID + " = " + result_Cat.getInt(1);
             Cursor result_SubCat = database.query(Table_SubCat.TABLE_NAME,null,where,null,null,null,null);
             SubCatsData[] subCatsDatas = new SubCatsData[result_SubCat.getCount()];
@@ -171,7 +172,6 @@ public class DBManager {
 
     private static AreaData[] getAreaData(){
         int index_city = 0;
-        int index_subcity = 0;
         /** Citys */
         Cursor result_City = database.query(Table_City.TABLE_NAME,null,null,null,null,null,null);
         AreaData[] areaDatas = new AreaData[result_City.getCount()];
@@ -181,6 +181,7 @@ public class DBManager {
             areaData.setCity_name(result_City.getString(2));
 
             /** SubCitys */
+            int index_subcity = 0;
             String where = Table_City.COLUMN_ID + " = " + result_City.getInt(1);
             Cursor result_SubCity = database.query(Table_SubCity.TABLE_NAME,null,where,null,null,null,null);
             SubAreaData[] subAreaDatas = new SubAreaData[result_SubCity.getCount()];

@@ -1,9 +1,9 @@
-package friendo.mtel.loyalty.Request;
+package friendo.mtel.loyalty.httpsparams;
 
 /**
  * Created by MTel on 2015/8/14.
  */
-public class VerControlRequest {
+public class VerControlParams {
 
     private String app_ver;
     private String os_ver;

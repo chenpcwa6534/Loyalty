@@ -35,6 +35,8 @@
     <string name="store_item_pointTitle">集點</string>
     <string name="store_item_experienceTitle">首次體驗</string>
     <string name="store_item_searchedit">搜尋店家名稱</string>
+    <string name="store_tag">限量</string>
+    <string name="store_reciprocal">倒數 %1$d 天</string>
     <string name="substore_beaconcontrol">Beacon到店優惠通知</string>
     <string name="substore_blog">部落格評價</string>
     <string name="substore_title">餐廳介紹</string>

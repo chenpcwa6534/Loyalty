@@ -38,14 +38,22 @@ public class StorePreferentialAdapter  extends RecyclerView.Adapter<StorePrefere
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mTitle.setText(db_firmCoupons[position].getDescription());
-        PicassoUtility.load(mContext, holder.mPhoto, db_firmCoupons[position].getPicture());
-        holder.mSheet.setText(String .format(mContext.getResources().getString(R.string.subpreferential_qty),db_firmCoupons[position].getExpireDay()));
+        if(db_firmCoupons[position].isType()){
+            holder.mTag.setVisibility(View.VISIBLE);
+            holder.mfirst.setVisibility(View.VISIBLE);
 
+            PicassoUtility.load(mContext, holder.mPhoto_first, db_firmCoupons[position].getPicture());
+            holder.mCouponName_first.setText(db_firmCoupons[position].getTitle());
+            holder.mContent_first.setText(db_firmCoupons[position].getDescription());
+            holder.mExpireday_first.setText(String.format(mContext.getResources().getString(R.string.store_reciprocal),db_firmCoupons[position].getExpireday()));
+        }else{
+            holder.mGeneral.setVisibility(View.VISIBLE);
 
-//        if(db_firmCoupons[position].getCoupon_rule_type().equals("latest")){
-//            holder.mBackgroundView.setBackgroundResource(R.mipmap.bg_common_orange_big);
-//        }
+            PicassoUtility.load(mContext, holder.mPhoto_general, db_firmCoupons[position].getPicture());
+            holder.mCouponName_general.setText(db_firmCoupons[position].getTitle());
+            holder.mContent_general.setText(db_firmCoupons[position].getDescription());
+            holder.mExpireday_general.setText(String.format(mContext.getResources().getString(R.string.store_reciprocal), db_firmCoupons[position].getExpireday()));
+        }
     }
 
     @Override
@@ -60,12 +68,17 @@ public class StorePreferentialAdapter  extends RecyclerView.Adapter<StorePrefere
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private ImageView mPhoto;
-        private TextView mSheet;
-        private View mBackgroundView;
-        private TextView mTitle;
-        private TextView mContent;
-        private TextView mTime;
+        private View mfirst;
+        private View mGeneral;
+        private ImageView mPhoto_first;
+        private ImageView mPhoto_general;
+        private TextView mCouponName_first;
+        private TextView mCouponName_general;
+        private TextView mContent_first;
+        private TextView mContent_general;
+        private TextView mExpireday_first;
+        private TextView mExpireday_general;
+        private TextView mTag;
 
         private ClickListener mListener;
         private FirmCouponsData[] db_firmCoupons;
@@ -74,23 +87,30 @@ public class StorePreferentialAdapter  extends RecyclerView.Adapter<StorePrefere
             super(itemView);
             this.db_firmCoupons = data;
             this.mListener = listener;
-            mPhoto = (ImageView) itemView.findViewById(R.id.img_photo);
-            mSheet = (TextView) itemView.findViewById(R.id.txt_QTY);
-            mBackgroundView = (View) itemView.findViewById(R.id.itemView);
-            mTitle = (TextView) itemView.findViewById(R.id.txt_title);
-            mContent = (TextView) itemView.findViewById(R.id.txt_content);
-            mTime = (TextView) itemView.findViewById(R.id.txt_time);
-            mBackgroundView.setOnClickListener(this);
+            mfirst = (View) itemView.findViewById(R.id.first);
+            mGeneral = (View) itemView.findViewById(R.id.general);
+
+            mPhoto_first = (ImageView) itemView.findViewById(R.id.img_first_photo);
+            mPhoto_general = (ImageView) itemView.findViewById(R.id.img_general_photo);
+
+            mCouponName_first = (TextView) itemView.findViewById(R.id.txt_first_couponname);
+            mCouponName_general = (TextView) itemView.findViewById(R.id.txt_general_couponname);
+
+            mContent_first = (TextView) itemView.findViewById(R.id.txt_first_content);
+            mContent_general = (TextView) itemView.findViewById(R.id.txt_general_content);
+
+            mExpireday_first = (TextView) itemView.findViewById(R.id.txt_first_expireday);
+            mExpireday_general = (TextView) itemView.findViewById(R.id.txt_general_expireday);
+
+            mTag = (TextView) itemView.findViewById(R.id.txt_tag);
+
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if(mListener != null){
-                switch (v.getId()){
-                    case R.id.itemView:
-                        mListener.onClick(db_firmCoupons[getPosition()].getCouponID());
-                        break;
-                }
+                mListener.onClick(db_firmCoupons[getPosition()].getCoupons_id());
             }
         }
 

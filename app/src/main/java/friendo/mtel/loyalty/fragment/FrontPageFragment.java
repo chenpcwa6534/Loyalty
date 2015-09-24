@@ -3,6 +3,7 @@ package friendo.mtel.loyalty.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,11 +21,11 @@ import com.google.gson.Gson;
 
 import org.json.JSONException;
 
-import friendo.mtel.loyalty.HttpsParams.ParamsManager;
+import friendo.mtel.loyalty.data.DataCache;
+import friendo.mtel.loyalty.httpsparams.ParamsManager;
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.activity.SubFrontPageActivity;
 import friendo.mtel.loyalty.adapter.FirmsAdapter;
-import friendo.mtel.loyalty.HttpsParams.FrontPageInParams;
 import friendo.mtel.loyalty.adapter.FirmsMapAdapter;
 import friendo.mtel.loyalty.component.AdsInfoData;
 import friendo.mtel.loyalty.component.AdvertisingData;
@@ -33,6 +34,7 @@ import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
 import friendo.mtel.loyalty.data.GetListResponse;
 import friendo.mtel.loyalty.data.GetSearchResponse;
+import friendo.mtel.loyalty.utility.Utilitys;
 import friendo.mtel.loyalty.view.SearchBarView;
 import friendo.mtel.loyalty.view.WebMapJSInterface;
 
@@ -72,17 +74,13 @@ public class FrontPageFragment extends CommonFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_store,container,false);
         findView(mView);
+        initData();
         return mView;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        DataManager.getInstance(getActivity()).qryAdvertising(false,getDataResponse);
-        FrontPageInParams frontPageInParams = ParamsManager.getfrontPageInParams(getActivity());
-        Gson gson = new Gson();
-        String userFilter = gson.toJson(frontPageInParams);
-        dataConnection(false,userFilter);
     }
 
     @Override
@@ -97,13 +95,12 @@ public class FrontPageFragment extends CommonFragment {
 
     /**
      * call list api
-     * @param isNeedAPI    isNeedAPI == true is anyway call api data, false is if cache not data then call data
      * @param userFilter
      */
-    private void dataConnection(boolean isNeedAPI, String userFilter){
+    private void dataConnection(String userFilter){
         try{
             Log.d(TAG,"qryFirmList request data = "+userFilter);
-            DataManager.getInstance(getActivity()).qryFirmList(pages, userFilter, isNeedAPI, getDataResponse);
+            DataManager.getInstance(getActivity()).qryFirmList(pages, userFilter, getDataResponse);
         }catch (JSONException e){
             Log.e(TAG,"firm list JSON to data fail ,Exception :" +e);
         }
@@ -119,7 +116,12 @@ public class FrontPageFragment extends CommonFragment {
         slide_out_right = AnimationUtils.loadAnimation(getActivity(),android.R.anim.slide_out_right);
         viewSwitcher.setInAnimation(slide_in_left);
         viewSwitcher.setOutAnimation(slide_out_right);
+    }
 
+    private void initData(){
+        DataManager.getInstance(getActivity()).qryAdvertising(false,getDataResponse);
+        String userFilter = ParamsManager.getFirmListInParams(getActivity());
+        dataConnection(userFilter);
     }
 
     /**
@@ -209,7 +211,7 @@ public class FrontPageFragment extends CommonFragment {
         @Override
         public void onFirmSearch(String userFilter) {
             String data = userFilter;
-            dataConnection(true,data);
+            dataConnection(data);
         }
 
         @Override
@@ -291,6 +293,18 @@ public class FrontPageFragment extends CommonFragment {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
+
+        }
+    };
+
+    private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            if(DataCache.cacheFirmListData.length == Utilitys.ONE_PAGE_DATACOUNT){
+                pages +=1;
+                String usetFilter = new Gson().toJson(DataCache.cacheFrontPageInParams);
+                dataConnection(usetFilter);
+            }
 
         }
     };

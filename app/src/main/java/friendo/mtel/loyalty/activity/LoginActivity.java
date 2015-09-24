@@ -1,5 +1,6 @@
 package friendo.mtel.loyalty.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,22 +9,10 @@ import android.widget.Button;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-
-import org.json.JSONObject;
-
-import java.util.Arrays;
 
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.data.GetPagesResponse;
-import friendo.mtel.loyalty.facebook.FacebookManager;
 import friendo.mtel.loyalty.fragment.LoginNumberFragment;
 import friendo.mtel.loyalty.fragment.LoginVerificationFragment;
 import friendo.mtel.loyalty.view.MessageDialog;
@@ -39,7 +28,6 @@ public class LoginActivity extends CommonActionBarActivity implements View.OnCli
     private String[] mResMsg;
 
     CallbackManager callbackManager;
-    private AccessToken accessToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +79,7 @@ public class LoginActivity extends CommonActionBarActivity implements View.OnCli
     private void intentActivity(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void showMessage(String[] msg){

@@ -1,4 +1,4 @@
-package friendo.mtel.loyalty.HttpsParams;
+package friendo.mtel.loyalty.httpsparams;
 
 /**
  * Created by MTel on 2015/7/27.
@@ -7,6 +7,7 @@ public class FrontPageInParams {
 
     private String latitude;
     private String longitude;
+    private String member_id;
     private String search;
     private UserFilterParams userfilter;
 
@@ -24,6 +25,14 @@ public class FrontPageInParams {
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    public String getMember_id() {
+        return member_id;
+    }
+
+    public void setMember_id(String member_id) {
+        this.member_id = member_id;
     }
 
     public String getSearch() {

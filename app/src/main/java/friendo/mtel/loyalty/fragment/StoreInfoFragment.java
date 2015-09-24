@@ -102,6 +102,9 @@ public class StoreInfoFragment extends CommonFragment implements ImageButton.OnC
             case R.id.txt_address:
                 intentMap(db_frimInfo.getAddress());
                 break;
+            case R.id.web_map:
+                intentMap(db_frimInfo.getAddress());
+                break;
         }
     }
 
@@ -134,6 +137,7 @@ public class StoreInfoFragment extends CommonFragment implements ImageButton.OnC
 
         mMap.addLocation(db_firmData.getLatitude(), db_firmData.getLongitude());
         mMap.locateMap();
+        mMap.setOnClickListener(this);
 
         mIntroductio.setText("");
         mAddress.setText(data.getAddress());

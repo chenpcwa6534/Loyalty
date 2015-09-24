@@ -1,6 +1,7 @@
 int attr Mode 0x7f01000e
 int attr OrderType 0x7f01000c
 int attr SearchKey 0x7f01000d
+int attr direction 0x7f01000f
 int attr pstsDividerColor 0x7f010003
 int attr pstsDividerPadding 0x7f010006
 int attr pstsIndicatorColor 0x7f010001
@@ -18,14 +19,23 @@ int color background_tab_pressed 0x7f040001
 int color text_tab_press 0x7f040002
 int color text_tab_pressed 0x7f040003
 int drawable background_tab 0x7f020000
-int drawable dot_gray 0x7f020001
-int drawable dot_white 0x7f020002
-int drawable ic_launcher 0x7f020003
-int id ViewPager 0x7f050002
-int id dot 0x7f050003
+int drawable bg_wheel 0x7f020001
+int drawable dot_gray 0x7f020002
+int drawable dot_white 0x7f020003
+int drawable ic_common_red_category_pressed 0x7f020004
+int drawable ic_launcher 0x7f020005
+int drawable ic_pointer 0x7f020006
+int id ViewPager 0x7f050005
+int id background 0x7f050007
+int id both 0x7f050002
+int id bottom 0x7f050003
+int id dot 0x7f050006
 int id firm 0x7f050000
 int id limit 0x7f050001
+int id pointer 0x7f050008
+int id top 0x7f050004
 int layout layout_viewpager 0x7f030000
+int layout layout_wheeloffortune 0x7f030001
 int[] styleable PagerSlidingTabStrip { 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b }
 int styleable PagerSlidingTabStrip_pstsDividerColor 2
 int styleable PagerSlidingTabStrip_pstsDividerPadding 5
@@ -42,3 +52,5 @@ int[] styleable SearchBarAttr { 0x7f01000c, 0x7f01000d, 0x7f01000e }
 int styleable SearchBarAttr_Mode 2
 int styleable SearchBarAttr_OrderType 0
 int styleable SearchBarAttr_SearchKey 1
+int[] styleable SwipyRefreshLayout { 0x7f01000f }
+int styleable SwipyRefreshLayout_direction 0

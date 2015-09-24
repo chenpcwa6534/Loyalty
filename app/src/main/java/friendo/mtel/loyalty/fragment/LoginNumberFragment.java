@@ -15,10 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import friendo.mtel.loyalty.R;
-import friendo.mtel.loyalty.Request.RequestManager;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
 import friendo.mtel.loyalty.data.GetPagesResponse;
+import friendo.mtel.loyalty.httpsparams.ParamsManager;
 
 /**
  * Created by MTel on 2015/7/2.
@@ -81,7 +81,7 @@ public class LoginNumberFragment extends Fragment implements View.OnClickListene
                 Toast.makeText(getActivity(),getActivity().getString(R.string.login_trip),Toast.LENGTH_SHORT).show();
                 opKeyBroad();
             }else{
-                String userfilter = RequestManager.setAskOPTResquest(mNumber.getText().toString());
+                String userfilter = ParamsManager.getAskOPTParams(mNumber.getText().toString());
                 Log.d(TAG,"AspOTP request data = "+ userfilter);
                 DataManager.getInstance(getActivity()).qryAskOTP(userfilter,getDataResponse);
             }

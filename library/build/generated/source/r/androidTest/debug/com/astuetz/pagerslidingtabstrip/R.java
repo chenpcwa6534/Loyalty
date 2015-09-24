@@ -11,6 +11,7 @@ public final class R {
 		public static final int Mode = 0x7f01000e;
 		public static final int OrderType = 0x7f01000c;
 		public static final int SearchKey = 0x7f01000d;
+		public static final int direction = 0x7f01000f;
 		public static final int pstsDividerColor = 0x7f010003;
 		public static final int pstsDividerPadding = 0x7f010006;
 		public static final int pstsIndicatorColor = 0x7f010001;
@@ -32,18 +33,27 @@ public final class R {
 	}
 	public static final class drawable {
 		public static final int background_tab = 0x7f020000;
-		public static final int dot_gray = 0x7f020001;
-		public static final int dot_white = 0x7f020002;
-		public static final int ic_launcher = 0x7f020003;
+		public static final int bg_wheel = 0x7f020001;
+		public static final int dot_gray = 0x7f020002;
+		public static final int dot_white = 0x7f020003;
+		public static final int ic_common_red_category_pressed = 0x7f020004;
+		public static final int ic_launcher = 0x7f020005;
+		public static final int ic_pointer = 0x7f020006;
 	}
 	public static final class id {
-		public static final int ViewPager = 0x7f050002;
-		public static final int dot = 0x7f050003;
+		public static final int ViewPager = 0x7f050005;
+		public static final int background = 0x7f050007;
+		public static final int both = 0x7f050002;
+		public static final int bottom = 0x7f050003;
+		public static final int dot = 0x7f050006;
 		public static final int firm = 0x7f050000;
 		public static final int limit = 0x7f050001;
+		public static final int pointer = 0x7f050008;
+		public static final int top = 0x7f050004;
 	}
 	public static final class layout {
 		public static final int layout_viewpager = 0x7f030000;
+		public static final int layout_wheeloffortune = 0x7f030001;
 	}
 	public static final class styleable {
 		public static final int[] PagerSlidingTabStrip = { 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b };
@@ -62,5 +72,7 @@ public final class R {
 		public static final int SearchBarAttr_Mode = 2;
 		public static final int SearchBarAttr_OrderType = 0;
 		public static final int SearchBarAttr_SearchKey = 1;
+		public static final int[] SwipyRefreshLayout = { 0x7f01000f };
+		public static final int SwipyRefreshLayout_direction = 0;
 	}
 }

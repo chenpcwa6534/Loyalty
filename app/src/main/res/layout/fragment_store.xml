@@ -24,16 +24,17 @@
                 android:layout_height="100dp"
                 android:background="@color/white"/>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="5dp"
-                android:background="@color/white"
-                android:scrollbars="vertical"
-                android:visibility="gone">
 
-            </android.support.v7.widget.RecyclerView>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp"
+                    android:background="@color/white"
+                    android:scrollbars="vertical"
+                    android:visibility="gone">
+
+                </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
 
@@ -47,16 +48,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="242dp"/>
 
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/listViewMap"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:scrollbars="vertical"
+                    android:visibility="gone">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/listViewMap"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:scrollbars="vertical"
-                android:visibility="gone">
-
-            </android.support.v7.widget.RecyclerView>
+                </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
 

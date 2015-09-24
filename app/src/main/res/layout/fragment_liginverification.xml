@@ -48,7 +48,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/login_verificationHint"
         android:textColor="@color/orange">
-        <requestFocus/>
     </EditText>
 
     <TextView

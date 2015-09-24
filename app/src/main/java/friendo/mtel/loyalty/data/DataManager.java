@@ -1,12 +1,10 @@
 package friendo.mtel.loyalty.data;
 
 import android.content.Context;
-import com.google.gson.Gson;
 
 import org.json.JSONException;
 
-import friendo.mtel.loyalty.Request.RequestManager;
-import friendo.mtel.loyalty.Request.VerControlRequest;
+import friendo.mtel.loyalty.httpsparams.ParamsManager;
 import friendo.mtel.loyalty.common.DeviceInformation;
 import friendo.mtel.loyalty.common.Env;
 import friendo.mtel.loyalty.component.AdvertisingData;
@@ -87,9 +85,11 @@ public class DataManager {
                 }
             }
         };
-        Gson gson = new Gson();
-        VerControlRequest verControlRequest = RequestManager.setVerControlRequest(DeviceInformation.getAppVersion(), DeviceInformation.getOSVersion(), DeviceInformation.getDeviceToken(mContext), DeviceInformation.getDeviceModel());
-        String userFilter = gson.toJson(verControlRequest);
+        String userFilter = ParamsManager.getVerControlParams(
+                DeviceInformation.getAppVersion(),
+                DeviceInformation.getOSVersion(),
+                DeviceInformation.getDeviceToken(mContext),
+                DeviceInformation.getDeviceModel());
         (new HTTPApi()).qryVersionControl(mContext, Env.getMemberID(mContext), verUpdateTime, userFilter, callAPIResponse);
     }
 
@@ -158,6 +158,7 @@ public class DataManager {
 
                 @Override
                 public void onSuccess(Object response) {
+                    LoyaltyPreference.setAPIRequestTime(mContext,LoyaltyPreference.API.Filter,((FilterData) response).getUpdateTime());
                     DBManager.setFilterData((FilterData) response);
                     DataCache.cacheFilterData = DBManager.getFilterData();
                     if(getDataResponse != null){
@@ -339,13 +340,8 @@ public class DataManager {
      * @param userFilter        search  params
      * @param getDataResponse
      */
-    public void qryFirmList(int page, String userFilter,boolean isNeedAPI, final GetDataResponse getDataResponse) throws JSONException{
+    public void qryFirmList(int page, String userFilter, final GetDataResponse getDataResponse) throws JSONException{
 
-        if(DataCache.cacheFirmListData == null){
-            isNeedAPI = true;
-        }
-
-        if(isNeedAPI){
             CallAPIResponse callAPIResponse = new CallAPIResponse() {
                 @Override
                 public void onStart() {
@@ -384,7 +380,6 @@ public class DataManager {
                 }
             };
             (new HTTPApi()).qryFirmList(mContext, page, userFilter, callAPIResponse);
-        }
     }
 
 
@@ -432,7 +427,8 @@ public class DataManager {
                 }
             }
         };
-        (new HTTPApi()).qryFirmCoupons(mContext, Env.getMemberID(mContext), firmID, callAPIResponse);
+        String userFilter = ParamsManager.getMember(Env.getMemberID(mContext));
+        (new HTTPApi()).qryFirmCoupons(mContext, userFilter, firmID, callAPIResponse);
     }
 
 
@@ -537,10 +533,7 @@ public class DataManager {
      * @param getDataResponse
      */
     public void qryFirmPoint(int firmID, final GetDataResponse getDataResponse){
-        boolean isNeedAPI = true;
-        if(DataCache.cacheFirmPointData != null) isNeedAPI = false;
 
-        if(isNeedAPI){
             CallAPIResponse callAPIResponse = new CallAPIResponse() {
                 @Override
                 public void onStart() {
@@ -578,8 +571,8 @@ public class DataManager {
                     }
                 }
             };
-            (new HTTPApi()).qryFirmPoint(mContext, Env.getMemberID(mContext), firmID, callAPIResponse);
-        }
+            String userFilter = ParamsManager.getMember(Env.getMemberID(mContext));
+            (new HTTPApi()).qryFirmPoint(mContext, userFilter, firmID, callAPIResponse);
     }
 
 
@@ -637,7 +630,7 @@ public class DataManager {
      * @param page          頁數 1 :1~100, 2 : 101~200 .....
      * @param getDataResponse
      */
-    public void qryLimitCoupons(String userFilter, int page, final GetDataResponse getDataResponse){
+    public void qryLimitCoupons(String userFilter, int page, final GetDataResponse getDataResponse) throws JSONException{
 
         CallAPIResponse callAPIResponse = new CallAPIResponse() {
             @Override
@@ -676,7 +669,7 @@ public class DataManager {
                 }
             }
         };
-        (new HTTPApi()).qryLimitCoupon(mContext, Env.getMemberID(mContext), page, userFilter, callAPIResponse);
+        (new HTTPApi()).qryLimitCoupon(mContext, page, userFilter, callAPIResponse);
     }
 
     /**

@@ -36,6 +36,18 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int SearchKey=0x7f01000d;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>top</code></td><td>0</td><td></td></tr>
+<tr><td><code>bottom</code></td><td>1</td><td></td></tr>
+<tr><td><code>both</code></td><td>2</td><td></td></tr>
+</table>
+         */
+        public static final int direction=0x7f01000f;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -148,18 +160,27 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class drawable {
         public static final int background_tab=0x7f020000;
-        public static final int dot_gray=0x7f020001;
-        public static final int dot_white=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
+        public static final int bg_wheel=0x7f020001;
+        public static final int dot_gray=0x7f020002;
+        public static final int dot_white=0x7f020003;
+        public static final int ic_common_red_category_pressed=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int ic_pointer=0x7f020006;
     }
     public static final class id {
-        public static final int ViewPager=0x7f050002;
-        public static final int dot=0x7f050003;
+        public static final int ViewPager=0x7f050005;
+        public static final int background=0x7f050007;
+        public static final int both=0x7f050002;
+        public static final int bottom=0x7f050003;
+        public static final int dot=0x7f050006;
         public static final int firm=0x7f050000;
         public static final int limit=0x7f050001;
+        public static final int pointer=0x7f050008;
+        public static final int top=0x7f050004;
     }
     public static final class layout {
         public static final int layout_viewpager=0x7f030000;
+        public static final int layout_wheeloffortune=0x7f030001;
     }
     public static final class styleable {
         /** Attributes that can be used with a PagerSlidingTabStrip.
@@ -422,5 +443,36 @@ containing a value of this type.
           @attr name com.astuetz.pagerslidingtabstrip.test:SearchKey
         */
         public static final int SearchBarAttr_SearchKey = 1;
+        /** Attributes that can be used with a SwipyRefreshLayout.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SwipyRefreshLayout_direction com.astuetz.pagerslidingtabstrip.test:direction}</code></td><td></td></tr>
+           </table>
+           @see #SwipyRefreshLayout_direction
+         */
+        public static final int[] SwipyRefreshLayout = {
+            0x7f01000f
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.astuetz.pagerslidingtabstrip.test.R.attr#direction}
+          attribute's value can be found in the {@link #SwipyRefreshLayout} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>top</code></td><td>0</td><td></td></tr>
+<tr><td><code>bottom</code></td><td>1</td><td></td></tr>
+<tr><td><code>both</code></td><td>2</td><td></td></tr>
+</table>
+          @attr name com.astuetz.pagerslidingtabstrip.test:direction
+        */
+        public static final int SwipyRefreshLayout_direction = 0;
     };
 }

@@ -6,11 +6,18 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.astuetz.component.SwipyRefreshLayout.SwipyRefreshLayout;
+import com.astuetz.component.SwipyRefreshLayout.SwipyRefreshLayoutDirection;
 import com.google.gson.Gson;
+
+import org.json.JSONException;
+
+import java.util.ArrayList;
 
 import friendo.mtel.loyalty.R;
 import friendo.mtel.loyalty.activity.SubPreferentialActivity;
@@ -20,6 +27,8 @@ import friendo.mtel.loyalty.data.DataCache;
 import friendo.mtel.loyalty.data.DataManager;
 import friendo.mtel.loyalty.data.GetDataResponse;
 import friendo.mtel.loyalty.data.GetSearchResponse;
+import friendo.mtel.loyalty.httpsparams.ParamsManager;
+import friendo.mtel.loyalty.utility.Utilitys;
 import friendo.mtel.loyalty.view.SearchBarView;
 
 /**
@@ -31,7 +40,9 @@ public class PreferentialFragment extends CommonFragment{
     private View mView;
     private RecyclerView mList;
     private SearchBarView mSearchbar;
-    private int page = 1;
+    private SwipyRefreshLayout mSwipyRefreshLayout;
+    private ArrayList<LimitCouponsData> db_limitCoupons;
+    private int pages = 1;
 
     public PreferentialFragment() {
         super();
@@ -47,15 +58,14 @@ public class PreferentialFragment extends CommonFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_preferential,container,false);
         findView(mView);
+        initData();
         return mView;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Gson gson = new Gson();
-        String userFilter = gson.toJson(DataCache.cacheFrontPageInParamsLimit);
-        DataManager.getInstance(getActivity()).qryLimitCoupons(userFilter,page,getDataResponse);
+
     }
 
     @Override
@@ -73,8 +83,29 @@ public class PreferentialFragment extends CommonFragment{
         mSearchbar.setCallback(getSearchResponse);
     }
 
-    private void initPreferential(LimitCouponsData[] data){
+    private void initData(){
+        String userFilter = ParamsManager.getLimitListInParams(getActivity());
+        dataConnection(userFilter);
+    }
+
+    /**
+     * call list api
+     * @param userFilter
+     */
+    private void dataConnection(String userFilter){
+        try{
+            Log.d(TAG, "qryLimitCoupons request data = " + userFilter);
+            DataManager.getInstance(getActivity()).qryLimitCoupons(userFilter, pages, getDataResponse);
+        }catch (JSONException e){
+            Log.e(TAG,"limit list JSON to data fail ,Exception :" +e);
+        }
+    }
+
+    private void initPreferential(ArrayList<LimitCouponsData> data){
         PreferentialAdapter moreAdapter = new PreferentialAdapter(getActivity(),data,onItemClickListener);
+        mSwipyRefreshLayout = (SwipyRefreshLayout) mView.findViewById(R.id.swipyrefresh);
+        mSwipyRefreshLayout.setDirection(SwipyRefreshLayoutDirection.BOTTOM);
+        mSwipyRefreshLayout.setOnRefreshListener(refreshListener);
         mList = (RecyclerView) mView.findViewById(R.id.listView);
         mList.setVisibility(View.VISIBLE);
         mList.setAdapter(moreAdapter);
@@ -124,7 +155,11 @@ public class PreferentialFragment extends CommonFragment{
         @Override
         public void onSuccess(Object[] obj) {
             LimitCouponsData[] limitCouponsData = (LimitCouponsData[]) obj;
-            initPreferential(limitCouponsData);
+            for(int i=0; i<limitCouponsData.length; i++){
+                db_limitCoupons.add(limitCouponsData[i]);
+            }
+            initPreferential(db_limitCoupons);
+            mSwipyRefreshLayout.setRefreshing(false);
         }
 
         @Override
@@ -135,6 +170,19 @@ public class PreferentialFragment extends CommonFragment{
         @Override
         public void onFinish() {
 
+        }
+    };
+
+    private SwipyRefreshLayout.OnRefreshListener refreshListener = new SwipyRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh(SwipyRefreshLayoutDirection direction) {
+            if(DataCache.cacheFirmListData.length == Utilitys.ONE_PAGE_DATACOUNT*pages){
+                pages +=1;
+                String usetFilter = new Gson().toJson(DataCache.cacheFrontPageInParamsLimit);
+                dataConnection(usetFilter);
+            }else {
+                mSwipyRefreshLayout.setRefreshing(false);
+            }
         }
     };
 

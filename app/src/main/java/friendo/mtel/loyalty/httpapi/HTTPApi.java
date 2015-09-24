@@ -2,7 +2,6 @@ package friendo.mtel.loyalty.httpapi;
 
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -11,11 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
-
-import friendo.mtel.loyalty.R;
-import friendo.mtel.loyalty.Request.MemberRequest;
-import friendo.mtel.loyalty.Request.RegRequest;
+import friendo.mtel.loyalty.httpsparams.MemberParams;
+import friendo.mtel.loyalty.httpsparams.RegParams;
 import friendo.mtel.loyalty.TestDataJson.TestDataJson;
 import friendo.mtel.loyalty.common.Env;
 import friendo.mtel.loyalty.component.AdvertisingData;
@@ -33,7 +29,6 @@ import friendo.mtel.loyalty.component.VersionControlData;
 import friendo.mtel.loyalty.component.FilterData;
 import friendo.mtel.loyalty.component.FirmInfoData;
 import friendo.mtel.loyalty.component.MemberPointData;
-import friendo.mtel.loyalty.view.MessageDialog;
 
 /**
  * Created by MTel on 2015/7/16.
@@ -167,8 +162,9 @@ public class HTTPApi {
      * @param callAPIResponse
      */
     public void qryFilter(Context context, String updateTime ,final CallAPIResponse callAPIResponse) throws JSONException{
-        String apiName = "stamps/ui/filter?updateTime="+updateTime;
+        String apiName = "stamps/ui/filter";
         final JSONObject jsonObject = new JSONObject();
+        jsonObject.put("updateTime",updateTime);
 
         VolleyAsyncHttpClient.getInstance(context).post(Env.serviceURL + apiName, jsonObject,new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
 
@@ -259,8 +255,8 @@ public class HTTPApi {
                 try {
                     if(getResult(response)){
                         Gson gson = new Gson();
-                        RegRequest regRequest = gson.fromJson(userFilter, RegRequest.class);
-                        if(callAPIResponse != null) callAPIResponse.onSuccess(regRequest.getCell_no());
+                        RegParams regParams = gson.fromJson(userFilter, RegParams.class);
+                        if(callAPIResponse != null) callAPIResponse.onSuccess(regParams.getCell_no());
                     }
                 }catch (Exception e) {
                     Log.e(TAG, "api AskOTP (HTTPApi.class line 254) Exception :" +e.getMessage());
@@ -443,61 +439,52 @@ public class HTTPApi {
     /**
      *
      * @param context
-     * @param memberID
+     * @param userFilter memberID in JSON
      * @param firmID
      * @param callAPIResponse
      */
-    public void qryFirmCoupons(Context context,String memberID, String firmID,final CallAPIResponse callAPIResponse){
-        String apiName = "";
+    public void qryFirmCoupons(Context context,String userFilter, String firmID,final CallAPIResponse callAPIResponse){
+        String apiName = "stamps/ui/firm/" + firmID + "/firm-coupons/";
         final JSONObject jsonObject = new JSONObject();
 
-//        VolleyAsyncHttpClient.getInstance(context).post(Env.serviceURL + apiName, jsonObject,new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
-//
-//            @Override
-//            public void onStart() {
-//                Log.i(TAG,"qryFilter onStart");
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                Log.i(TAG,"qryFilter onFinish");
-//            }
-//
-//            @Override
-//            public void onFailure(String msg) {
-//                Log.i(TAG,"qryFilter onFailure msg:" +msg);
-//            }
-//
-//            @Override
-//            public void onSuccess(JSONObject response) {
-//                Log.i(TAG, "qryFilter onSuccess=" + response);
-//                try {
-//                    String data = response.getString("data");
-//                    Gson gson = new Gson();
-//
-//                    if(callAPIResponse != null) callAPIResponse.onSuccess(filterData);
-//
-//                }catch (Exception e) {
-//                    Log.e(TAG, e.getMessage());
-//                }
-//            }
-//        });
-        Log.d(TAG,"Firm coupins Json : "+ TestDataJson.getFirmCoupons().toString());
-        if(getResult(TestDataJson.getFirmCoupons())){
-            String[] data = getArrayData(TestDataJson.getFirmCoupons());
-            Gson gson = new Gson();
-            FirmCouponsData[] firmCouponseDatas = new FirmCouponsData[data.length];
-            for(int i=0; i<data.length; i++){
-                firmCouponseDatas[i] = gson.fromJson(data[i], FirmCouponsData.class);
+        VolleyAsyncHttpClient.getInstance(context).post(VolleyAsyncHttpClient.MATHOD_POST,Env.serviceURL + apiName, jsonObject, userFilter, new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
+
+            @Override
+            public void onStart() {
+                Log.i(TAG,"qryFirmCoupons onStart");
             }
-            if(callAPIResponse != null){
-                callAPIResponse.onSuccess(firmCouponseDatas);
+
+            @Override
+            public void onFinish() {
+                Log.i(TAG,"qryFirmCoupons onFinish");
             }
-        }else{
-            if(callAPIResponse != null){
-                callAPIResponse.onFailure(getError(context,TestDataJson.getResponseError()));
+
+            @Override
+            public void onFailure(String msg) {
+                Log.i(TAG,"qryFirmCoupons onFailure msg:" +msg);
             }
-        }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+                Log.i(TAG, "qryFirmCoupons onSuccess=" + response);
+                try {
+                    if(getResult(response)){
+                        String[] data = getArrayData(response);
+                        FirmCouponsData[] firmCouponsData = new FirmCouponsData[data.length];
+                        Gson gson = new Gson();
+                        for(int i=0; i<data.length; i++){
+                            firmCouponsData[i] = gson.fromJson(data[i],FirmCouponsData.class);
+                        }
+                        if(callAPIResponse != null) callAPIResponse.onSuccess(firmCouponsData);
+                    }else{
+                        String msg = response.getString("errorMsg");
+                        if(callAPIResponse != null) callAPIResponse.onFailure(msg);
+                    }
+                }catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
+        });
     }
 
 
@@ -619,15 +606,15 @@ public class HTTPApi {
     /**
      *
      * @param context
-     * @param memberID
+     * @param userFilter
      * @param firmID
      * @param callAPIResponse
      */
-    public void qryFirmPoint(Context context, String memberID, int firmID, final CallAPIResponse callAPIResponse){
+    public void qryFirmPoint(Context context, String userFilter, int firmID, final CallAPIResponse callAPIResponse){
         String apiName = "stamps/ui/firms/" + firmID + "/PointCard";
         final JSONObject jsonObject = new JSONObject();
 
-        VolleyAsyncHttpClient.getInstance(context).post(VolleyAsyncHttpClient.MATHOD_POST,Env.serviceURL + apiName, jsonObject, memberIDToJson(memberID),new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
+        VolleyAsyncHttpClient.getInstance(context).post(VolleyAsyncHttpClient.MATHOD_POST,Env.serviceURL + apiName, jsonObject, userFilter, new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
 
             @Override
             public void onStart() {
@@ -732,64 +719,52 @@ public class HTTPApi {
     /**
      *
      * @param context
-     * @param memberID
-     * @param page
+     * @param pages
      * @param userFilter
      * @param callAPIResponse
      */
-    public void qryLimitCoupon(Context context, String memberID, int page, String userFilter, final CallAPIResponse callAPIResponse){
-        String apiName = "";
+    public void qryLimitCoupon(Context context, int pages, String userFilter, final CallAPIResponse callAPIResponse) throws JSONException{
+        String apiName = "stamps/ui/CollectibleCoupon?page="+pages;
         final JSONObject jsonObject = new JSONObject();
 
-//        VolleyAsyncHttpClient.getInstance(context).post(Env.serviceURL + apiName, jsonObject,new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
-//
-//            @Override
-//            public void onStart() {
-//                Log.i(TAG,"qryFilter onStart");
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                Log.i(TAG,"qryFilter onFinish");
-//            }
-//
-//            @Override
-//            public void onFailure(String msg) {
-//                Log.i(TAG,"qryFilter onFailure msg:" +msg);
-//            }
-//
-//            @Override
-//            public void onSuccess(JSONObject response) {
-//                Log.i(TAG, "qryFilter onSuccess=" + response);
-//                try {
-//                    String data = response.getString("data");
-//                    Gson gson = new Gson();
-//
-//                    if(callAPIResponse != null) callAPIResponse.onSuccess(filterData);
-//
-//                }catch (Exception e) {
-//                    Log.e(TAG, e.getMessage());
-//                }
-//            }
-//        });
-        Log.d(TAG,"Limit coupon Json : "+ TestDataJson.getLimitCoupon().toString());
-        if(getResult(TestDataJson.getLimitCoupon())){
-            String[] data = getArrayData(TestDataJson.getLimitCoupon());
-            Gson gson = new Gson();
-            LimitCouponsData[] limitCouponsData = new LimitCouponsData[data.length];
-            for(int i=0; i<data.length; i++){
-                limitCouponsData[i] = gson.fromJson(data[i], LimitCouponsData.class);
-            }
-            if(callAPIResponse != null){
-                callAPIResponse.onSuccess(limitCouponsData);
-            }
-        }else{
-            if(callAPIResponse != null){
-                callAPIResponse.onFailure(getError(context,TestDataJson.getResponseError()));
-            }
-        }
-    }
+        VolleyAsyncHttpClient.getInstance(context).post(VolleyAsyncHttpClient.MATHOD_POST, Env.serviceURL + apiName, jsonObject, userFilter,new VolleyAsyncHttpClient.VolleyAsyncHttpClientCallback(){
 
+            @Override
+            public void onStart() {
+                Log.i(TAG,"qryLimitCoupon onStart");
+            }
+
+            @Override
+            public void onFinish() {
+                Log.i(TAG,"qryLimitCoupon onFinish");
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                Log.i(TAG,"qryLimitCoupon onFailure msg:" +msg);
+            }
+
+            @Override
+            public void onSuccess(JSONObject response) {
+                Log.i(TAG, "qryLimitCoupon onSuccess=" + response);
+                try {
+                    if(getResult(response)){
+                        String[] data = getArrayData(response);
+                        LimitCouponsData[] limitCouponsDatas = new LimitCouponsData[data.length];
+                        Gson gson = new Gson();
+                        for(int i=0; i<data.length; i++){
+                            limitCouponsDatas[i] = gson.fromJson(data[i],LimitCouponsData.class);
+                        }
+                        if(callAPIResponse != null) callAPIResponse.onSuccess(limitCouponsDatas);
+                    }else {
+                        getError(callAPIResponse,response);
+                    }
+                }catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
+        });
+    }
 
     /**
      *
@@ -1061,6 +1036,11 @@ public class HTTPApi {
         return msg;
     }
 
+    private void getError(CallAPIResponse callAPIResponse, JSONObject response){
+        String msg = getError(response);
+        callAPIResponse.onFailure(msg);
+    }
+
     private String getData(JSONObject response){
         String data = "";
         try{
@@ -1083,12 +1063,5 @@ public class HTTPApi {
             Log.e(TAG,"data array have wrong ,JSON to String is fail , data is [" + response.toString()+"]");
         }
         return data;
-    }
-
-    private String memberIDToJson(String memberID){
-        Gson gson = new Gson();
-        MemberRequest memberRequest = new MemberRequest();
-        memberRequest.setMember_id(memberID);
-        return gson.toJson(memberRequest);
     }
 }

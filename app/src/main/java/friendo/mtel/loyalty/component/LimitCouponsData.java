@@ -5,45 +5,39 @@ package friendo.mtel.loyalty.component;
  */
 public class LimitCouponsData {
 
-    private String name;
-    private String title;
-    private String desc;
-    private int catID;
+    private int cat_id;
+    private int coupons_id;
+    private String description;
     private int expireday;
-    private int count;
+    private int firm_id;
+    private String firm_name;
     private String picture;
-    private int couponID;
+    private String picturepath;
+    private int rem_cnt;
+    private String title;
 
-    public String getName() {
-        return name;
+    public int getCat_id() {
+        return cat_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCat_id(int cat_id) {
+        this.cat_id = cat_id;
     }
 
-    public String getTitle() {
-        return title;
+    public int getCoupons_id() {
+        return coupons_id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCoupons_id(int coupons_id) {
+        this.coupons_id = coupons_id;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public int getCatID() {
-        return catID;
-    }
-
-    public void setCatID(int catID) {
-        this.catID = catID;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getExpireday() {
@@ -54,6 +48,22 @@ public class LimitCouponsData {
         this.expireday = expireday;
     }
 
+    public int getFirm_id() {
+        return firm_id;
+    }
+
+    public void setFirm_id(int firm_id) {
+        this.firm_id = firm_id;
+    }
+
+    public String getFirm_name() {
+        return firm_name;
+    }
+
+    public void setFirm_name(String firm_name) {
+        this.firm_name = firm_name;
+    }
+
     public String getPicture() {
         return picture;
     }
@@ -62,19 +72,27 @@ public class LimitCouponsData {
         this.picture = picture;
     }
 
-    public int getCount() {
-        return count;
+    public String getPicturepath() {
+        return picturepath;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setPicturepath(String picturepath) {
+        this.picturepath = picturepath;
     }
 
-    public int getCouponID() {
-        return couponID;
+    public int getRem_cnt() {
+        return rem_cnt;
     }
 
-    public void setCouponID(int couponID) {
-        this.couponID = couponID;
+    public void setRem_cnt(int rem_cnt) {
+        this.rem_cnt = rem_cnt;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
